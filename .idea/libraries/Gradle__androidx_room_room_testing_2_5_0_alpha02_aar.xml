@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: androidx.room:room-testing:2.5.0-alpha02@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/7f4c8ec6ce263f817744c2875e061685/transformed/room-testing-2.5.0-alpha02/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/7f4c8ec6ce263f817744c2875e061685/transformed/room-testing-2.5.0-alpha02/res" />
+      <root url="file://$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/7f4c8ec6ce263f817744c2875e061685/transformed/room-testing-2.5.0-alpha02/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/modules-2/files-2.1/androidx.room/room-testing/2.5.0-alpha02/76e551904e77a9064e335b2f970cf8ac0e2a3b88/room-testing-2.5.0-alpha02-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

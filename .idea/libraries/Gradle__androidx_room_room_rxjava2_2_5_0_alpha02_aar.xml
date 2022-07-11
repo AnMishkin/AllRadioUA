@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: androidx.room:room-rxjava2:2.5.0-alpha02@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/3ddf96f13fb23e5de83a537d7d5275ad/transformed/room-rxjava2-2.5.0-alpha02/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/3ddf96f13fb23e5de83a537d7d5275ad/transformed/room-rxjava2-2.5.0-alpha02/res" />
+      <root url="file://$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/3ddf96f13fb23e5de83a537d7d5275ad/transformed/room-rxjava2-2.5.0-alpha02/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/modules-2/files-2.1/androidx.room/room-rxjava2/2.5.0-alpha02/104bafc3fe7aedb917d8c793f9695a77021b984/room-rxjava2-2.5.0-alpha02-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

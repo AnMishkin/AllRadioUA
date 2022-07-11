@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.android.exoplayer:extension-mediasession:2.18.0@aar">
+    <ANNOTATIONS>
+      <root url="jar://$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/7640cd3b31babff962f9acb8c5bf735c/transformed/jetified-extension-mediasession-2.18.0/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/7640cd3b31babff962f9acb8c5bf735c/transformed/jetified-extension-mediasession-2.18.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/7640cd3b31babff962f9acb8c5bf735c/transformed/jetified-extension-mediasession-2.18.0/res" />
+      <root url="file://$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/7640cd3b31babff962f9acb8c5bf735c/transformed/jetified-extension-mediasession-2.18.0/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/modules-2/files-2.1/com.google.android.exoplayer/extension-mediasession/2.18.0/4a50319146e7c12d9762dbc4971da2a320983352/extension-mediasession-2.18.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

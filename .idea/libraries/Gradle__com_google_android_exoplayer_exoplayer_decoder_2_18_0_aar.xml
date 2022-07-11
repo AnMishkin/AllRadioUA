@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.android.exoplayer:exoplayer-decoder:2.18.0@aar">
+    <ANNOTATIONS>
+      <root url="jar://$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/361fbc7fd406d6739c6d4468cfca4f00/transformed/jetified-exoplayer-decoder-2.18.0/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/361fbc7fd406d6739c6d4468cfca4f00/transformed/jetified-exoplayer-decoder-2.18.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/361fbc7fd406d6739c6d4468cfca4f00/transformed/jetified-exoplayer-decoder-2.18.0/res" />
+      <root url="file://$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/361fbc7fd406d6739c6d4468cfca4f00/transformed/jetified-exoplayer-decoder-2.18.0/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/modules-2/files-2.1/com.google.android.exoplayer/exoplayer-decoder/2.18.0/2efe8e25620980ee9e191f3df141fa289d7fadce/exoplayer-decoder-2.18.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
