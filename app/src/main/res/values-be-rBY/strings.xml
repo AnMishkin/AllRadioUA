@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Радыё UA</string>
+    <string name="error_network">Няма доступу да інтэрнэту</string>
+    <string name="dev_name">Developed by Mishkin</string>
+    <string name="name_station">Назва станцыі</string>
+    <string name="set_hint_edit_text">Увядзіце назву станцыі</string>
+    <string name="link_station">Прамая спасылка на радыёструмень</string>
+    <string name="set_hint_url_edit_text">Увядзіце спасылку на трансляцыю</string>
+    <string name="update_station">Абнавіць станцыі</string>
+    <string name="set_timer_text">Устанавіць таймер</string>
+    <string name="set_timer_button">Устанавіць таймер</string>
+    <string name="stop_timer_button">Спыніць</string>
+    <string name="my_station_switch">Толькі мае станцыі</string>
+    <string name="sort_title">Сартаваць па назве</string>
+    <string name="def_rb">Стандартна</string>
+    <string name="asc_rb">А…Я</string>
+    <string name="desc_rb">Я…А</string>
+    <string name="popular_rb">Ад самага праслухоўванага</string>
+    <string name="not_popular_rb">Ад самых не праслухоўваных</string>
+    <string name="title_sort_menu">Сартаванне</string>
+    <string name="error_payback">Памылка прайгравання</string>
+    <string name="list_rb">Спіс</string>
+    <string name="grid_rb">Сетка</string>
+    <string name="view_tv">Адлюстраванне</string>
+    <string name="list_menu_item">Станцыі</string>
+    <string name="fav_menu_item">Абранае</string>
+    <string name="set_menu_item">Наладкі</string>
+    <string name="history_menu_item">Гісторыя</string>
+    <string name="set_title">Асноўныя</string>
+    <string name="minute_title">мін</string>
+    <string name="timer_work">Таймер запушчаны</string>
+    <string name="timer_set">Устанавіць таймер</string>
+    <string name="clear_history">Ачысціць гісторыю</string>
+    <string name="history_clear_toast">Гісторыя вычышчана</string>
+    <string name="title_view_setting">Параметры адлюстравання</string>
+    <string name="title_station_setting">Параметры станцый</string>
+    <string name="empty_edit_text">Увядзіце Назва станцыі або спасылку</string>
+    <string name="no_match">Супадзенняў не знойдзена</string>
+    <string name="app_widget_description">Радыё UA</string>
+    <string name="title_widget">Радыё</string>
+    <string name="sub_title_widget">Трэк</string>
+</resources>

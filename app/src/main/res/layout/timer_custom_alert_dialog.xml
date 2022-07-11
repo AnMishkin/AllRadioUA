@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    android:background="@color/gray"
+    android:orientation="vertical"
+    android:padding="15dp">
+
+    <TextView
+        android:id="@+id/timerTextViewDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/set_timer_text"
+        android:textColor="@color/white" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center|center_horizontal"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/minuteEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/yellow"
+                android:drawableTint="#ECBCBC"
+                android:ems="10"
+                android:inputType="number|textPersonName"
+                android:textColor="@color/white"
+                android:textColorHighlight="@color/yellow"
+                android:textColorHint="@color/white"
+                android:textColorLink="@color/yellow" />
+
+            <TextView
+                android:id="@+id/minTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/minute_title"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/setTimerButton"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/black"
+            android:text="@string/set_timer_button"
+            android:textColor="@color/white"
+            android:textSize="8sp" />
+
+        <Button
+            android:id="@+id/stopTimerButton"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/black"
+            android:text="@string/stop_timer_button"
+            android:textColor="@color/white"
+            android:textSize="8sp"
+            android:visibility="invisible"
+            tools:visibility="invisible" />
+
+    </LinearLayout>
+</LinearLayout>

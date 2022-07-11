@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Radio UA</string>
+    <string name="error_network">No internet access</string>
+    <string name="dev_name">Developed by Mishkin</string>
+    <string name="name_station">Station name</string>
+    <string name="set_hint_edit_text">Enter station name</string>
+    <string name="link_station">Direct link to the radio stream</string>
+    <string name="set_hint_url_edit_text">Enter stream link</string>
+    <string name="update_station">Update Stations</string>
+    <string name="set_timer_text">Set timer</string>
+    <string name="set_timer_button">Set timer</string>
+    <string name="stop_timer_button">Stop</string>
+    <string name="my_station_switch">Only my stations</string>
+    <string name="sort_title">Sort by name</string>
+    <string name="def_rb">Standard</string>
+    <string name="asc_rb">А…Z</string>
+    <string name="desc_rb">Z…А</string>
+    <string name="popular_rb">From the most listened to</string>
+    <string name="not_popular_rb">From the most unlistened</string>
+    <string name="title_sort_menu">Сортировка</string>
+    <string name="error_payback">Sorting</string>
+    <string name="list_rb">List</string>
+    <string name="grid_rb">Grid</string>
+    <string name="view_tv">Display</string>
+    <string name="list_menu_item">Stations</string>
+    <string name="fav_menu_item">Favorites</string>
+    <string name="set_menu_item">Settings</string>
+    <string name="history_menu_item">Story</string>
+    <string name="set_title">Main</string>
+    <string name="minute_title">min</string>
+    <string name="timer_work">Timer started</string>
+    <string name="timer_set">Set timer</string>
+    <string name="clear_history">Clear the history</string>
+    <string name="history_clear_toast">History cleared</string>
+    <string name="title_view_setting">Display options</string>
+    <string name="title_station_setting">Station parameters</string>
+    <string name="empty_edit_text">Enter Station name or link</string>
+    <string name="no_match">No matches found</string>
+    <string name="app_widget_description">All Radio UA</string>
+    <string name="title_widget">Radio</string>
+    <string name="sub_title_widget">Track</string>
+</resources>

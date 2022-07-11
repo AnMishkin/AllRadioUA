@@ -1,0 +1,508 @@
+{
+  "RadioWaves":  [{
+      "coutnOpen": 1,
+      "custom": false,
+      "favorite": false,
+      "fmFrequency": "Україна,Київ 105.5 FM",
+      "id": 1,
+      "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/Перец%20FM.jpg?alt=media&token=a2fc8750-dd8b-41a4-9ce3-f5077b3a30f0",
+      "name": "Перець FM",
+      "url": "https://radio.urg.ua/radio-stilnoe"
+    }
+  ,
+     
+    {
+     "coutnOpen": 1,
+     "custom": false,
+     "favorite": false,
+     "fmFrequency": "Україна,Київ 96.4 FM",
+     "id": 3,
+     "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/hit.webp?alt=media&token=1591f3f9-63ca-4d19-9890-7eb6125b1d8e",
+     "name": "ХІТ FM",
+     "url": "https://online.hitfm.ua/HitFM"
+   }
+   ,
+   {
+    "coutnOpen": 1,
+    "custom": false,
+    "favorite": false,
+    "fmFrequency": "Україна,Київ 103.1 FM",
+    "id": 4,
+    "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/lux.jpg?alt=media&token=0b2875e3-c0f4-4404-89df-9cb1aaa9aaa5",
+    "name": "ЛЮКС FM",
+    "url": "http://icecast.luxnet.ua/lux"
+  }
+  ,
+  {
+    "coutnOpen": 1,
+    "custom": false,
+    "favorite": false,
+    "fmFrequency": "Україна,Київ 92.8 FM",
+    "id": 2,
+    "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/nrj.jpg?alt=media&token=d3508a56-0bad-40c1-8a07-9b037c09a923",
+    "name": "NRJ FM",
+    "url": "https://cast.radiogroup.com.ua/nrj"
+  }
+  
+  ,
+  {
+   "coutnOpen": 1,
+   "custom": false,
+   "favorite": false,
+   "fmFrequency": "Україна,Київ 101.9 FM",
+   "id": 5,
+   "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/shanson.gif?alt=media&token=603ea7d0-131b-45ac-9f02-0071c2d644e1",
+   "name": "Шансон",
+   "url": "https://cast.radiogroup.com.ua/shanson320"
+ }
+ ,
+  {
+   "coutnOpen": 1,
+   "custom": false,
+   "favorite": false,
+   "fmFrequency": "Україна,Київ 98.5 FM",
+   "id": 6,
+   "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/bayractar.jpg?alt=media&token=11025f90-9b49-403a-ac62-a3c61899f9c4",
+   "name": "Байрактар",
+   "url": "https://online.radiobayraktar.com.ua/RadioBayraktar"
+ }
+ ,
+ {
+  "coutnOpen": 1,
+  "custom": false,
+  "favorite": false,
+  "fmFrequency": "Україна,Київ 96.8 FM",
+  "id": 7,
+  "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/dj-fm.jpg?alt=media&token=9acdd538-744d-4922-900c-5b3a8acd830c",
+  "name": "DJ FM",
+  "url": "https://cast.radiogroup.com.ua/djfm320"
+}
+,
+ {
+  "coutnOpen": 1,
+  "custom": false,
+  "favorite": false,
+  "fmFrequency": "Україна,Київ 106.5 FM",
+  "id": 8,
+  "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/kiss.jpg?alt=media&token=809d5fe0-397c-4cfe-a4b2-a56047fe6122",
+  "name": "Kiss FM",
+  "url": "https://online.kissfm.ua/KissFM"
+}
+,
+ {
+  "coutnOpen": 1,
+  "custom": false,
+  "favorite": false,
+  "fmFrequency": "Україна,Київ",
+  "id": 24,
+  "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/kissdeep.png?alt=media&token=95b5f3d0-289b-441c-ad39-b103977d2e56",
+  "name": "Kiss FM - Deep",
+  "url": "https://online.kissfm.ua/KissFM_Deep"
+}
+,
+ {
+  "coutnOpen": 1,
+  "custom": false,
+  "favorite": false,
+  "fmFrequency": "Україна,Київ 101.1 FM",
+  "id": 9,
+  "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/pyatnica.jpg?alt=media&token=714b75b1-e3f5-4101-883d-68af64b31db9",
+  "name": "Радіо Українських доріг (П'ятниця FM)",
+  "url": "https://cast.radiogroup.com.ua/radiopyatnica"
+}
+,
+ {
+  "coutnOpen": 1,
+  "custom": false,
+  "favorite": false,
+  "fmFrequency": "Україна,Київ 98 FM",
+  "id": 10,
+  "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/kievfm.png?alt=media&token=5ad11276-a838-4e71-8227-b8af10e5b76c",
+  "name": "Київ 98 FM",
+  "url": "https://cdn.vsnw.net:8943/kyiv_fm_128k"
+}
+,
+ {
+  "coutnOpen": 1,
+  "custom": false,
+  "favorite": false,
+  "fmFrequency": "Україна,Київ",
+  "id": 11,
+  "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/lounge.jpg?alt=media&token=443a03de-7554-40a3-b103-8d2e0d4cdd0f",
+  "name": "Lounge FM Chill Out",
+  "url": "https://cast.radiogroup.com.ua/chillout128"
+}
+
+,
+ {
+  "coutnOpen": 1,
+  "custom": false,
+  "favorite": false,
+  "fmFrequency": "Україна,Київ 95.2 FM",
+  "id": 12,
+  "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/melodiya.jpg?alt=media&token=438a6510-3559-44f2-8bb4-a6b7a44c8702",
+  "name": "Мелодія FM",
+  "url": "https://online.melodiafm.ua/MelodiaFM"
+}
+
+,
+ {
+  "coutnOpen": 1,
+  "custom": false,
+  "favorite": false,
+  "fmFrequency": "Україна,Київ 107.9 FM",
+  "id": 14,
+  "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/nashe.png?alt=media&token=43cc5ea8-ea5b-4ef1-9c7d-4c08b68c6574",
+  "name": "Наше радіо",
+  "url": "https://online.nasheradio.ua/NasheRadio"
+}
+,
+ {
+  "coutnOpen": 1,
+  "custom": false,
+  "favorite": false,
+  "fmFrequency": "Україна,Київ 104 FM",
+  "id": 15,
+  "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/power.jpg?alt=media&token=05c96eb6-48dc-4109-a002-9003d717b22d",
+  "name": "Power FM",
+  "url": "https://cast.radiogroup.com.ua/powerfm320"
+}
+,
+ {
+  "coutnOpen": 1,
+  "custom": false,
+  "favorite": false,
+  "fmFrequency": "Україна,Київ 103.6 FM",
+  "id": 19,
+  "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/balady.jpg?alt=media&token=bcb2645d-1ca6-4312-8b1d-f0cd98ff12be",
+  "name": "ROKS FM - Рок Балади",
+  "url": "https://online.radioroks.ua/RadioROKS_Ballads"
+}
+,
+ {
+  "coutnOpen": 1,
+  "custom": false,
+  "favorite": false,
+  "fmFrequency": "Україна,Київ",
+  "id": 16,
+  "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/roks.jpg?alt=media&token=2ead96e2-b7b4-49fa-b884-ba1e77cd82a7",
+  "name": "ROKS FM",
+  "url": "https://online.radioroks.ua/RadioROKS"
+}
+
+,
+ {
+  "coutnOpen": 1,
+  "custom": false,
+  "favorite": false,
+  "fmFrequency": "Україна,Київ 101.5 FM",
+  "id": 13,
+  "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/relax.png?alt=media&token=22e5aaaf-a951-44a0-827c-2fb41a1c62c6",
+  "name": "RELAX",
+  "url": "https://online.radiorelax.ua/RadioRelax"
+}
+,
+ {
+  "coutnOpen": 1,
+  "custom": false,
+  "favorite": false,
+  "fmFrequency": "Україна,Київ",
+  "id": 25,
+  "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/relaxinst.webp?alt=media&token=86eae36f-1d3e-492b-be90-7835bca73f2b",
+  "name": "Радіо Relax - Instrumental",
+  "url": "https://online.radiorelax.ua/RadioRelax_Instrumental"
+}
+,
+ {
+  "coutnOpen": 1,
+  "custom": false,
+  "favorite": false,
+  "fmFrequency": "Україна,Київ",
+  "id": 17,
+  "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/avto.png?alt=media&token=04deff94-b13a-4a45-a9b3-0bc08d76ea3e",
+  "name": "Авторадіо",
+  "url": "https://cast.radiogroup.com.ua/avtoradio.aac"
+}
+,
+ {
+  "coutnOpen": 1,
+  "custom": false,
+  "favorite": false,
+  "fmFrequency": "Україна,Київ 95.6 FM",
+  "id": 18,
+  "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/djem.jpg?alt=media&token=075b4205-e0b4-48b7-ad90-781db39cf8bb",
+  "name": "Джем ФМ - Jam FM",
+  "url": "https://cast.radiogroup.com.ua/jamfm"
+}
+,
+ {
+  "coutnOpen": 1,
+  "custom": false,
+  "favorite": false,
+  "fmFrequency": "Україна,Київ FM",
+  "id": 20,
+  "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/retro.jpg?alt=media&token=3a3b41aa-a0ec-47ed-9056-ac4fe7d551ad",
+  "name": "Ретро FM",
+  "url": "https://cast.radiogroup.com.ua/retro"
+}
+,
+ {
+  "coutnOpen": 1,
+  "custom": false,
+  "favorite": false,
+  "fmFrequency": "Україна,Київ 100 FM",
+  "id": 21,
+  "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/kraina.jpg?alt=media&token=3129a842-d5b3-4ef9-826b-bfb08b8fb8a8",
+  "name": "Країна ФМ (ex Гала Радио)",
+  "url": "http://live.radioec.com.ua:8000/kiev"
+}
+,
+ {
+  "coutnOpen": 1,
+  "custom": false,
+  "favorite": false,
+  "fmFrequency": "Україна,Київ 100.5 FM",
+  "id": 22,
+  "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/miami.jpg?alt=media&token=08c3adf1-279f-4ffc-83d9-473c84d4060d",
+  "name": "MIAMI",
+  "url": "http://62.80.190.246:8000/NRK128"
+}
+
+,
+ {
+  "coutnOpen": 1,
+  "custom": false,
+  "favorite": false,
+  "fmFrequency": "Україна,Київ 92.4 FM",
+  "id": 26,
+  "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/maximum.jpg?alt=media&token=8d57f3e2-fdc7-46b6-ab71-190822bbd0f3",
+  "name": "Maximum",
+  "url": "https://icecast.luxnet.ua/radio24_mp3"
+}
+,
+ {
+  "coutnOpen": 1,
+  "custom": false,
+  "favorite": false,
+  "fmFrequency": "Україна,Київ 94.6 FM",
+  "id": 27,
+  "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/armiya.jpg?alt=media&token=d26178af-934b-4806-838e-d58080e45bc5",
+  "name": "Радио Армія FM",
+  "url": "https://icecast.armyfm.com.ua:8443/ArmyFM"
+}
+,
+ {
+  "coutnOpen": 1,
+  "custom": false,
+  "favorite": false,
+  "fmFrequency": "Україна,Київ 93.8 FM",
+  "id": 28,
+  "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/bizness.jpg?alt=media&token=ed9aa228-6d1c-485d-90e0-f335479911fa",
+  "name": "Бізнес радіо",
+  "url": "https://cast.radiogroup.com.ua/businessradio320"
+}
+,
+ {
+  "coutnOpen": 1,
+  "custom": false,
+  "favorite": false,
+  "fmFrequency": "Україна,Київ 102.5 FM",
+  "id": 29,
+  "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/prosto.png?alt=media&token=93f7ceb9-0449-45c3-bc29-df59a77de7e7",
+  "name": "Просто радіо",
+  "url": "http://62.80.190.246:8000/PRK128"
+}
+
+,
+ {
+  "coutnOpen": 1,
+  "custom": false,
+  "favorite": false,
+  "fmFrequency": "Україна,Київ 99 FM",
+  "id": 31,
+  "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/nostalgie.jpg?alt=media&token=bb306d7b-1986-4618-80dd-6491f737f2b7",
+  "name": "Ностальжі",
+  "url": "https://icecast.luxnet.ua/nostalgi"
+}
+,
+ {
+  "coutnOpen": 1,
+  "custom": false,
+  "favorite": false,
+  "fmFrequency": "Україна,Київ 97.6 FM",
+  "id": 30,
+  "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/kultura.jpg?alt=media&token=362498a0-820a-4a9d-8f19-04234e48da3e",
+  "name": "UA:Радіо Культура",
+  "url": "http://radio.ukr.radio:8000/ur3-mp3-m"
+}
+,
+ {
+  "coutnOpen": 1,
+  "custom": false,
+  "favorite": false,
+  "fmFrequency": "Україна,Київ 96 FM",
+  "id": 32,
+  "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/nv.jfif?alt=media&token=6e6f1df2-a745-4686-a5ab-022266ac976f",
+  "name": "Радіо НВ",
+  "url": "https://online-radio.nv.ua/radionv.mp3 "
+}
+,
+ {
+  "coutnOpen": 1,
+  "custom": false,
+  "favorite": false,
+  "fmFrequency": "Україна,Київ",
+  "id": 33,
+  "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/hromadske.jpg?alt=media&token=bf7dd405-3bfd-4531-ae36-85240a3b6bbb",
+  "name": "Громадське радіо",
+  "url": "http://91.218.212.67:8000/stream-ps-hi"
+}
+,
+ {
+  "coutnOpen": 1,
+  "custom": false,
+  "favorite": false,
+  "fmFrequency": "Україна,Львів 100.8 FM",
+  "id": 34,
+  "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/lvivska.jpg?alt=media&token=97fa5cbf-8885-4b83-afb6-38b707a16f7d",
+  "name": "Львівська хвиля",
+  "url": "https://onair.lviv.fm:8443/lviv.fm"
+}
+,
+ {
+  "coutnOpen": 1,
+  "custom": false,
+  "favorite": false,
+  "fmFrequency": "Україна,Мукачеве, 101.9 FM",
+  "id": 35,
+  "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/zakarpattia.jpg?alt=media&token=74b60860-9013-48f6-a24c-49503b96b0cc",
+  "name": "Закарпаття FM",
+  "url": "http://195.234.148.51:8000/;stream.mp3?39"
+}
+,
+ {
+  "coutnOpen": 1,
+  "custom": false,
+  "favorite": false,
+  "fmFrequency": "Україна,Львів, 89.7 FM",
+  "id": 36,
+  "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/galuchina.png?alt=media&token=5e14effa-b7ad-454c-aea0-1d9d5a94940a",
+  "name": "FM Галичина",
+  "url": "http://91.218.212.67:8000/stream-ps-hi"
+}
+,
+ {
+  "coutnOpen": 1,
+  "custom": false,
+  "favorite": false,
+  "fmFrequency": "Україна,Стрий,101 FM",
+  "id": 37,
+  "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/striy.jpg?alt=media&token=ff152d80-6962-44d3-baa8-39dd0789199b",
+  "name": "Стрий FM",
+  "url": "http://online.fm.stryi.com:8000/stryi-fm_mp3"
+}
+
+,
+ {
+  "coutnOpen": 1,
+  "custom": false,
+  "favorite": false,
+  "fmFrequency": "Україна,Калуш,107.4 FM",
+  "id": 39,
+  "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/kalush.jpg?alt=media&token=37bd8d29-e83e-42c6-8555-b6b66b7ad509",
+  "name": "Калуш FM",
+  "url": "http://195.182.22.130:8000/Streamogg"
+}
+,
+ {
+  "coutnOpen": 1,
+  "custom": false,
+  "favorite": false,
+  "fmFrequency": "Україна,Київ,104.6 FM",
+  "id": 40,
+  "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/jazz.jpg?alt=media&token=5fd3ad16-1142-4f5a-8006-debcf33c38a1",
+  "name": "Radio Jazz",
+  "url": "https://online.radiojazz.ua/RadioJazz"
+}
+,
+ {
+  "coutnOpen": 1,
+  "custom": false,
+  "favorite": false,
+  "fmFrequency": "Україна",
+  "id": 41,
+  "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/rzk.jpg?alt=media&token=b53bc5e1-352e-44cb-a370-fc45972b17a3",
+  "name": "RzK",
+  "url": "http://stream.mjoy.ua:8000/radio-z-kryjivky"
+}
+,
+ {
+  "coutnOpen": 1,
+  "custom": false,
+  "favorite": false,
+  "fmFrequency": "Україна,Київ,97.4 FM",
+  "id": 42,
+  "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/KEXXX.png?alt=media&token=c3e49abb-e011-46aa-aa73-c5539c3015bb",
+  "name": "KEXXX FM",
+  "url": "https://myradio24.org/82192"
+}
+,
+ {
+  "coutnOpen": 1,
+  "custom": false,
+  "favorite": false,
+  "fmFrequency": "Україна",
+  "id": 43,
+  "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/star.jpg?alt=media&token=ddefdf7d-959d-49d7-b4dc-44bf266c15e9",
+  "name": "TRANCE IS STAR RADIO",
+  "url": "https://myradio24.org/tisradio"
+}
+,
+ {
+  "coutnOpen": 1,
+  "custom": false,
+  "favorite": false,
+  "fmFrequency": "Україна",
+  "id": 44,
+  "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/yee.jpg?alt=media&token=c24f7f58-f318-4891-937b-df64e686e057",
+  "name": "Є!Радіо",
+  "url": "http://45.129.97.52:8000/eradio"
+}
+
+
+
+
+
+
+
+
+
+
+,
+ {
+  "coutnOpen": 1,
+  "custom": false,
+  "favorite": false,
+  "fmFrequency": "Україна,Київ",
+  "id": 23,
+  "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/happy.png?alt=media&token=ca09c25f-1fdd-4690-82b9-dd6fc273d374",
+  "name": "Happy Radio",
+  "url": "https://stream.pcradio.ru/happy_radio_ukr-hi"
+}
+,
+ {
+  "coutnOpen": 1,
+  "custom": false,
+  "favorite": false,
+  "fmFrequency": "Україна",
+  "id": 38,
+  "image": "https://firebasestorage.googleapis.com/v0/b/allradioua.appspot.com/o/palanyca.jpg?alt=media&token=8ee8d547-d5e9-454c-84e9-f8cd530038d2",
+  "name": "Радіо Паляниця",
+  "url": "http://node-09.zeno.fm/5ky8e2uefseuv?zs=VR6plQA0TOesoTY8xVThfw&rj-tok=AAABgc8rdMkA-fwaEdcy1Etcow&rj-ttl=5"
+}
+
+
+  ]
+  }
+  
+  

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/listFragmentItem"
+        android:icon="@drawable/ic_baseline_list_24"
+        tools:ignore="MenuTitle" />
+    <item
+        android:id="@+id/favoriteFragmentItem"
+        android:icon="@drawable/ic_baseline_favorite_24"
+        tools:ignore="MenuTitle" />
+    <item
+        android:id="@+id/historyFragmentItem"
+        android:icon="@drawable/ic_baseline_history_24"
+        tools:ignore="MenuTitle" />
+    <item
+        android:id="@+id/settingFragmentItem"
+        android:icon="@drawable/ic_baseline_settings_24"
+        tools:ignore="MenuTitle" />
+
+</menu>

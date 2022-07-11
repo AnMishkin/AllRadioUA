@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "453534911392",
+    "firebase_url": "https://allradioua-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "allradioua",
+    "storage_bucket": "allradioua.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:453534911392:android:aeee411b7f9c5d95fa72c5",
+        "android_client_info": {
+          "package_name": "download.mishkindeveloper.AllRadioUA"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "453534911392-dag2t4l89dmno3p2q263djkk182b067a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnHAidGm2enRAj6fl7gGTMGCZSIV_uLVI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "453534911392-dag2t4l89dmno3p2q263djkk182b067a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

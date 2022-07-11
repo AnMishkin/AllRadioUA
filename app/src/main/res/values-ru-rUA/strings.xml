@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Все Радіо України</string>
+    <string name="error_network">Нет доступа к интернету</string>
+    <string name="dev_name">Developed by Mishkin</string>
+    <string name="name_station">Название станции</string>
+    <string name="set_hint_edit_text">Введите название станции</string>
+    <string name="link_station">Прямая ссылка на радиопоток</string>
+    <string name="set_hint_url_edit_text">Введите ссылку на трансляцию</string>
+    <string name="update_station">Обновить станции</string>
+    <string name="set_timer_text">Установить таймер</string>
+    <string name="set_timer_button">Установить таймер</string>
+    <string name="stop_timer_button">Остановить</string>
+    <string name="my_station_switch">Только мои станции</string>
+    <string name="sort_title">Сортировать по названию</string>
+    <string name="def_rb">Стандартно</string>
+    <string name="asc_rb">А…Я</string>
+    <string name="desc_rb">Я…А</string>
+    <string name="popular_rb">От самого прослушиваемого</string>
+    <string name="not_popular_rb">От самых не прослушиваемых</string>
+    <string name="title_sort_menu">Сортировка</string>
+    <string name="error_payback">Ошибка воспроизведения</string>
+    <string name="list_rb">Список</string>
+    <string name="grid_rb">Сетка</string>
+    <string name="view_tv">Отображение</string>
+    <string name="list_menu_item">Станции</string>
+    <string name="fav_menu_item">Избранное</string>
+    <string name="set_menu_item">Настройки</string>
+    <string name="history_menu_item">История</string>
+    <string name="set_title">Основные</string>
+    <string name="minute_title">мин</string>
+    <string name="timer_work">Таймер запущен</string>
+    <string name="timer_set">Установить таймер</string>
+    <string name="clear_history">Очистить историю</string>
+    <string name="history_clear_toast">История очищена</string>
+    <string name="title_view_setting">Параметры отображения</string>
+    <string name="title_station_setting">Параметры станций</string>
+    <string name="empty_edit_text">Введите Название станции или ссылку</string>
+    <string name="no_match">Совпадений не найдено</string>
+    <string name="title_widget">Радио</string>
+    <string name="sub_title_widget">Трек</string>
+    <string name="app_widget_description">Все радіо України</string>
+</resources>

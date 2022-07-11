@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">All Radio UA</string>
+    <string name="error_network">Brak dostępu do internetu</string>
+    <string name="dev_name">Developed by Mishkin</string>
+    <string name="name_station">Nazwa stacji</string>
+    <string name="set_hint_edit_text">Wpisz nazwę stacji</string>
+    <string name="link_station">Link do strumienia radiowego</string>
+    <string name="set_hint_url_edit_text">Wpisz link w radiu</string>
+    <string name="update_station">Zaktualizuj stacje</string>
+    <string name="set_timer_text">Ustaw minutnik</string>
+    <string name="set_timer_button">Ustaw minutnik</string>
+    <string name="stop_timer_button">Zatrzymaj się</string>
+    <string name="my_station_switch">Tylko moje stacje</string>
+    <string name="sort_title">Sortuj według nazwy</string>
+    <string name="def_rb">Normalnie</string>
+    <string name="asc_rb">А…Z</string>
+    <string name="desc_rb">Z…А</string>
+    <string name="popular_rb">Od słuchacza</string>
+    <string name="not_popular_rb">Od najbardziej niesłychanego</string>
+    <string name="title_sort_menu">Sortowanie</string>
+    <string name="error_payback">Błąd playbacku</string>
+    <string name="list_rb">Lista</string>
+    <string name="grid_rb">Krata</string>
+    <string name="view_tv">Wyświetlacz</string>
+    <string name="list_menu_item">Stacje</string>
+    <string name="fav_menu_item">Ulubione</string>
+    <string name="set_menu_item">Ustawienia</string>
+    <string name="history_menu_item">Historia</string>
+    <string name="set_title">Podstawowy</string>
+    <string name="minute_title">min</string>
+    <string name="timer_work">Minutnik działa</string>
+    <string name="timer_set">Ustaw minutnik</string>
+    <string name="clear_history">Czysta historia</string>
+    <string name="history_clear_toast">Historia jest wyczyszczona</string>
+    <string name="title_view_setting">Opcje wyświetlania</string>
+    <string name="title_station_setting">Parametry stacji</string>
+
+    <string name="empty_edit_text">Wpisz nazwę stacji lub link</string>
+    <string name="no_match">Nie znaleziono żadnego meczu</string>
+    <string name="app_widget_description">All Radio UA</string>
+    <string name="title_widget">Radio</string>
+    <string name="sub_title_widget">Tor</string>
+</resources>
