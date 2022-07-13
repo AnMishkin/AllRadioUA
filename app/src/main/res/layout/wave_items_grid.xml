@@ -47,11 +47,11 @@
 
             <ImageButton
                 android:id="@+id/menuImageButton"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_alignParentEnd="true"
                 android:layout_gravity="center"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="5dp"
                 android:layout_weight="1"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 app:srcCompat="@drawable/ic_baseline_toc_24" />
@@ -61,7 +61,9 @@
                 android:layout_width="41dp"
                 android:layout_height="41dp"
                 android:layout_above="@+id/favAnimationView"
+                android:layout_alignParentStart="true"
                 android:layout_gravity="center"
+                android:layout_marginStart="58dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="-61dp"
                 android:layout_toStartOf="@+id/menuImageButton"

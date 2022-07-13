@@ -31,7 +31,7 @@
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:text="@string/title_sort_menu"
-                android:textColor="@color/white" />
+                android:textColor="#FFEB3B" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
