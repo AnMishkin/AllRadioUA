@@ -17,7 +17,6 @@ import androidx.appcompat.widget.SearchView
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
 import androidx.fragment.app.FragmentTransaction
@@ -36,6 +35,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 import com.google.firebase.database.*
 import com.google.firebase.database.annotations.NotNull
+import com.squareup.picasso.Picasso
+import dagger.android.AndroidInjection
+import de.hdodenhof.circleimageview.CircleImageView
 import download.mishkindeveloper.AllRadioUA.R
 import download.mishkindeveloper.AllRadioUA.data.entity.RadioWave
 import download.mishkindeveloper.AllRadioUA.data.entity.Track
@@ -47,9 +49,6 @@ import download.mishkindeveloper.AllRadioUA.ui.favoriteFragment.FavoriteFragment
 import download.mishkindeveloper.AllRadioUA.ui.historyFragment.HistoryFragment
 import download.mishkindeveloper.AllRadioUA.ui.listFragment.ListFragment
 import download.mishkindeveloper.AllRadioUA.ui.settingFragment.SettingFragment
-import com.squareup.picasso.Picasso
-import dagger.android.AndroidInjection
-import de.hdodenhof.circleimageview.CircleImageView
 import okhttp3.*
 import org.json.JSONArray
 import org.json.JSONObject
@@ -157,6 +156,7 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         init()
 
         initPermission()
@@ -225,12 +225,14 @@ class MainActivity : AppCompatActivity() {
         favoriteImageButton?.setImageResource(R.drawable.ic_baseline_favorite_24)
         lottieAnimationView?.visibility = View.VISIBLE
         lottieAnimationView?.playAnimation()
+
     }
 
     private fun favoriteStatusTrue() {
         radioWave?.favorite = false
         viewModel.updateRadioWave(radioWave)
         favoriteImageButton?.setImageResource(R.drawable.ic_baseline_favorite_border_24)
+
     }
 
     private fun initRadioWaveFromService() {
@@ -313,13 +315,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun setTitleMiniPlayer(id: Int) {
         val radioWave: RadioWave = viewModel.getRadioWaveForId(id)
-        if (radioWave != null) {
-            titleTextView.text = radioWave.name
-            Picasso.get()
-                .load(radioWave.image)
-                .into(posterImageView)
-            preferencesHelper.setIdPlayMedia(radioWave.id)
-        }
+        titleTextView.text = radioWave.name
+        Picasso.get()
+            .load(radioWave.image)
+            .into(posterImageView)
+        preferencesHelper.setIdPlayMedia(radioWave.id)
     }
 
     private fun createListFragment() {
@@ -363,10 +363,12 @@ class MainActivity : AppCompatActivity() {
         when (it.itemId) {
             R.id.listFragmentItem -> {
                 createListFragment()
+                loadPageAds()
                 searchImageButton.visibility = View.VISIBLE
             }
             R.id.favoriteFragmentItem -> {
                 createFavFragment()
+                loadPageAds()
                 searchImageButton.visibility = View.INVISIBLE
             }
             R.id.settingFragmentItem -> {

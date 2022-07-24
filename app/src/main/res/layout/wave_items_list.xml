@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/black"
+    android:background="#000822"
     android:orientation="vertical">
 
     <LinearLayout
@@ -55,7 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:textColor="@color/white"
+                android:textColor="#FFEB3B"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -70,7 +70,7 @@
                     android:id="@+id/historyDateTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
+                    android:textColor="#FFEB3B"
                     android:textSize="10sp" />
             </LinearLayout>
         </LinearLayout>
@@ -102,6 +102,6 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:background="#43939292"
+        android:background="#FFEB3B"
         android:foregroundGravity="center" />
 </LinearLayout>

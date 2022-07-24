@@ -76,6 +76,7 @@ class FavoriteFragment : Fragment(), MenuItemIdListener {
         mGridLayoutManager = when (displayListType) {
             DisplayListType.List -> {
                 GridLayoutManager(activity, 1)
+
             }
             DisplayListType.Grid -> {
                 GridLayoutManager(activity, 2)
@@ -131,4 +132,7 @@ class FavoriteFragment : Fragment(), MenuItemIdListener {
     override fun updateCountOpenItem(id: Int?) {
 
     }
+
+
+
 }

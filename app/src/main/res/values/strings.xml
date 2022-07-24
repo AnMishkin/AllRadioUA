@@ -6,7 +6,7 @@
 
     <string name="firebase_ref" translatable="false">RadioWaves</string>
     <string name="firebase_url" translatable="false">https://allradioua-default-rtdb.europe-west1.firebasedatabase.app/</string>
-    <string name="default_logo_url" translatable="false">https://cdn-icons-png.flaticon.com/512/186/186054.png</string>
+    <string name="default_logo_url" translatable="false">"http://mishkindeveloper.download/assets/img/default_image.png"</string>
     <string name="intent_filter" translatable="false">count_down</string>
     <string name="intent_filter_notification" translatable="false">notification</string>
     <string name="serializable_extra" translatable="false">media</string>

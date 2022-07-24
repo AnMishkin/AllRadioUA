@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="#001860"
     android:orientation="vertical">
 
     <LinearLayout
@@ -45,7 +45,7 @@
         android:id="@+id/bottomSheet"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black"
+        android:background="#001860"
         app:behavior_hideable="false"
         app:behavior_peekHeight="0dp"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
@@ -70,7 +70,7 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
-                app:cardBackgroundColor="@color/gray"
+                app:cardBackgroundColor="#000822"
                 app:cardCornerRadius="22dp">
 
                 <LinearLayout
@@ -91,7 +91,7 @@
                             android:layout_weight="1"
                             android:buttonTint="@color/yellow"
                             android:text="@string/my_station_switch"
-                            android:textColor="@color/white"
+                            android:textColor="#FFEB3B"
                             app:thumbTint="@color/yellow"
                             app:trackTint="@color/white" />
                     </LinearLayout>
@@ -102,7 +102,7 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
-                        android:background="#43939292"
+                        android:background="#FFEB3B"
                         android:foregroundGravity="center" />
 
                     <LinearLayout
@@ -116,7 +116,7 @@
                             android:foregroundGravity="center"
                             android:gravity="center"
                             android:text="@string/sort_title"
-                            android:textColor="@color/white" />
+                            android:textColor="#FFEB3B" />
 
                         <RadioGroup
                             android:id="@+id/sortNameRadioGroup"
@@ -127,41 +127,41 @@
                                 android:id="@+id/radioButtonDefault"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:buttonTint="@color/yellow"
+                                android:buttonTint="@color/white"
                                 android:text="@string/def_rb"
-                                android:textColor="@color/white" />
+                                android:textColor="#FFEB3B" />
 
                             <RadioButton
                                 android:id="@+id/radioButtonAsc"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:buttonTint="@color/yellow"
+                                android:buttonTint="@color/white"
                                 android:text="@string/asc_rb"
-                                android:textColor="@color/white" />
+                                android:textColor="#FFEB3B" />
 
                             <RadioButton
                                 android:id="@+id/radioButtonDesc"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:buttonTint="@color/yellow"
+                                android:buttonTint="@color/white"
                                 android:text="@string/desc_rb"
-                                android:textColor="@color/white" />
+                                android:textColor="#FFEB3B" />
 
                             <RadioButton
                                 android:id="@+id/popularRadioButton"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:buttonTint="@color/yellow"
+                                android:buttonTint="@color/white"
                                 android:text="@string/popular_rb"
-                                android:textColor="@color/white" />
+                                android:textColor="#FFEB3B" />
 
                             <RadioButton
                                 android:id="@+id/notPopularRadioButton"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:buttonTint="@color/yellow"
+                                android:buttonTint="@color/white"
                                 android:text="@string/not_popular_rb"
-                                android:textColor="@color/white" />
+                                android:textColor="#FFEB3B" />
                         </RadioGroup>
 
                     </LinearLayout>

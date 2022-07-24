@@ -5,6 +5,7 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.exoplayer2.ExoPlayer
@@ -15,6 +16,7 @@ import download.mishkindeveloper.AllRadioUA.enums.DisplayListType
 import download.mishkindeveloper.AllRadioUA.listeners.MenuItemIdListener
 import download.mishkindeveloper.AllRadioUA.services.PlayerService
 import com.squareup.picasso.Picasso
+import download.mishkindeveloper.AllRadioUA.ui.listFragment.ListFragment
 
 class ListFragmentRecyclerViewAdapter(
     private var items: List<RadioWave>,
@@ -81,12 +83,15 @@ class ListFragmentRecyclerViewAdapter(
         checkImageNull(position, holder)
         checkFavItem(position, holder)
         checkCustomItem(position, holder)
-        holder.menuImageButton?.setOnClickListener { menuItemIdListener.getItemMenu(items[position].id)
+        holder.menuImageButton?.setOnClickListener {
+            menuItemIdListener.getItemMenu(items[position].id)
         }
+//        holder.menuImageButton?.setOnClickListener {
+//            Toast.makeText(context, "rewire", Toast.LENGTH_SHORT).show() }
         holder.itemView.setOnClickListener {
             setMediaItem(position)
             menuItemIdListener.updateCountOpenItem(items[position].id)
-
+            //holder.lottieAnimationView?.visibility = View.VISIBLE
         }
         radioWaveNameEquals(position, holder)
     }
@@ -106,6 +111,7 @@ class ListFragmentRecyclerViewAdapter(
     private fun checkFavItem(position: Int, holder: WaveViewHolder) {
         if (items[position].favorite == true) {
             holder.favImageView?.visibility = View.VISIBLE
+
         } else {
             holder.favImageView?.visibility = View.INVISIBLE
         }
@@ -137,6 +143,9 @@ class ListFragmentRecyclerViewAdapter(
         mService.getPlayer()!!.prepare()
         mService.getPlayer()!!.play()
         mService.setRadioWave(items[position])
+
+
+
         notifyDataSetChanged()
 
 
