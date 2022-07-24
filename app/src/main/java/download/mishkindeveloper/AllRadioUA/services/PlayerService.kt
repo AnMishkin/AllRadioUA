@@ -145,6 +145,7 @@ class PlayerService() : Service(), Parcelable {
         )
             .setChannelNameResourceId(R.string.app_name)
             .setChannelImportance(IMPORTANCE_NONE)
+
             .setMediaDescriptionAdapter(object : MediaDescriptionAdapter {
                 override fun getCurrentContentTitle(player: Player): CharSequence {
                     return radioWave?.name.toString()
