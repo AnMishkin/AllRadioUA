@@ -78,7 +78,10 @@ class SettingFragment : Fragment() {
                 }
             }
         }
-        updateLottieAnimView?.setOnClickListener { updateDbAndAnim() }
+        updateLottieAnimView?.setOnClickListener {
+            updateDbAndAnim()
+
+        }
         trashLottieAnimationView?.setOnClickListener { clearHistoryAndAnim() }
         clearHistoryTextView?.setOnClickListener { clearHistoryAndAnim() }
         updateStationTextView?.setOnClickListener { updateDbAndAnim() }

@@ -146,7 +146,9 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onAdShowedFullScreenContent() {
-                mInterstitialAd = null
+//                mInterstitialAd = null
+//                initAds()
+//                Toast.makeText(this@MainActivity, "загрузилась реклама", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -322,14 +324,14 @@ class MainActivity : AppCompatActivity() {
         preferencesHelper.setIdPlayMedia(radioWave.id)
     }
 
-    private fun createListFragment() {
+    fun createListFragment() {
         fragment = ListFragment().newInstance()
         val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragmentContainerView, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
         titleToolTextView?.text = getString(R.string.list_menu_item)
-
+initAds()
     }
 
     private fun createSettingFragment() {
@@ -339,6 +341,7 @@ class MainActivity : AppCompatActivity() {
         transaction.addToBackStack(null)
         transaction.commit()
         titleToolTextView?.text = getString(R.string.set_menu_item)
+        initAds()
     }
 
     private fun createHistoryFragment() {
@@ -348,6 +351,7 @@ class MainActivity : AppCompatActivity() {
         transaction.addToBackStack(null)
         transaction.commit()
         titleToolTextView?.text = getString(R.string.history_menu_item)
+        initAds()
     }
 
     private fun createFavFragment() {
@@ -357,6 +361,7 @@ class MainActivity : AppCompatActivity() {
         transaction.addToBackStack(null)
         transaction.commit()
         titleToolTextView?.text = getString(R.string.fav_menu_item)
+        initAds()
     }
 
     private var bottomNavViewOnItemSelectListener = NavigationBarView.OnItemSelectedListener {
@@ -378,17 +383,19 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.historyFragmentItem -> {
                 createHistoryFragment()
+
                 loadPageAds()
                 searchImageButton.visibility = View.INVISIBLE
             }
         }
         return@OnItemSelectedListener true
     }
-
+//реклама
     private fun loadPageAds() {
         if (mInterstitialAd != null) {
             mInterstitialAd?.show(this)
         } else {
+
         }
     }
 

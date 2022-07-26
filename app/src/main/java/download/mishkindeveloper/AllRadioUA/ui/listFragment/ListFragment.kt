@@ -123,6 +123,7 @@ class ListFragment : Fragment(), MenuItemIdListener, FragmentSettingListener {
                 }
                 R.id.notPopularRadioButton -> {
                     notPopularSetPrefsAndUpdateRv()
+
                 }
             }
         }
