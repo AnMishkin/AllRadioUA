@@ -87,6 +87,7 @@ class PlayerService() : Service(), Parcelable {
             R.id.widgetLinearLayout,
             getPendingSelfIntent(applicationContext, openAction)
         )
+        
     }
 
     fun getPendingSelfIntent(context: Context?, action: String?): PendingIntent? {

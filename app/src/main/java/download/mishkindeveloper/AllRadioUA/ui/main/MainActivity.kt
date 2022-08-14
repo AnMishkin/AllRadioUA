@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity() {
     private  var lottieAnimationView: LottieAnimationView? = null
     private  var mVisualizer: CircleLineVisualizer? = null
     private var audioSessionId by Delegates.notNull<Int>()
-    private  var motionLayout: MotionLayout? = null
+    var motionLayout: MotionLayout? = null
     private  var favoriteImageButton: ImageButton? = null
     private var playImageView: ImageView? = null
     private var animNetLottieAnimationView: LottieAnimationView? = null
@@ -159,16 +159,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        checkFirstStartStatus()
+
         init()
 
         initPermission()
-        checkFirstStartStatus()
+
         initBroadcastManager()
         setMediaInfoInMiniPlayer()
         setListeners()
         performSearch()
         initAds()
 
+        //titleToolTextView?.text = items.size.toString()+"-"+getString(R.string.list_menu_item)
     }
 
     override fun onDestroy() {
@@ -176,6 +179,8 @@ class MainActivity : AppCompatActivity() {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(radioWaveBroadcastReceiver)
         setMediaInfoInMiniPlayer()
         mAdView.destroy()
+        mExoPlayer?.stop()
+
     }
 
     private val timerBroadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
@@ -208,6 +213,8 @@ class MainActivity : AppCompatActivity() {
         firstStartStatus = preferencesHelper.getFirstStart()
         if (firstStartStatus) {
             initDb()
+
+
         } else {
             startPlayerService()
         }
@@ -262,7 +269,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun setListeners() {
+    fun setListeners() {
         favoriteImageButton?.setOnClickListener {
             initRadioWaveFromService()
         }
@@ -281,6 +288,8 @@ class MainActivity : AppCompatActivity() {
             }
             false
         }
+
+
         searchImageButton.setOnClickListener {
             checkStatusSearchViewVisible()
         }
@@ -296,7 +305,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkStatusClickPlayInMiniPlayer() {
+    fun checkStatusClickPlayInMiniPlayer() {
         if (mExoPlayer!!.isPlaying) {
             mExoPlayer!!.pause()
         } else {
@@ -323,14 +332,14 @@ class MainActivity : AppCompatActivity() {
             .into(posterImageView)
         preferencesHelper.setIdPlayMedia(radioWave.id)
     }
-
+//подключаю подсчет станций
     fun createListFragment() {
         fragment = ListFragment().newInstance()
         val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragmentContainerView, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
-        titleToolTextView?.text = getString(R.string.list_menu_item)
+    //titleToolTextView?.text = items.size.toString()+"-"+getString(R.string.list_menu_item)
 initAds()
     }
 
@@ -370,16 +379,21 @@ initAds()
                 createListFragment()
                 loadPageAds()
                 searchImageButton.visibility = View.VISIBLE
+                //обновление базы
+                updateDb()
             }
             R.id.favoriteFragmentItem -> {
+                updateDb()
                 createFavFragment()
                 loadPageAds()
                 searchImageButton.visibility = View.INVISIBLE
+
             }
             R.id.settingFragmentItem -> {
                 createSettingFragment()
                 loadPageAds()
                 searchImageButton.visibility = View.INVISIBLE
+
             }
             R.id.historyFragmentItem -> {
                 createHistoryFragment()
@@ -457,7 +471,8 @@ initAds()
         mFmFrequencyTextView?.text = mPlayerService?.getRadioWave()?.fmFrequency
     }
 
-    private fun setMediaSessionAndVisual() {
+    fun setMediaSessionAndVisual() {
+
         audioSessionId = mExoPlayer!!.audioSessionId
         try {
             mVisualizer?.setAudioSessionId(audioSessionId)
@@ -487,7 +502,9 @@ initAds()
         animNetLottieAnimationView = findViewById(R.id.netAnim)
         backImageButton = findViewById(R.id.backImageButton)
         titleToolTextView = findViewById(R.id.titleToolTextView)
+       // titleToolTextView?.text = items.size.toString()+"-"+getString(R.string.list_menu_item)
         titleToolTextView?.text = getString(R.string.list_menu_item)
+
         searchView = findViewById(R.id.radio_search)
         timerTextView = findViewById(R.id.timerTextView)
         timerImageButton = findViewById(R.id.timerImageButton)
@@ -527,11 +544,13 @@ initAds()
                 createListFragment()
                 preferencesHelper.setFirstStart(false)
                 preferencesHelper.setIdPlayMedia(items[2].id)
+
             }
 
             override fun onCancelled(@NonNull @NotNull error: DatabaseError) {}
         }
         database?.addValueEventListener(valueEventListener)
+
     }
 
     fun updateDb() {
@@ -664,7 +683,7 @@ initAds()
         @SuppressLint("SimpleDateFormat")
         private fun insertTrackAndSetDefaultPoster(mediaMetadata: MediaMetadata) {
             artistPoster =
-                "https://i.ibb.co/G3yqPVB/generalimage.jpg"
+                "http://mishkindeveloper.download/imageRadio/NoImageSong.jpg"
             val track = Track()
             val sdf = SimpleDateFormat("dd.MM.yyyy HH:mm:ss")
             val currentDate = sdf.format(Date())

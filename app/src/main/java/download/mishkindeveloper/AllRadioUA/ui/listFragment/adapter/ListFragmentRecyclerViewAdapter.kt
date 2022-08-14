@@ -17,6 +17,7 @@ import download.mishkindeveloper.AllRadioUA.listeners.MenuItemIdListener
 import download.mishkindeveloper.AllRadioUA.services.PlayerService
 import com.squareup.picasso.Picasso
 import download.mishkindeveloper.AllRadioUA.ui.listFragment.ListFragment
+import download.mishkindeveloper.AllRadioUA.ui.main.MainActivity
 
 class ListFragmentRecyclerViewAdapter(
     private var items: List<RadioWave>,

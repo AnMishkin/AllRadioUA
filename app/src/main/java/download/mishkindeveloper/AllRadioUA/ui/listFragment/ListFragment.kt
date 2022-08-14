@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.annotation.NonNull
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -17,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.switchmaterial.SwitchMaterial
+import com.google.firebase.database.*
+import com.google.firebase.database.annotations.NotNull
 import download.mishkindeveloper.AllRadioUA.listeners.FragmentSettingListener
 import download.mishkindeveloper.AllRadioUA.listeners.MenuItemIdListener
 import download.mishkindeveloper.AllRadioUA.R
@@ -99,9 +102,12 @@ class ListFragment : Fragment(), MenuItemIdListener, FragmentSettingListener {
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet!!)
         titleSortTextView = view.findViewById(R.id.titleSortTextView)
     }
+//попытка обновления базы при выборе сортировки
+
+
 
     private fun initListeners() {
-        hideBottomSheetImageButton?.setOnClickListener {
+            hideBottomSheetImageButton?.setOnClickListener {
             bottomSheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
         }
         switch?.setOnClickListener {
@@ -111,20 +117,30 @@ class ListFragment : Fragment(), MenuItemIdListener, FragmentSettingListener {
             when (i) {
                 R.id.radioButtonDefault -> {
                     defaultSetPrefsAndUpdateRv()
+                    bottomSheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
+
                 }
                 R.id.radioButtonAsc -> {
                     ascSetPrefsAndUpdateRv()
+                    bottomSheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
                 }
                 R.id.radioButtonDesc -> {
                     descSetPrefsAndUpdateRv()
+                    bottomSheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
                 }
                 R.id.popularRadioButton -> {
                     popularSetPrefsAndUpdateRv()
+                    bottomSheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
                 }
                 R.id.notPopularRadioButton -> {
                     notPopularSetPrefsAndUpdateRv()
+                    bottomSheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
+                    //updateDb()
+                    //MainActivity().updateDb() //- так вылетает ошибка
+                    //(activity as MainActivity?)?.updateDb()
 
                 }
+
             }
         }
         sortImageButton?.setOnClickListener {
