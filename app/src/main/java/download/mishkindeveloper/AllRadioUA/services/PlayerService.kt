@@ -16,6 +16,9 @@ import android.os.IBinder
 import android.os.Parcel
 import android.os.Parcelable
 import android.support.v4.media.session.MediaSessionCompat
+import android.view.MotionEvent
+import android.view.MotionEvent.ACTION_UP
+import android.view.View
 import android.widget.RemoteViews
 import androidx.annotation.Nullable
 import androidx.core.app.NotificationCompat
@@ -108,6 +111,7 @@ class PlayerService() : Service(), Parcelable {
     private fun actionEquals(intent: Intent?) {
         if (intent?.action.equals(playAction)) {
             mPlayer!!.play()
+
         }
         if (intent?.action.equals(pauseAction)) {
             mPlayer!!.pause()
@@ -311,7 +315,7 @@ class PlayerService() : Service(), Parcelable {
         @SuppressLint("SimpleDateFormat")
         private fun insertTrackAndSetDefaultPoster(mediaMetadata: MediaMetadata) {
             artistPoster =
-                "https://i.ibb.co/G3yqPVB/generalimage.jpg"
+                "http://mishkindeveloper.download/imageRadio/NoImageSong.jpg"
             val track = Track()
             val sdf = SimpleDateFormat("dd.MM.yyyy HH:mm:ss")
             val currentDate = sdf.format(Date())

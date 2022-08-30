@@ -41,4 +41,7 @@
     <string name="app_widget_description">All Radio UA</string>
     <string name="title_widget">Radio</string>
     <string name="sub_title_widget">Tor</string>
+
+    <string name="add_radio_station_message">Twoja stacja została dodana do listy stacji radiowych!</string>
+    <string name="del_radio_station_message">Twoja stacja została usunięta z listy stacji radiowych!</string>
 </resources>

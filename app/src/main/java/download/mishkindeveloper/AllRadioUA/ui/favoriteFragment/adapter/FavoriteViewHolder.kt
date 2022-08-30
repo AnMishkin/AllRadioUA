@@ -1,6 +1,7 @@
 package download.mishkindeveloper.AllRadioUA.ui.favoriteFragment.adapter
 
 import android.view.View
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -12,4 +13,5 @@ class FavoriteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var nameTextView: TextView? = itemView.findViewById(R.id.textViewTrackName)
     var frequencyTextView: TextView? = itemView.findViewById(R.id.historyDateTextView)
     var lottieAnimationView: LottieAnimationView? =itemView.findViewById(R.id.favAnimationView)
+    var menuImageButton: ImageButton?=itemView.findViewById(R.id.menuImageButton)
 }

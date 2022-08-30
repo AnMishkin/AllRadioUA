@@ -29,8 +29,8 @@
             android:ems="10"
             android:hint="@string/set_hint_edit_text"
             android:inputType="textPersonName"
-            android:textColor="#FFEB3B"
-            android:textColorHint="@color/yellow" />
+            android:textColor="#FFFFFF"
+            android:textColorHint="@color/white" />
     </LinearLayout>
 
     <LinearLayout
@@ -55,8 +55,8 @@
             android:ems="10"
             android:hint="@string/set_hint_url_edit_text"
             android:inputType="textPersonName"
-            android:textColor="#FFEB3B"
-            android:textColorHint="@color/yellow" />
+            android:textColor="#FFFFFF"
+            android:textColorHint="@color/white" />
     </LinearLayout>
 
     <LinearLayout

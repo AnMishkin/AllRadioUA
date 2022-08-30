@@ -33,6 +33,7 @@ import download.mishkindeveloper.AllRadioUA.ui.main.MainViewModel
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
+
 class ListFragment : Fragment(), MenuItemIdListener, FragmentSettingListener {
     private var mRecyclerView: RecyclerView? =null
     private  var mGridLayoutManager: GridLayoutManager?=null
@@ -112,36 +113,39 @@ class ListFragment : Fragment(), MenuItemIdListener, FragmentSettingListener {
         }
         switch?.setOnClickListener {
             switchIsChecked()
+            bottomSheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
         }
         sortNameRadioGroup?.setOnCheckedChangeListener { _, i ->
             when (i) {
                 R.id.radioButtonDefault -> {
                     defaultSetPrefsAndUpdateRv()
                     bottomSheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
-
+                    setDefaultStatusAndUpdateUI()
                 }
                 R.id.radioButtonAsc -> {
                     ascSetPrefsAndUpdateRv()
                     bottomSheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
+                    setAscStatusAndUpdateUI()
                 }
                 R.id.radioButtonDesc -> {
                     descSetPrefsAndUpdateRv()
                     bottomSheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
+                    setDescStatusAndUpdateUI()
                 }
                 R.id.popularRadioButton -> {
                     popularSetPrefsAndUpdateRv()
                     bottomSheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
+                    setPopularStatusAndUpdateUI()
                 }
                 R.id.notPopularRadioButton -> {
                     notPopularSetPrefsAndUpdateRv()
                     bottomSheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
-                    //updateDb()
-                    //MainActivity().updateDb() //- так вылетает ошибка
-                    //(activity as MainActivity?)?.updateDb()
+                    setNotPopularStatusAndUpdateUI()
 
                 }
 
             }
+
         }
         sortImageButton?.setOnClickListener {
             bottomSheetBehavior?.state = BottomSheetBehavior.STATE_EXPANDED
@@ -151,14 +155,14 @@ class ListFragment : Fragment(), MenuItemIdListener, FragmentSettingListener {
         }
     }
 
-    private fun switchIsChecked() {
+     fun switchIsChecked() {
         if (switch?.isChecked==true) {
             preferencesHelper.setSwitchEnabled(true)
             defaultListItem = viewModel.getCustomAll()
             updateRecyclerView(defaultListItem)
         } else {
             preferencesHelper.setSwitchEnabled(false)
-            defaultListItem = viewModel.getAllRadioWaves()
+            defaultListItem = viewModel.getCustomAll()+viewModel.getAllRadioWaves()
             updateRecyclerView(defaultListItem)
         }
     }
@@ -209,6 +213,7 @@ class ListFragment : Fragment(), MenuItemIdListener, FragmentSettingListener {
             sortNameRadioGroup?.check(R.id.radioButtonDefault)
             items = viewModel.getAllRadioWaves().toMutableList()
         }
+        items?.let { updateRecyclerView(it) }
     }
 
     private fun setAscStatusAndUpdateUI() {
@@ -217,6 +222,7 @@ class ListFragment : Fragment(), MenuItemIdListener, FragmentSettingListener {
             sortNameRadioGroup?.check(R.id.radioButtonAsc)
             items = viewModel.getAllSortAsc().toMutableList()
         }
+        items?.let { updateRecyclerView(it) }
     }
 
     private fun setDescStatusAndUpdateUI() {
@@ -225,6 +231,7 @@ class ListFragment : Fragment(), MenuItemIdListener, FragmentSettingListener {
             sortNameRadioGroup?.check(R.id.radioButtonDesc)
             items = viewModel.getAllSortDesc().toMutableList()
         }
+        items?.let { updateRecyclerView(it) }
     }
 
     private fun setPopularStatusAndUpdateUI() {
@@ -233,6 +240,7 @@ class ListFragment : Fragment(), MenuItemIdListener, FragmentSettingListener {
             sortNameRadioGroup?.check(R.id.popularRadioButton)
             items = viewModel.getPopularDesc().toMutableList()
         }
+        items?.let { updateRecyclerView(it) }
     }
 
     private fun setNotPopularStatusAndUpdateUI() {
@@ -241,6 +249,7 @@ class ListFragment : Fragment(), MenuItemIdListener, FragmentSettingListener {
             sortNameRadioGroup?.check(R.id.notPopularRadioButton)
             items = viewModel.getPopularAsc().toMutableList()
         }
+        items?.let { updateRecyclerView(it) }
     }
 
     private fun loadPrefsAndUpdateRadioButton() {
@@ -326,8 +335,13 @@ class ListFragment : Fragment(), MenuItemIdListener, FragmentSettingListener {
             radioWave.custom = true
             radioWave.url = urlEditText.text.toString()
             viewModel.updateRadioWave(radioWave)
+            //viewModel.getCustomAll()
+
+//            var custDef = ListFragment().defaultListItem
+//            updateRecyclerView(custDef)
             builder.dismiss()
             initAdapter()
+            //defaultListItem = viewModel.getCustomAll()+viewModel.getAllRadioWaves()
         }
     }
 
@@ -343,10 +357,17 @@ class ListFragment : Fragment(), MenuItemIdListener, FragmentSettingListener {
     ) {
         updateButton.setOnClickListener {
             updateButtonEvent(nameEditText, radioWave, urlEditText, builder)
+            switchIsChecked()
+            //(activity as MainActivity?)?.updateDb()
+           // defaultListItem = viewModel.getCustomAll()+viewModel.getAllRadioWaves()
         }
 
         delButton.setOnClickListener {
             delButtonEvent(radioWave, builder)
+            switchIsChecked()
+            (activity as MainActivity?)?.updateDb()
+
+            Toast.makeText(this.context, R.string.del_radio_station_message, Toast.LENGTH_LONG).show()
         }
     }
 

@@ -27,49 +27,56 @@
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/4f1523588cafba2b7f464e6c001f876f/transformed/jetified-okio-jvm-3.0.0.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/f2ae01e53caa8b24fe35ddf216661311/transformed/jetified-kotlinx-coroutines-core-jvm-1.5.0.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/2413d0e52122390097dbdf7708b21969/transformed/jetified-kotlin-stdlib-jdk8-1.6.21.jar</arg>
+                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/4dcd6390b30572d6769324bbd2f4fdb8/transformed/material-1.6.0-api.jar</arg>
+                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/c295f6d93dd72aa3119241261cb4c968/transformed/jetified-viewpager2-1.0.0-api.jar</arg>
+                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/2621d736bed7477ffacd5891523b4309/transformed/recyclerview-1.2.1-api.jar</arg>
+                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/391d049e93e291787be47d0df26a9ef6/transformed/cardview-1.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/dbcc75a26bfb80f3d5d7f0c4db7809f7/transformed/jetified-core-ktx-1.8.0-api.jar</arg>
-                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/48a5b0a9c642a10b8d00ac3a18ee6bf4/transformed/material-1.6.1-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/3010838ee4c5d35a18d2000d3602ee7a/transformed/jetified-dagger-android-support-2.20-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/f75200e7e1c5936346c05f6cb07aa072/transformed/appcompat-1.4.2-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/9f31fb4e771fc3db731b6adb785f06a2/transformed/jetified-firebase-database-ktx-20.0.5-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/d7be78dfbd05da4d1ab54ed8dff211af/transformed/jetified-firebase-analytics-ktx-21.0.0-api.jar</arg>
+                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/ebd3e2c416d978d95c33f27abc59005d/transformed/jetified-firebase-messaging-ktx-23.0.7-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/641cd34ed487993daf5825df29345294/transformed/jetified-firebase-common-ktx-20.1.1-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/69e09d43b9e368ad9667a5f883768369/transformed/jetified-firebase-database-20.0.5-api.jar</arg>
-                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/06f00ea892df82bff883e3aab3d9562a/transformed/jetified-firebase-analytics-21.0.0-api.jar</arg>
-                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/a1e4f15719f5b464364484a3bf63f05d/transformed/jetified-play-services-measurement-api-21.0.0-api.jar</arg>
+                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/671d0ae9a357338289c2b4096a430e46/transformed/jetified-firebase-messaging-23.0.7-api.jar</arg>
+                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/1855bf4fe53187671136442ad9f89281/transformed/jetified-firebase-core-21.1.0-api.jar</arg>
+                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/0ea93121056dd142819bb32f53916627/transformed/jetified-firebase-analytics-21.1.0-api.jar</arg>
+                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/2607a9202e43c2ad94533872d3275f06/transformed/jetified-play-services-measurement-api-21.1.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/de0959d72a94f9e63a30f128c2cb9a95/transformed/jetified-firebase-appcheck-interop-16.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/3e35662b8bc57a31014b9558af6a8232/transformed/jetified-firebase-auth-interop-19.0.2-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/8eac336e66a0acb1e84305e190287ddf/transformed/jetified-firebase-installations-17.0.1-api.jar</arg>
+                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/b94df97e90887ed3626dcf12d930f218/transformed/jetified-firebase-datatransport-18.1.5-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/f505ab0610e4979726dfc6c0a1ff5e65/transformed/jetified-firebase-common-20.1.1-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/523d8e21f59805fb1b8c8d60a51d988c/transformed/jetified-firebase-components-17.0.0-api.jar</arg>
-                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/54507add2e3ac3297706d6b2388f26bf/transformed/jetified-play-services-ads-21.0.0-api.jar</arg>
-                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/c295f6d93dd72aa3119241261cb4c968/transformed/jetified-viewpager2-1.0.0-api.jar</arg>
+                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/031b1b4f4b51db224f16abecae8d0162/transformed/jetified-play-services-ads-21.1.0-api.jar</arg>
+                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/995799bbbffac468daa501697b99a8e0/transformed/drawerlayout-1.1.1-api.jar</arg>
+                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/6995ce3e1c358bd013c10d4291df757f/transformed/coordinatorlayout-1.1.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/0f0e772c75617cc624f92b96af7db500/transformed/jetified-play-services-appset-16.0.1-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/6722ea94d651679073dfcbf4a656f5db/transformed/jetified-firebase-database-collection-18.0.1-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/97a79dc1cfa9e85ed696f18daf1b1bd5/transformed/jetified-play-services-base-18.0.1-api.jar</arg>
+                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/dcd41846b0317a5857500ee153b7e655/transformed/jetified-play-services-cloud-messaging-17.0.1-api.jar</arg>
+                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/460aad2f659674ddaaf190dc518499f6/transformed/jetified-firebase-iid-interop-17.1.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/aa87e2178e7ef4bbcd37a264fba86339/transformed/jetified-firebase-installations-interop-17.0.1-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/0f422c1ce3c820422fe2dc5a097fc87a/transformed/jetified-play-services-tasks-18.0.1-api.jar</arg>
-                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/75548307567df23e87e4b6b1005c92fa/transformed/jetified-play-services-ads-lite-21.0.0-api.jar</arg>
-                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/c63c76427b72086e644036d87cca35cf/transformed/jetified-play-services-ads-base-21.0.0-api.jar</arg>
-                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/680565a8c2006fff9a39457e0c6438e3/transformed/jetified-play-services-measurement-21.0.0-api.jar</arg>
+                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/ab7e3c951f3054c693956e8628f17b5c/transformed/jetified-play-services-ads-lite-21.1.0-api.jar</arg>
+                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/a9b0cef0440f04cd6ee3b589e2256c39/transformed/jetified-play-services-ads-base-21.1.0-api.jar</arg>
+                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/b58f6009545b726e1206706b427b9ad4/transformed/jetified-play-services-measurement-21.1.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/9e246178c36abffcca796794bd59e391/transformed/jetified-user-messaging-platform-2.0.0-api.jar</arg>
-                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/827b110cf387475f3643beed64f4d5ec/transformed/jetified-play-services-measurement-sdk-21.0.0-api.jar</arg>
-                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/f59f3fcc3d482ba51c856ff166516460/transformed/jetified-play-services-measurement-impl-21.0.0-api.jar</arg>
+                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/2285892adb19ccce207524224ef8a9c6/transformed/jetified-play-services-measurement-sdk-21.1.0-api.jar</arg>
+                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/cbc2a97a865548b314ec3b6ddbdab50b/transformed/jetified-play-services-measurement-impl-21.1.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/51962e67c7d466701eb8e26a2eadb260/transformed/jetified-play-services-ads-identifier-18.0.0-api.jar</arg>
-                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/36c2c2d0bea5d490f473c1c118f012de/transformed/jetified-play-services-measurement-sdk-api-21.0.0-api.jar</arg>
-                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/9d62a49f6a534b8586aab8bf52d984ce/transformed/jetified-play-services-measurement-base-21.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/7c3ff8eafc38a4290c91eaa54bc55249/transformed/jetified-play-services-stats-17.0.2-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/eed06a6c3e966a1489f4179fbca6bb2f/transformed/jetified-firebase-measurement-connector-19.0.0-api.jar</arg>
+                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/a32542f7f12a9647403b6d971d5e60f5/transformed/jetified-play-services-measurement-sdk-api-21.1.0-api.jar</arg>
+                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/0b56976e51e69cbe865d3210d842bb63/transformed/jetified-play-services-measurement-base-21.1.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/03d67a467ac15bfc8d535c5c39cd9aa1/transformed/jetified-play-services-basement-18.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/58a03f8d58d2b496ba341f6e1d6a40a6/transformed/fragment-1.3.6-api.jar</arg>
+                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/fe1a9908b6b74e7a450f22ff58bdb2e2/transformed/viewpager-1.0.0-api.jar</arg>
+                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/7d4b5354c0cf1e1817b3da7c645d935f/transformed/customview-1.1.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/11f0a0f748efa61c4dc671e78aac38e9/transformed/jetified-activity-1.2.4-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/dd91b97acdfa499856afcd1785deae70/transformed/jetified-appcompat-resources-1.4.2-api.jar</arg>
-                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/0d0a98d3ef77fa9c2eda57690e8d8e96/transformed/browser-1.0.0-api.jar</arg>
-                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/9df01119c465e913dae4ab9441803a1e/transformed/legacy-support-core-ui-1.0.0-api.jar</arg>
-                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/995799bbbffac468daa501697b99a8e0/transformed/drawerlayout-1.1.1-api.jar</arg>
-                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/6995ce3e1c358bd013c10d4291df757f/transformed/coordinatorlayout-1.1.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/07ece32c3b7d68f1fdd471107a670da7/transformed/dynamicanimation-1.0.0-api.jar</arg>
-                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/2621d736bed7477ffacd5891523b4309/transformed/recyclerview-1.2.1-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/b4412061763ed7f59f28068100d60053/transformed/transition-1.2.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/6f1699b96e4796de7890adf525228043/transformed/vectordrawable-animated-1.1.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/32f043aa10645f458faacca84e3e31ef/transformed/vectordrawable-1.1.0-api.jar</arg>
@@ -77,18 +84,13 @@
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/3925c6e03a704465bfb2ff8299b42f11/transformed/jetified-exoplayer-ui-2.18.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/3d3e90dec76a20a0c08bc0ad619e5b26/transformed/jetified-extension-mediasession-2.18.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/058e7741336732e2138fee22e5e24d31/transformed/media-1.4.3-api.jar</arg>
-                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/fe1a9908b6b74e7a450f22ff58bdb2e2/transformed/viewpager-1.0.0-api.jar</arg>
+                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/26ed0e0abeac6b03f658cc9c7a2e60f9/transformed/browser-1.4.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/a52567c2c472844d57393d93fb1583aa/transformed/legacy-support-core-utils-1.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/fda00ceb41941d6510ce6ccddbe624a4/transformed/loader-1.0.0-api.jar</arg>
-                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/8161732ca44532e4070d29f0bf1c0001/transformed/slidingpanelayout-1.0.0-api.jar</arg>
-                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/7d4b5354c0cf1e1817b3da7c645d935f/transformed/customview-1.1.0-api.jar</arg>
-                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/d0b225ed1471d54892d0b39b28117380/transformed/swiperefreshlayout-1.0.0-api.jar</arg>
-                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/f565a0ccd4ec6d4da698ac2036def36c/transformed/asynclayoutinflater-1.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/088cb7a98655e7ed8aeb6f5e6077423e/transformed/core-1.8.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/49db322d8cbb73b042bbab93120f46be/transformed/cursoradapter-1.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/1a8dcdd3e0c98a055b947c9e24d3a5da/transformed/jetified-lifecycle-viewmodel-savedstate-2.3.1-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/9cb33c40b96a0a04cadb5215f69a3ffa/transformed/jetified-savedstate-1.1.0-api.jar</arg>
-                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/391d049e93e291787be47d0df26a9ef6/transformed/cardview-1.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/c4f7e6d589757014c33734614b27e9dd/transformed/lifecycle-runtime-2.4.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/ea5941afc2a450cc7360d5ecbed1756a/transformed/exifinterface-1.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/d467c7960cb7c088d29c34122268d33d/transformed/jetified-dagger-android-2.20-api.jar</arg>
@@ -103,6 +105,12 @@
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/67670276510d4c7d0f3680d5e73fb055/transformed/lifecycle-livedata-core-2.4.1-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-common/2.4.1/1fdb7349701e9cf2f0a69fc10642b6fef6bb3e12/lifecycle-common-2.4.1.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/modules-2/files-2.1/androidx.arch.core/core-common/2.1.0/b3152fc64428c9354344bd89848ecddc09b6f07e/core-common-2.1.0.jar</arg>
+                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/29d5199b1241a04af12ee9a6a508103c/transformed/jetified-transport-backend-cct-3.1.6-api.jar</arg>
+                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/3e61c3cb20a56665ffe9720cdce715fb/transformed/jetified-transport-runtime-3.1.6-api.jar</arg>
+                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/b026be8d8e63fefa77f206b161b604ec/transformed/jetified-firebase-encoders-json-18.0.0-api.jar</arg>
+                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/0668171d333839affa4d244067e8630e/transformed/jetified-firebase-encoders-proto-16.0.0.jar</arg>
+                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/71ba8a27d4423f6df587384b4304a3ff/transformed/jetified-firebase-encoders-17.0.0.jar</arg>
+                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/b2a5f07752642ad45fe0e987e738821f/transformed/jetified-transport-api-3.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/9fee490ec002fa892ce6ad014e2e3be2/transformed/interpolator-1.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/5d978ee1d27610f1dbb069386273e5a2/transformed/documentfile-1.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/0d537cce6a7baacb646a95518b270d19/transformed/localbroadcastmanager-1.0.0-api.jar</arg>
@@ -118,8 +126,11 @@
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/abcb89c527cfb840c6a35e6ea0e061be/transformed/jetified-guava-31.0.1-android.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/403f78419e5ecbd534815bc168a4b67d/transformed/jetified-listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/2ea5f4596631fc580302332229ed4919/transformed/jetified-firebase-annotations-16.0.0.jar</arg>
+                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/6e5f3ab326caa7fe7189f83f75e6d016/transformed/jetified-dagger-2.20.jar</arg>
+                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/f000fa97631fc74dddaca7cea2c82244/transformed/jetified-javax.inject-1.jar</arg>
+                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/0e00c4c52589f4952d88b8f7cfa5314a/transformed/jetified-error_prone_annotations-2.9.0.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/c2da93971cffc9b98533da370e0d2c67/transformed/jetified-startup-runtime-1.0.0-api.jar</arg>
-                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/be2170ba034ab9e24e495fedc9d126e6/transformed/constraintlayout-2.1.4-api.jar</arg>
+                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/2bb7375da3411649473a37fed797fbd9/transformed/constraintlayout-2.1.3-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/fd8c8b0155539b37864a0f2b9031a874/transformed/jetified-failureaccess-1.0.1.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/218f0c5e9df883ff166822556d0f81dc/transformed/jetified-exoplayer-database-2.18.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/6a9380a70aa155bc5e35730c24779250/transformed/jetified-exoplayer-datasource-2.18.0-api.jar</arg>
@@ -130,8 +141,6 @@
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/420642a099d87beaf1ea3a0c013ab6c4/transformed/jetified-exoplayer-rtsp-2.18.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/91891137571c06e4eb15f09f16792a7a/transformed/jetified-exoplayer-smoothstreaming-2.18.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/f719bd14f8078843926d8514ea190537/transformed/jetified-audiovisualizer-0.9.2-api.jar</arg>
-                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/6e5f3ab326caa7fe7189f83f75e6d016/transformed/jetified-dagger-2.20.jar</arg>
-                <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/f000fa97631fc74dddaca7cea2c82244/transformed/jetified-javax.inject-1.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/b38cfcf788f9a6e4e69d7e029fb3f601/transformed/jetified-rxandroid-2.1.1-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/facfd836bb9b833cca50befcdc4d0734/transformed/jetified-rxjava-2.2.9.jar</arg>
                 <arg>$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/39d7d443cda6b8158944c5a96b7c44de/transformed/jetified-reactive-streams-1.0.2.jar</arg>
@@ -221,6 +230,8 @@
     <orderEntry type="library" name="Gradle: androidx.collection:collection:1.1.0" level="project" />
     <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-common:2.4.1" level="project" />
     <orderEntry type="library" name="Gradle: androidx.arch.core:core-common:2.1.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.firebase:firebase-encoders-proto:16.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.firebase:firebase-encoders:17.0.0" level="project" />
     <orderEntry type="library" name="Gradle: androidx.annotation:annotation:1.3.0" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.21" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.6.21" level="project" />
@@ -229,9 +240,10 @@
     <orderEntry type="library" name="Gradle: com.google.guava:guava:31.0.1-android" level="project" />
     <orderEntry type="library" name="Gradle: com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava" level="project" />
     <orderEntry type="library" name="Gradle: com.google.firebase:firebase-annotations:16.0.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.guava:failureaccess:1.0.1" level="project" />
     <orderEntry type="library" name="Gradle: com.google.dagger:dagger:2.20" level="project" />
     <orderEntry type="library" name="Gradle: javax.inject:javax.inject:1" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.errorprone:error_prone_annotations:2.9.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.guava:failureaccess:1.0.1" level="project" />
     <orderEntry type="library" name="Gradle: io.reactivex.rxjava2:rxjava:2.2.9" level="project" />
     <orderEntry type="library" name="Gradle: org.reactivestreams:reactive-streams:1.0.2" level="project" />
     <orderEntry type="library" name="Gradle: androidx.databinding:viewbinding:7.1.1@aar" level="project" />
@@ -241,49 +253,56 @@
     <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.airbnb.android:lottie:3.4.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.squareup.picasso:picasso:2.71828@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.android.material:material:1.6.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.viewpager2:viewpager2:1.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.recyclerview:recyclerview:1.2.1@aar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.cardview:cardview:1.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.core:core-ktx:1.8.0@aar" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.android.material:material:1.6.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.dagger:dagger-android-support:2.20@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.appcompat:appcompat:1.4.2@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.firebase:firebase-database-ktx:20.0.5@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.firebase:firebase-analytics-ktx:21.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.firebase:firebase-messaging-ktx:23.0.7@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.firebase:firebase-common-ktx:20.1.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.firebase:firebase-database:20.0.5@aar" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.firebase:firebase-analytics:21.0.0@aar" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-measurement-api:21.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.firebase:firebase-messaging:23.0.7@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.firebase:firebase-core:21.1.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.firebase:firebase-analytics:21.1.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-measurement-api:21.1.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.firebase:firebase-appcheck-interop:16.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.firebase:firebase-auth-interop:19.0.2@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.firebase:firebase-installations:17.0.1@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.firebase:firebase-datatransport:18.1.5@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.firebase:firebase-common:20.1.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.firebase:firebase-components:17.0.0@aar" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-ads:21.0.0@aar" level="project" />
-    <orderEntry type="library" name="Gradle: androidx.viewpager2:viewpager2:1.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-ads:21.1.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.drawerlayout:drawerlayout:1.1.1@aar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.coordinatorlayout:coordinatorlayout:1.1.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-appset:16.0.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.firebase:firebase-database-collection:18.0.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-base:18.0.1@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-cloud-messaging:17.0.1@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.firebase:firebase-iid-interop:17.1.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.firebase:firebase-installations-interop:17.0.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-tasks:18.0.1@aar" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-ads-lite:21.0.0@aar" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-ads-base:21.0.0@aar" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-measurement:21.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-ads-lite:21.1.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-ads-base:21.1.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-measurement:21.1.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.ump:user-messaging-platform:2.0.0@aar" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-measurement-sdk:21.0.0@aar" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-measurement-impl:21.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-measurement-sdk:21.1.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-measurement-impl:21.1.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-ads-identifier:18.0.0@aar" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-measurement-sdk-api:21.0.0@aar" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-measurement-base:21.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-stats:17.0.2@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.firebase:firebase-measurement-connector:19.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-measurement-sdk-api:21.1.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-measurement-base:21.1.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-basement:18.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.fragment:fragment:1.3.6@aar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.viewpager:viewpager:1.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.customview:customview:1.1.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.activity:activity:1.2.4@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.appcompat:appcompat-resources:1.4.2@aar" level="project" />
-    <orderEntry type="library" name="Gradle: androidx.browser:browser:1.0.0@aar" level="project" />
-    <orderEntry type="library" name="Gradle: androidx.legacy:legacy-support-core-ui:1.0.0@aar" level="project" />
-    <orderEntry type="library" name="Gradle: androidx.drawerlayout:drawerlayout:1.1.1@aar" level="project" />
-    <orderEntry type="library" name="Gradle: androidx.coordinatorlayout:coordinatorlayout:1.1.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.dynamicanimation:dynamicanimation:1.0.0@aar" level="project" />
-    <orderEntry type="library" name="Gradle: androidx.recyclerview:recyclerview:1.2.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.transition:transition:1.2.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.vectordrawable:vectordrawable-animated:1.1.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.vectordrawable:vectordrawable:1.1.0@aar" level="project" />
@@ -291,18 +310,13 @@
     <orderEntry type="library" name="Gradle: com.google.android.exoplayer:exoplayer-ui:2.18.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.exoplayer:extension-mediasession:2.18.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.media:media:1.4.3@aar" level="project" />
-    <orderEntry type="library" name="Gradle: androidx.viewpager:viewpager:1.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.browser:browser:1.4.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.legacy:legacy-support-core-utils:1.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.loader:loader:1.0.0@aar" level="project" />
-    <orderEntry type="library" name="Gradle: androidx.slidingpanelayout:slidingpanelayout:1.0.0@aar" level="project" />
-    <orderEntry type="library" name="Gradle: androidx.customview:customview:1.1.0@aar" level="project" />
-    <orderEntry type="library" name="Gradle: androidx.swiperefreshlayout:swiperefreshlayout:1.0.0@aar" level="project" />
-    <orderEntry type="library" name="Gradle: androidx.asynclayoutinflater:asynclayoutinflater:1.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.core:core:1.8.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.cursoradapter:cursoradapter:1.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.savedstate:savedstate:1.1.0@aar" level="project" />
-    <orderEntry type="library" name="Gradle: androidx.cardview:cardview:1.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-runtime:2.4.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.exifinterface:exifinterface:1.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.dagger:dagger-android:2.20@aar" level="project" />
@@ -314,6 +328,10 @@
     <orderEntry type="library" name="Gradle: androidx.arch.core:core-runtime:2.1.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.versionedparcelable:versionedparcelable:1.1.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-livedata-core:2.4.1@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.android.datatransport:transport-backend-cct:3.1.6@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.android.datatransport:transport-runtime:3.1.6@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.firebase:firebase-encoders-json:18.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.android.datatransport:transport-api:3.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.interpolator:interpolator:1.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.documentfile:documentfile:1.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.localbroadcastmanager:localbroadcastmanager:1.0.0@aar" level="project" />
@@ -322,7 +340,7 @@
     <orderEntry type="library" name="Gradle: com.google.android.exoplayer:exoplayer-core:2.18.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.exoplayer:exoplayer-common:2.18.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.startup:startup-runtime:1.0.0@aar" level="project" />
-    <orderEntry type="library" name="Gradle: androidx.constraintlayout:constraintlayout:2.1.4@aar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.constraintlayout:constraintlayout:2.1.3@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.exoplayer:exoplayer-database:2.18.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.exoplayer:exoplayer-datasource:2.18.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.exoplayer:exoplayer-decoder:2.18.0@aar" level="project" />

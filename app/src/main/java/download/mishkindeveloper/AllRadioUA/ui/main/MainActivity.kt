@@ -7,6 +7,7 @@ import android.content.*
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.IBinder
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.widget.*
@@ -28,6 +29,7 @@ import com.google.android.exoplayer2.*
 import com.google.android.exoplayer2.PlaybackException.ERROR_CODE_IO_FILE_NOT_FOUND
 import com.google.android.exoplayer2.PlaybackException.ERROR_CODE_IO_NETWORK_CONNECTION_FAILED
 import com.google.android.exoplayer2.ui.PlayerControlView
+import com.google.android.exoplayer2.ui.PlayerNotificationManager
 import com.google.android.gms.ads.*
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
@@ -41,6 +43,8 @@ import de.hdodenhof.circleimageview.CircleImageView
 import download.mishkindeveloper.AllRadioUA.R
 import download.mishkindeveloper.AllRadioUA.data.entity.RadioWave
 import download.mishkindeveloper.AllRadioUA.data.entity.Track
+import download.mishkindeveloper.AllRadioUA.data.repository.RadioWaveRepository
+import download.mishkindeveloper.AllRadioUA.databinding.CustomPlayerViewBinding
 import download.mishkindeveloper.AllRadioUA.helper.PreferenceHelper
 import download.mishkindeveloper.AllRadioUA.listeners.FragmentSettingListener
 import download.mishkindeveloper.AllRadioUA.services.PlayerService
@@ -134,7 +138,7 @@ class MainActivity : AppCompatActivity() {
         val adRequest = AdRequest.Builder().build()
         InterstitialAd.load(
             this,
-            "ca-app-pub-3940256099942544/1033173712",
+            "ca-app-pub-3971991853344828/7136755739",
             adRequest,
             interstitialAdLoadCallback
         )
@@ -158,13 +162,9 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        checkFirstStartStatus()
-
         init()
-
         initPermission()
-
+        checkFirstStartStatus()
         initBroadcastManager()
         setMediaInfoInMiniPlayer()
         setListeners()
@@ -295,7 +295,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkStatusSearchViewVisible() {
+    fun checkStatusSearchViewVisible() {
         if (searchView?.visibility == View.VISIBLE) {
             searchView?.visibility = View.GONE
             titleToolTextView?.visibility = View.VISIBLE
@@ -310,6 +310,15 @@ class MainActivity : AppCompatActivity() {
             mExoPlayer!!.pause()
         } else {
             mExoPlayer!!.play()
+            //motionLayout?.transitionToStart()
+            //onTransitionStarted()
+            //transitionListener
+            //setMediaSessionAndVisual()
+            //MotionEvent.ACTION_UP
+            //mVisualizer?.setAudioSessionId(audioSessionId)
+            //motionLayout?.transitionToStart()
+            //mVisualizer?.release()
+
         }
     }
 
@@ -326,11 +335,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun setTitleMiniPlayer(id: Int) {
         val radioWave: RadioWave = viewModel.getRadioWaveForId(id)
-        titleTextView.text = radioWave.name
-        Picasso.get()
-            .load(radioWave.image)
-            .into(posterImageView)
-        preferencesHelper.setIdPlayMedia(radioWave.id)
+        if (radioWave != null) {
+            Log.d("Mylog","радио-$radioWave")
+            titleTextView.text = radioWave.name
+            Picasso.get()
+                .load(radioWave.image)
+                .into(posterImageView)
+            preferencesHelper.setIdPlayMedia(radioWave.id)
+        }
     }
 //подключаю подсчет станций
     fun createListFragment() {
@@ -339,11 +351,16 @@ class MainActivity : AppCompatActivity() {
         transaction.replace(R.id.fragmentContainerView, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
+    searchImageButton.visibility = View.VISIBLE
+    titleToolTextView?.text = getString(R.string.list_menu_item)
     //titleToolTextView?.text = items.size.toString()+"-"+getString(R.string.list_menu_item)
 initAds()
+    Log.d("Mylog","создается список станций")
     }
 
     private fun createSettingFragment() {
+        searchView?.visibility = View.GONE
+        titleToolTextView?.visibility=View.VISIBLE
         fragment = SettingFragment().newInstance()
         val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragmentContainerView, fragment)
@@ -351,9 +368,12 @@ initAds()
         transaction.commit()
         titleToolTextView?.text = getString(R.string.set_menu_item)
         initAds()
+
     }
 
     private fun createHistoryFragment() {
+        searchView?.visibility = View.GONE
+        titleToolTextView?.visibility=View.VISIBLE
         fragment = HistoryFragment().newInstance()
         val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragmentContainerView, fragment)
@@ -364,6 +384,8 @@ initAds()
     }
 
     private fun createFavFragment() {
+        searchView?.visibility = View.GONE
+        titleToolTextView?.visibility=View.VISIBLE
         fragment = FavoriteFragment().newInstance()
         val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragmentContainerView, fragment)
@@ -404,7 +426,7 @@ initAds()
         }
         return@OnItemSelectedListener true
     }
-//реклама
+//реклама межстраничная
     private fun loadPageAds() {
         if (mInterstitialAd != null) {
             mInterstitialAd?.show(this)
@@ -412,7 +434,7 @@ initAds()
 
         }
     }
-
+//реклама баннера
     private fun loadBanner(progress: Float) {
         if (progress > 0.99F) {
             mAdView.visibility = View.VISIBLE
@@ -422,6 +444,7 @@ initAds()
             mAdView.visibility = View.GONE
         }
     }
+
 
     private val transitionListener = object : MotionLayout.TransitionListener {
         override fun onTransitionStarted(p0: MotionLayout?, startId: Int, endId: Int) {}
@@ -539,11 +562,13 @@ initAds()
                     val radioWave: RadioWave? = dataSnapshot.getValue(RadioWave::class.java)
                     items.add(radioWave!!)
                 }
+
+
                 viewModel.createListRadioWave(items)
                 startPlayerService()
                 createListFragment()
                 preferencesHelper.setFirstStart(false)
-                preferencesHelper.setIdPlayMedia(items[2].id)
+                preferencesHelper.setIdPlayMedia(items[1].id)
 
             }
 
@@ -583,7 +608,7 @@ initAds()
                 mPlayerService?.getPlayer()?.setMediaItem(mediaItem)
                 mPlayerService?.setRadioWave(viewModel.getRadioWaveForId(id))
 
-
+               // MotionEvent.ACTION_UP
 
             }
         } catch (e: NullPointerException) {
@@ -749,6 +774,8 @@ initAds()
     private fun isPlayingMedia(isPlaying: Boolean) {
         if (isPlaying) {
             playImageView?.setImageResource(R.drawable.ic_baseline_pause_24)
+
+            motionLayout?.transitionToEnd()
         } else {
             playImageView?.setImageResource(R.drawable.ic_baseline_play_arrow_24)
         }
@@ -871,6 +898,9 @@ initAds()
         val urlEditText = view.findViewById<EditText>(R.id.url_edit_text)
         saveButton.setOnClickListener {
             insertRadioWave(nameEditText, urlEditText, builder)
+            createListFragment()
+
+            Toast.makeText(this, R.string.add_radio_station_message, Toast.LENGTH_LONG).show()
         }
         builder.setView(view)
         builder.setCanceledOnTouchOutside(true)
@@ -894,6 +924,7 @@ initAds()
             viewModel.insertRadioWave(radioWave)
             fragmentSettingListener?.update()
             builder.dismiss()
+
         }
     }
 

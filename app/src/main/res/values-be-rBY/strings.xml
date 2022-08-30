@@ -40,4 +40,6 @@
     <string name="app_widget_description">Радыё UA</string>
     <string name="title_widget">Радыё</string>
     <string name="sub_title_widget">Трэк</string>
+    <string name="add_radio_station_message">Ваша станцыя дададзена ў спіс радыёстанцый!</string>
+    <string name="del_radio_station_message">Ваша станцыя была выдаленая са спісу радыёстанцый!</string>
 </resources>

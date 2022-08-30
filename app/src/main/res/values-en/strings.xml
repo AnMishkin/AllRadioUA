@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Radio UA</string>
+    <string name="app_name">All Radio of Ukraine</string>
     <string name="error_network">No internet access</string>
     <string name="dev_name">Developed by Mishkin</string>
     <string name="name_station">Station name</string>
@@ -18,7 +18,7 @@
     <string name="desc_rb">Z…А</string>
     <string name="popular_rb">From the most listened to</string>
     <string name="not_popular_rb">From the most unlistened</string>
-    <string name="title_sort_menu">Сортировка</string>
+    <string name="title_sort_menu">Sort</string>
     <string name="error_payback">Sorting</string>
     <string name="list_rb">List</string>
     <string name="grid_rb">Grid</string>
@@ -40,4 +40,7 @@
     <string name="app_widget_description">All Radio UA</string>
     <string name="title_widget">Radio</string>
     <string name="sub_title_widget">Track</string>
+
+    <string name="add_radio_station_message">Your station has been added to the list of radio stations!</string>
+    <string name="del_radio_station_message">Your station has been removed from the list of radio stations!</string>
 </resources>

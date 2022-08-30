@@ -26,6 +26,17 @@
                 android:layout_height="160dp"
                 tools:srcCompat="@tools:sample/avatars" />
 
+            <ImageButton
+                android:id="@+id/menuImageButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="center"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                app:srcCompat="@drawable/ic_baseline_toc_24" />
+
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/favAnimationView"
                 android:layout_width="120dp"
@@ -44,17 +55,6 @@
                 app:lottie_loop="true"
                 app:lottie_rawRes="@raw/music_anim"
                 tools:visibility="visible" />
-
-            <ImageButton
-                android:id="@+id/menuImageButton"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignParentEnd="true"
-                android:layout_gravity="center"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                app:srcCompat="@drawable/ic_baseline_toc_24" />
 
             <ImageView
                 android:id="@+id/favImageView"

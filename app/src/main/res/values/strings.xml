@@ -56,4 +56,9 @@
     <string name="app_widget_description">All Radio UA</string>
     <string name="title_widget">Radio</string>
     <string name="sub_title_widget">Track</string>
+
+    <string name="add_radio_station_message">Your station has been added to the list of radio stations!</string>
+    <string name="del_radio_station_message">Your station has been removed from the list of radio stations!</string>
+
+
 </resources>

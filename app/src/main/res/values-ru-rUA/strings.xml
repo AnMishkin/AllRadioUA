@@ -40,4 +40,7 @@
     <string name="title_widget">Радио</string>
     <string name="sub_title_widget">Трек</string>
     <string name="app_widget_description">Все радіо України</string>
+
+    <string name="add_radio_station_message">Ваша станция добавлена в список радиостанций!</string>
+    <string name="del_radio_station_message">Ваша станция удалена из списка радиостанций!</string>
 </resources>

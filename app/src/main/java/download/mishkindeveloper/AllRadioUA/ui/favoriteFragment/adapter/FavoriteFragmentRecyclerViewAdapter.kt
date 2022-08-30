@@ -2,7 +2,9 @@ package download.mishkindeveloper.AllRadioUA.ui.favoriteFragment.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
@@ -11,18 +13,21 @@ import download.mishkindeveloper.AllRadioUA.data.entity.RadioWave
 import download.mishkindeveloper.AllRadioUA.enums.DisplayListType
 import download.mishkindeveloper.AllRadioUA.services.PlayerService
 import com.squareup.picasso.Picasso
+import download.mishkindeveloper.AllRadioUA.listeners.MenuItemIdListener
 
 class FavoriteFragmentRecyclerViewAdapter(
     private var items: List<RadioWave>,
     var context: Context?,
     var mPlayer: ExoPlayer,
-    var mService: PlayerService
+    var mService: PlayerService,
+    private var menuItemIdListener: MenuItemIdListener
 ) :
     RecyclerView.Adapter<FavoriteViewHolder>() {
     private val grid = 0
     private val list = 1
     private var displayListType: DisplayListType? = null
     private val waveViewHolder:FavoriteViewHolder? = null
+
 
     fun setDisplayListType(displayListType: DisplayListType) {
         this.displayListType = displayListType
@@ -70,6 +75,19 @@ class FavoriteFragmentRecyclerViewAdapter(
         holder.itemView.setOnClickListener {
             setRadioWaveAndPlay(position)
         }
+
+//        FavoriteViewHolder.menuImageButton?.setOnClickListener {
+//            // Toast.makeText(context, "Нажал на настройки странции в исбранном", Toast.LENGTH_SHORT).show()
+//            menuItemIdListener.getItemMenu(items[position].id)
+
+          // holder.menuImageButton?.setOnClickListener {
+
+//                Toast.makeText(context,
+//                    "Нажал на настройки странции в исбранном",
+//                    Toast.LENGTH_SHORT).show()
+           // }
+            //}
+
     }
 
     private fun setRadioWaveAndPlay(position: Int) {
