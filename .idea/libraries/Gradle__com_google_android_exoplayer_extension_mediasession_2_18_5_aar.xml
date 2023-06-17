@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.android.exoplayer:extension-mediasession:2.18.5@aar">
+    <ANNOTATIONS>
+      <root url="jar://$PROJECT_DIR$/.gradle/caches/transforms-3/f0676160b9be5401658a705bec9dab07/transformed/jetified-extension-mediasession-2.18.5/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/.gradle/caches/transforms-3/f0676160b9be5401658a705bec9dab07/transformed/jetified-extension-mediasession-2.18.5/res" />
+      <root url="file://$PROJECT_DIR$/.gradle/caches/transforms-3/f0676160b9be5401658a705bec9dab07/transformed/jetified-extension-mediasession-2.18.5/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/.gradle/caches/transforms-3/f0676160b9be5401658a705bec9dab07/transformed/jetified-extension-mediasession-2.18.5/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/.gradle/caches/modules-2/files-2.1/com.google.android.exoplayer/extension-mediasession/2.18.5/626952f01ab66688b94fa9dec12ede183a0ac6a2/extension-mediasession-2.18.5-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

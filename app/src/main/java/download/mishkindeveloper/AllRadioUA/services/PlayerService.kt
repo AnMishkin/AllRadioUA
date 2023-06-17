@@ -1,6 +1,7 @@
 package download.mishkindeveloper.AllRadioUA.services
 
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Notification
 import android.app.NotificationManager.IMPORTANCE_NONE
@@ -8,20 +9,17 @@ import android.app.PendingIntent
 import android.app.Service
 import android.appwidget.AppWidgetManager
 import android.content.*
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.Drawable
-import android.os.Binder
-import android.os.IBinder
-import android.os.Parcel
-import android.os.Parcelable
+import android.net.Uri
+import android.os.*
+import android.provider.Settings
 import android.support.v4.media.session.MediaSessionCompat
-import android.view.MotionEvent
-import android.view.MotionEvent.ACTION_UP
-import android.view.View
 import android.widget.RemoteViews
-import androidx.annotation.Nullable
 import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaMetadata
@@ -30,16 +28,17 @@ import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
 import com.google.android.exoplayer2.ui.PlayerNotificationManager.BitmapCallback
 import com.google.android.exoplayer2.ui.PlayerNotificationManager.MediaDescriptionAdapter
+import com.squareup.picasso.Picasso
+import com.squareup.picasso.Picasso.LoadedFrom
 import download.mishkindeveloper.AllRadioUA.R
 import download.mishkindeveloper.AllRadioUA.data.entity.RadioWave
 import download.mishkindeveloper.AllRadioUA.data.entity.Track
 import download.mishkindeveloper.AllRadioUA.data.repository.TrackRepository
 import download.mishkindeveloper.AllRadioUA.ui.main.MainActivity
 import download.mishkindeveloper.AllRadioUA.widget.PlayerWidget
-import com.squareup.picasso.Picasso
-import com.squareup.picasso.Picasso.LoadedFrom
 import okhttp3.*
 import org.json.JSONArray
+import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -65,6 +64,7 @@ class PlayerService() : Service(), Parcelable {
     private var stationName = ""
     private var artistPoster = ""
 
+
     @set:Inject
     internal var trackRepository: TrackRepository? = null
 
@@ -73,8 +73,7 @@ class PlayerService() : Service(), Parcelable {
         bitMapPoster = parcel.readParcelable(Bitmap::class.java.classLoader)
     }
 
-    @Nullable
-    override fun onBind(p0: Intent?): IBinder {
+    override fun onBind(p0: Intent?): IBinder? {
         return playerBinder
     }
 
@@ -90,7 +89,6 @@ class PlayerService() : Service(), Parcelable {
             R.id.widgetLinearLayout,
             getPendingSelfIntent(applicationContext, openAction)
         )
-        
     }
 
     fun getPendingSelfIntent(context: Context?, action: String?): PendingIntent? {
@@ -111,7 +109,6 @@ class PlayerService() : Service(), Parcelable {
     private fun actionEquals(intent: Intent?) {
         if (intent?.action.equals(playAction)) {
             mPlayer!!.play()
-
         }
         if (intent?.action.equals(pauseAction)) {
             mPlayer!!.pause()
@@ -144,6 +141,19 @@ class PlayerService() : Service(), Parcelable {
     }
 
     fun initNotification() {
+        // Проверка и запрос разрешения FOREGROUND_SERVICE
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.FOREGROUND_SERVICE)
+                != PackageManager.PERMISSION_GRANTED
+            ) {
+                val permissionIntent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                val uri = Uri.fromParts("package", packageName, null)
+                permissionIntent.data = uri
+                permissionIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(permissionIntent)
+                return
+            }
+        }
         playerNotificationManger = PlayerNotificationManager.Builder(
             this, 151,
             this.resources.getString(R.string.app_name)
@@ -269,10 +279,12 @@ class PlayerService() : Service(), Parcelable {
     private fun loadPoster() {
         Picasso.get()
             .load(radioWave?.image)
-            .resize(100,70)
+            .resize(100, 70)
             .into(object : com.squareup.picasso.Target {
                 override fun onBitmapLoaded(bitmap: Bitmap?, from: LoadedFrom?) {
+                    if (bitmap != null) {
                         remoteViews!!.setImageViewBitmap(R.id.widgetImageView, bitmap)
+                    }
                 }
 
                 override fun onBitmapFailed(e: java.lang.Exception?, errorDrawable: Drawable?) {
@@ -328,63 +340,84 @@ class PlayerService() : Service(), Parcelable {
 
         @SuppressLint("SimpleDateFormat")
         private fun insertTrackAndLoadPoster(mediaMetadata: MediaMetadata, jsonArray: JSONArray) {
-            val track = Track()
-            val sdf = SimpleDateFormat("dd.MM.yyyy HH:mm:ss")
-            val currentDate = sdf.format(Date())
-            track.name = mediaMetadata.title.toString()
-            artistPoster =
-                jsonArray.getJSONObject(0)?.getString("strArtistFanart").toString()
-            track.date = currentDate
-            track.image = artistPoster.toString()
-            track.station = mediaMetadata.station.toString()
-            trackRepository?.insertTrack(track)
+            try {
+                if (jsonArray.length() > 0) {
+                    val artistObject = jsonArray.getJSONObject(0)
+                    if (artistObject.has("strArtistFanart")) {
+                        val artistPoster = artistObject.getString("strArtistFanart")
+                        val track = Track()
+                        val sdf = SimpleDateFormat("dd.MM.yyyy HH:mm:ss")
+                        val currentDate = sdf.format(Date())
+                        track.name = mediaMetadata.title.toString()
+                        track.date = currentDate
+                        track.image = artistPoster
+                        track.station = mediaMetadata.station.toString()
+                        trackRepository?.insertTrack(track)
+                    } else {
+                        insertTrackAndSetDefaultPoster(mediaMetadata)
+                    }
+                } else {
+                    insertTrackAndSetDefaultPoster(mediaMetadata)
+                }
+            } catch (e: JSONException) {
+                // Обработка ошибки при получении данных из JSON массива
+                insertTrackAndSetDefaultPoster(mediaMetadata)
+            }
         }
 
         private fun posterRequestOkhttp(mediaMetadata: MediaMetadata) {
             val artist = mediaMetadata.title.toString().split("-")
-            val url =
-                "https://www.theaudiodb.com/api/v1/json/2/search.php?s=${artist[0]}"
+            val url = "https://www.theaudiodb.com/api/v1/json/523532/search.php?s=${artist[0]}"
             val okHttpClient: OkHttpClient = OkHttpClient()
             val request: Request = Request.Builder().url(url).build()
             okHttpClient.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
+                    // Обработка ошибки при выполнении запроса
+                    insertTrackAndSetDefaultPoster(mediaMetadata)
                 }
 
-                @SuppressLint("SimpleDateFormat")
                 override fun onResponse(call: Call, response: Response) {
-                    val json = response.body?.string()?.let { JSONObject(it) }
-                    val jsonArray: JSONArray
+                    val responseBody = response.body?.string()
+                    if (!response.isSuccessful || responseBody.isNullOrEmpty()) {
+                        // Обработка ошибки при получении ответа
+                        insertTrackAndSetDefaultPoster(mediaMetadata)
+                        return
+                    }
+
                     try {
-                        jsonArray = json!!.getJSONArray("artists")
+                        val json = JSONObject(responseBody)
+                        val jsonArray = json.getJSONArray("artists")
                         insertTrackAndLoadPoster(mediaMetadata, jsonArray)
-                    } catch (e: java.lang.Exception) {
+                    } catch (e: JSONException) {
+                        // Обработка ошибки при разборе JSON
                         insertTrackAndSetDefaultPoster(mediaMetadata)
                     }
                 }
             })
         }
 
+
         override fun onIsPlayingChanged(isPlaying: Boolean) {
-            if (isPlaying) {
-                remoteViews!!.setImageViewResource(
-                    R.id.playWidgetImageButton,
+            remoteViews?.let { views ->
+                val playPauseIcon = if (isPlaying) {
                     R.drawable.ic_baseline_pause_24
-                )
-                remoteViews!!.setOnClickPendingIntent(
-                    R.id.playWidgetImageButton,
-                    getPendingSelfIntent(applicationContext, pauseAction)
-                )
-            } else {
-                remoteViews!!.setImageViewResource(
-                    R.id.playWidgetImageButton,
+                } else {
                     R.drawable.ic_baseline_play_arrow_24
-                )
-                remoteViews!!.setOnClickPendingIntent(
-                    R.id.playWidgetImageButton,
+                }
+
+                views.setImageViewResource(R.id.playWidgetImageButton, playPauseIcon)
+
+                val pendingIntent = if (isPlaying) {
+                    getPendingSelfIntent(applicationContext, pauseAction)
+                } else {
                     getPendingSelfIntent(applicationContext, playAction)
-                )
+                }
+                views.setOnClickPendingIntent(R.id.playWidgetImageButton, pendingIntent)
+
+                appWidgetManager?.updateAppWidget(thisWidget, views)
             }
-            appWidgetManager!!.updateAppWidget(thisWidget, remoteViews)
         }
+
     }
+
 }

@@ -1,10 +1,15 @@
 package download.mishkindeveloper.AllRadioUA.ui.main
 
+
 import android.Manifest
 import android.animation.Animator
 import android.annotation.SuppressLint
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.content.*
+import android.content.IntentSender.SendIntentException
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.os.IBinder
 import android.util.Log
@@ -12,6 +17,8 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.*
 import androidx.annotation.NonNull
+import androidx.annotation.Nullable
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -23,30 +30,41 @@ import androidx.fragment.app.FragmentContainerView
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.gauravk.audiovisualizer.visualizer.CircleLineVisualizer
 import com.google.android.exoplayer2.*
-import com.google.android.exoplayer2.PlaybackException.ERROR_CODE_IO_FILE_NOT_FOUND
-import com.google.android.exoplayer2.PlaybackException.ERROR_CODE_IO_NETWORK_CONNECTION_FAILED
+import com.google.android.exoplayer2.ExoPlaybackException.*
 import com.google.android.exoplayer2.ui.PlayerControlView
-import com.google.android.exoplayer2.ui.PlayerNotificationManager
 import com.google.android.gms.ads.*
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
+import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.timepicker.MaterialTimePicker
+import com.google.android.material.timepicker.TimeFormat
+import com.google.android.play.core.appupdate.AppUpdateManager
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.google.android.play.core.install.InstallStateUpdatedListener
+import com.google.android.play.core.install.model.AppUpdateType
+import com.google.android.play.core.install.model.InstallStatus
+import com.google.android.play.core.install.model.UpdateAvailability
 import com.google.firebase.database.*
 import com.google.firebase.database.annotations.NotNull
 import com.squareup.picasso.Picasso
 import dagger.android.AndroidInjection
 import de.hdodenhof.circleimageview.CircleImageView
 import download.mishkindeveloper.AllRadioUA.R
+import download.mishkindeveloper.AllRadioUA.ReviewManager.ReviewManager
+import download.mishkindeveloper.AllRadioUA.alarm.AlarmFragment
+import download.mishkindeveloper.AllRadioUA.alarm.RadioStationAdapter
+
 import download.mishkindeveloper.AllRadioUA.data.entity.RadioWave
 import download.mishkindeveloper.AllRadioUA.data.entity.Track
-import download.mishkindeveloper.AllRadioUA.data.repository.RadioWaveRepository
-import download.mishkindeveloper.AllRadioUA.databinding.CustomPlayerViewBinding
 import download.mishkindeveloper.AllRadioUA.helper.PreferenceHelper
 import download.mishkindeveloper.AllRadioUA.listeners.FragmentSettingListener
+import download.mishkindeveloper.AllRadioUA.listeners.MenuItemIdListener
 import download.mishkindeveloper.AllRadioUA.services.PlayerService
 import download.mishkindeveloper.AllRadioUA.services.TimerService
 import download.mishkindeveloper.AllRadioUA.ui.favoriteFragment.FavoriteFragment
@@ -60,10 +78,15 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
-import kotlin.properties.Delegates
 
 
 class MainActivity : AppCompatActivity() {
+    private val RECORD_PERMISSION_CODE = 1
+
+    private lateinit var timer: Timer
+    private val noDelay = 5000L
+    private val everyFiveSeconds = 5000L
+
     private var mExoPlayer: ExoPlayer? = null
     private var mPlayerService: PlayerService? = null
     private  var mPlayerView: PlayerControlView? = null
@@ -77,7 +100,8 @@ class MainActivity : AppCompatActivity() {
     private  var radioWave: RadioWave? = null
     private  var lottieAnimationView: LottieAnimationView? = null
     private  var mVisualizer: CircleLineVisualizer? = null
-    private var audioSessionId by Delegates.notNull<Int>()
+    //заменил
+    private var audioSessionId: Int? = null
     var motionLayout: MotionLayout? = null
     private  var favoriteImageButton: ImageButton? = null
     private var playImageView: ImageView? = null
@@ -87,6 +111,16 @@ class MainActivity : AppCompatActivity() {
     private var searchView: SearchView? = null
     private var timerTextView: TextView? = null
     private var timerImageButton: ImageButton? = null
+    private var alertImageButton: ImageButton? = null
+    private lateinit var alarmManager: AlarmManager
+    private lateinit var calendar: Calendar
+    private lateinit var pendingIntent: PendingIntent
+    private lateinit var timePicker: MaterialTimePicker
+    private lateinit var alarmRecyclerView: RecyclerView
+    private lateinit var alarmAdapter: RadioStationAdapter
+    private var selectedRadioStation: RadioWave? = null
+    private var menuItemIdListener: MenuItemIdListener? = null
+
     private var addImageButton: ImageButton? = null
     private var titleTextViewPlayer: TextView? = null
     private var trackInfoMiniPlayerTextView: TextView? = null
@@ -108,6 +142,17 @@ class MainActivity : AppCompatActivity() {
     private lateinit var searchImageButton: ImageButton
     private lateinit var mAdView: AdView
     private var mInterstitialAd: InterstitialAd? = null
+
+    lateinit var mAppUpdateManager: AppUpdateManager
+    private val RC_APP_UPDATE = 100
+    private var updateCanceled: String? = null
+    private var newAppIsReady: String? = null
+    private var updateInstall: String? = null
+
+    private lateinit var textReview : String
+    private lateinit var laiterReview : String
+    private lateinit var leaveReview : String
+    private lateinit var okReview : String
 
     private val radioWaveBroadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent) {
@@ -157,6 +202,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
@@ -166,11 +212,41 @@ class MainActivity : AppCompatActivity() {
         initPermission()
         checkFirstStartStatus()
         initBroadcastManager()
+        //createNotificationChannelAlarm()
         setMediaInfoInMiniPlayer()
         setListeners()
         performSearch()
         initAds()
+        ReviewManager(this).checkAndPromptForReview(textReview, laiterReview, leaveReview,okReview)
 
+        mAppUpdateManager = AppUpdateManagerFactory.create(this)
+        mAppUpdateManager.registerListener(installStateUpdatedListener)
+
+        mAppUpdateManager.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)
+            ) {
+                try {
+                    mAppUpdateManager.startUpdateFlowForResult(
+                        appUpdateInfo, AppUpdateType.FLEXIBLE, this, RC_APP_UPDATE
+                    )
+                } catch (e: SendIntentException) {
+                    e.printStackTrace()
+                }
+            }
+        }
+
+
+// Implement InstallStateUpdatedListener interface
+        val installStateUpdatedListener = InstallStateUpdatedListener {
+            // Handle update state changes here
+        }
+
+
+
+        //isRecordAudioPermissionGranted()
+
+        //checkDate()
         //titleToolTextView?.text = items.size.toString()+"-"+getString(R.string.list_menu_item)
     }
 
@@ -180,6 +256,7 @@ class MainActivity : AppCompatActivity() {
         setMediaInfoInMiniPlayer()
         mAdView.destroy()
         mExoPlayer?.stop()
+        mVisualizer?.release()
 
     }
 
@@ -193,6 +270,26 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         registerReceiver(timerBroadcastReceiver, IntentFilter(getString(R.string.intent_filter)))
         mAdView.resume()
+        //requestRecordPermission()
+        // Проверка состояния обновления
+        mAppUpdateManager.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
+            if (appUpdateInfo.installStatus() == InstallStatus.DOWNLOADED) {
+                // Обновление было загружено, отображаем сообщение
+                showCompletedUpdate()
+            } else if (appUpdateInfo.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
+                // Процесс обновления был приостановлен, возобновляем его
+                try {
+                    mAppUpdateManager.startUpdateFlowForResult(
+                        appUpdateInfo,
+                        AppUpdateType.FLEXIBLE,
+                        this,
+                        RC_APP_UPDATE
+                    )
+                } catch (e: SendIntentException) {
+                    e.printStackTrace()
+                }
+            }
+        }
     }
 
     override fun onPause() {
@@ -202,10 +299,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStop() {
         try {
+            motionLayout?.transitionToEnd()
             unregisterReceiver(timerBroadcastReceiver)
+
         } catch (e: java.lang.Exception) {
             e.stackTrace
         }
+        mAppUpdateManager.unregisterListener(installStateUpdatedListener);
         super.onStop()
     }
 
@@ -213,9 +313,10 @@ class MainActivity : AppCompatActivity() {
         firstStartStatus = preferencesHelper.getFirstStart()
         if (firstStartStatus) {
             initDb()
-
+            updateDb()
 
         } else {
+            updateDb()
             startPlayerService()
         }
     }
@@ -234,7 +335,7 @@ class MainActivity : AppCompatActivity() {
         favoriteImageButton?.setImageResource(R.drawable.ic_baseline_favorite_24)
         lottieAnimationView?.visibility = View.VISIBLE
         lottieAnimationView?.playAnimation()
-
+        Log.d("Mylog","Клацнули кнопку добавить в ибранное")
     }
 
     private fun favoriteStatusTrue() {
@@ -288,12 +389,144 @@ class MainActivity : AppCompatActivity() {
             }
             false
         }
-
-
-        searchImageButton.setOnClickListener {
+        searchImageButton?.setOnClickListener {
             checkStatusSearchViewVisible()
         }
+
+        //кнопка будильника
+        alertImageButton?.setOnClickListener {
+            createAlarmDialog()
+        }
     }
+
+    fun onRadioStationSelected(radioStation: RadioWave) {
+        // Здесь вы получаете выбранную радиостанцию и можете сохранить ее для использования в будильнике
+        val selectedRadioStationName = radioStation.name
+
+        // Продолжайте реализацию, например, сохраните выбранную радиостанцию в SharedPreferences
+    }
+
+
+    private fun createAlarmDialog() {
+        timePicker = MaterialTimePicker.Builder()
+            .setTimeFormat(TimeFormat.CLOCK_24H)
+            .setHour(12)
+            .setMinute(0)
+            .setInputMode(MaterialTimePicker.INPUT_MODE_CLOCK)
+            .setTitleText("Выберите время для будильника")
+            .build()
+
+        timePicker.addOnPositiveButtonClickListener {
+            val selectedHour = timePicker.hour
+            val selectedMinute = timePicker.minute
+
+
+            val sharedPreferences = getSharedPreferences("AlarmPrefs", Context.MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            editor.putInt("AlarmHour", selectedHour)
+            editor.putInt("AlarmMinute", selectedMinute)
+            editor.apply()
+
+            createAlarmFragment()
+        }
+
+        timePicker.show(supportFragmentManager, "timePicker")
+    }
+
+//    private fun showRadioStationSelection() {
+//        val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_alarm, null)
+//        alarmRecyclerView = dialogView.findViewById(R.id.recyclerView)
+//
+//        val radioStations = viewModel.getAllRadioWaves().map { it.name }
+//        alarmAdapter = RadioStationAdapter(radioStations as List<String>, this) { radioStation ->
+//            setAlarm(radioStation, timePicker.hour, timePicker.minute)
+//        }
+//        alarmRecyclerView.layoutManager = LinearLayoutManager(this)
+//        alarmRecyclerView.adapter = alarmAdapter
+//
+//        val dialogBuilder = AlertDialog.Builder(this)
+//            //.setTitle("Выберите радиостанцию")
+//            .setView(dialogView)
+//            .setPositiveButton("ОК") { dialog, _ ->
+//                val selectedRadioStation = alarmAdapter.getSelectedRadioStation()
+//
+//                if (selectedRadioStation != null) {
+//                    setAlarm(selectedRadioStation, timePicker.hour, timePicker.minute)
+//                    Toast.makeText(this, "Будильник установлен!", Toast.LENGTH_LONG).show()
+//                } else {
+//                    Toast.makeText(this, "Будильник не установлен! Выберите радиостанцию!", Toast.LENGTH_LONG).show()
+//                }
+//
+//                dialog.dismiss()
+//            }
+//            .setNegativeButton("Отмена") { dialog, _ ->
+//                dialog.dismiss()
+//            }
+//
+//        val alertDialog = dialogBuilder.create()
+//        alertDialog.show()
+//    }
+
+//    private fun setAlarm(radioStation: String, selectedHour: Int, selectedMinute: Int) {
+//        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+//        val intent = Intent(this, AlarmReceiver::class.java).apply {
+//            putExtra("radioStation", radioStation)
+//        }
+//
+//        val pendingIntent = PendingIntent.getBroadcast(applicationContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+//
+//        val calendar = Calendar.getInstance()
+//        calendar.set(Calendar.HOUR_OF_DAY, selectedHour)
+//        calendar.set(Calendar.MINUTE, selectedMinute)
+//        calendar.set(Calendar.SECOND, 0)
+//
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            createNotificationChannelAlarm()
+//        }
+//
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            alarmManager.setExactAndAllowWhileIdle(
+//                AlarmManager.RTC_WAKEUP,
+//                calendar.timeInMillis,
+//                pendingIntent
+//            )
+//        } else {
+//            alarmManager.setExact(
+//                AlarmManager.RTC_WAKEUP,
+//                calendar.timeInMillis,
+//                pendingIntent
+//            )
+//        }
+//    }
+
+//    @RequiresApi(Build.VERSION_CODES.O)
+//    private fun createNotificationChannelAlarm() {
+//        val channelId = "mishkin"
+//        val channelName = "Alarm Reminder"
+//        val importance = NotificationManager.IMPORTANCE_HIGH
+//
+//        val channel = NotificationChannel(channelId, channelName, importance)
+//        channel.description = "Channel for Alarm Manager"
+//
+//        val notificationManager = getSystemService(NotificationManager::class.java)
+//        notificationManager.createNotificationChannel(channel)
+//    }
+
+    fun createAlarmFragment() {
+        fragment = AlarmFragment().newInstance()
+        val adapter = RadioStationAdapter(items, this, mPlayerService, menuItemIdListener)
+        val sharedPreferences = getSharedPreferences("AlarmPrefs", Context.MODE_PRIVATE)
+        val hour = sharedPreferences.getInt("AlarmHour", 0)
+        val minute = sharedPreferences.getInt("AlarmMinute", 0)
+        adapter.setAlarmTime(hour, minute)
+        val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragmentContainerView, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+        initAds()
+        Log.d("Mylog","создается список станций для будильника")
+    }
+
 
     fun checkStatusSearchViewVisible() {
         if (searchView?.visibility == View.VISIBLE) {
@@ -306,21 +539,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun checkStatusClickPlayInMiniPlayer() {
-        if (mExoPlayer!!.isPlaying) {
-            mExoPlayer!!.pause()
-        } else {
-            mExoPlayer!!.play()
-            //motionLayout?.transitionToStart()
-            //onTransitionStarted()
-            //transitionListener
-            //setMediaSessionAndVisual()
-            //MotionEvent.ACTION_UP
-            //mVisualizer?.setAudioSessionId(audioSessionId)
-            //motionLayout?.transitionToStart()
-            //mVisualizer?.release()
-
+        if (mExoPlayer != null) {
+            if (mExoPlayer!!.isPlaying) {
+                mExoPlayer!!.pause()
+            } else {
+                mExoPlayer!!.play()
+            }
         }
     }
+
 
     private fun setMediaInfoInMiniPlayer() {
         val id: Int = preferencesHelper.getIdPlayMedia()
@@ -413,7 +640,7 @@ initAds()
             }
             R.id.settingFragmentItem -> {
                 createSettingFragment()
-                loadPageAds()
+                //loadPageAds()
                 searchImageButton.visibility = View.INVISIBLE
 
             }
@@ -462,7 +689,8 @@ initAds()
             setParamMediaIfScrollMiniPlayer()
             checkButtonPlayInMiniPlayer()
             if (mPlayerService == null) return
-            setMediaSessionAndVisual()
+            requestRecordPermission()
+            //setMediaSessionAndVisual()
         }
 
         override fun onTransitionTrigger(
@@ -495,15 +723,25 @@ initAds()
     }
 
     fun setMediaSessionAndVisual() {
-
-        audioSessionId = mExoPlayer!!.audioSessionId
         try {
-            mVisualizer?.setAudioSessionId(audioSessionId)
+            mExoPlayer?.let { player ->
+                audioSessionId = player.audioSessionId
+            }
+
+            mVisualizer?.let { visualizer ->
+                audioSessionId?.let { session ->
+                    visualizer.setAudioSessionId(session)
+                }
+            }
         } catch (e: Exception) {
+            Log.d("MyLog", "Вылетела ошибка - в setMediaSessionAndVisual")
             mVisualizer?.release()
-            mVisualizer?.setAudioSessionId(audioSessionId)
+            audioSessionId?.let { session ->
+                mVisualizer?.setAudioSessionId(session)
+            }
         }
     }
+
 
     @SuppressLint("ClickableViewAccessibility")
     private fun init() {
@@ -531,24 +769,32 @@ initAds()
         searchView = findViewById(R.id.radio_search)
         timerTextView = findViewById(R.id.timerTextView)
         timerImageButton = findViewById(R.id.timerImageButton)
+        alertImageButton = findViewById(R.id.alertButton)
         addImageButton = findViewById(R.id.addImageButton)
         searchImageButton = findViewById(R.id.searchImageButton)
         titleTextViewPlayer = findViewById(R.id.titlePlayerTextView)
         trackInfoMiniPlayerTextView = findViewById(R.id.track_info_textView)
         trackInfoMiniPlayerTextView?.isSelected = true
 
+        updateCanceled = getString(R.string.update_canceled)
+        newAppIsReady = getString(R.string.new_app_is_ready)
+        updateInstall = getString(R.string.update_install)
+
+        textReview = getString(R.string.text_review)
+        laiterReview = getString(R.string.laiter_review)
+        leaveReview = getString(R.string.leave_review)
+        okReview = getString(R.string.ok_review)
     }
 
-
     private fun initPermission() {
-        if (ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.RECORD_AUDIO
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            val permissions = arrayOf(Manifest.permission.RECORD_AUDIO)
-            ActivityCompat.requestPermissions(this, permissions, 0)
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED) {
+            //Toast.makeText(this, "You have already granted this permission!",
+                //Toast.LENGTH_LONG).show();
+        } else {
+            requestRecordPermission();
         }
+
     }
 
     fun initDb() {
@@ -578,38 +824,63 @@ initAds()
 
     }
 
+
     fun updateDb() {
-        database =
-            FirebaseDatabase.getInstance(getString(R.string.firebase_url))
-                .getReference(getString(R.string.firebase_ref))
+        database = FirebaseDatabase.getInstance(getString(R.string.firebase_url)).getReference(getString(R.string.firebase_ref))
         val valueEventListener: ValueEventListener = object : ValueEventListener {
             override fun onDataChange(@NonNull @NotNull snapshot: DataSnapshot) {
+                // Создаем список радиостанций, которые будут добавлены в базу данных
+                val newRadioWaves = mutableListOf<RadioWave>()
+
                 for (dataSnapshot in snapshot.children) {
                     val radioWave: RadioWave? = dataSnapshot.getValue(RadioWave::class.java)
-                    items.add(radioWave!!)
+
+                    // Если радиостанция уже есть в базе данных, то используем ее данные из базы данных
+                    // иначе добавляем новую радиостанцию в список новых радиостанций
+                    val existingRadioWave = viewModel.getRadioWaveForId(radioWave?.id)
+                    if (existingRadioWave != null) {
+                        radioWave?.favorite = existingRadioWave.favorite
+                        radioWave?.custom = existingRadioWave.custom
+                        radioWave?.countOpen = existingRadioWave.countOpen
+                        newRadioWaves.add(radioWave!!)
+                    } else {
+                        newRadioWaves.add(radioWave!!)
+                    }
                 }
-                viewModel.createListRadioWave(items)
+
+                // Обновляем базу данных только с новыми радиостанциями
+                viewModel.createListRadioWave(newRadioWaves)
+
+                // Устанавливаем флаг "FirstStart" в false, только если данные были успешно получены
                 preferencesHelper.setFirstStart(false)
             }
 
             override fun onCancelled(@NonNull @NotNull error: DatabaseError) {}
         }
-        database?.addValueEventListener(valueEventListener)
+
+        // Запрашиваем данные из Firebase Realtime Database и обновляем их в приложении при каждом изменении
+        database!!.addValueEventListener(valueEventListener)
     }
 
+
+
+
+
+
+
+
     private fun setMediaItem() {
+        //requestRecordPermission()
         val id = preferencesHelper.getIdPlayMedia()
         val url: String?
         try {
-            if (mExoPlayer!!.currentMediaItem == null) {
-                url = viewModel.getRadioWaveForId(id).url
-                val mediaItem: MediaItem =
-                    MediaItem.fromUri(url!!)
-                mPlayerService?.getPlayer()?.setMediaItem(mediaItem)
-                mPlayerService?.setRadioWave(viewModel.getRadioWaveForId(id))
-
-               // MotionEvent.ACTION_UP
-
+            if (mExoPlayer!!.currentMediaItem == null)
+              {
+                    url = viewModel.getRadioWaveForId(id).url
+                    val mediaItem: MediaItem =
+                        MediaItem.fromUri(url!!)
+                    mPlayerService?.getPlayer()?.setMediaItem(mediaItem)
+                    mPlayerService?.setRadioWave(viewModel.getRadioWaveForId(id))
             }
         } catch (e: NullPointerException) {
             e.stackTrace
@@ -621,10 +892,12 @@ initAds()
             mPlayerService = (binder as PlayerService.PlayerBinder).getService()
             mExoPlayer = mPlayerService?.getPlayer()
             mPlayerService?.getRadioWave()?.id?.let { preferencesHelper.setIdPlayMedia(it) }
+
             setMediaItem()
             isPlayingMedia(mExoPlayer!!.isPlaying)
             setTrackInfo()
             mPlayerService?.getPlayer()?.addListener(playerListener)
+            //Log.d("Mylog","$mExoPlayer")
         }
 
         override fun onServiceDisconnected(className: ComponentName) {
@@ -679,7 +952,7 @@ initAds()
         private fun posterRequestOkhttp(mediaMetadata: MediaMetadata) {
             val artist = mediaMetadata.title.toString().split("-")
             val url =
-                "https://www.theaudiodb.com/api/v1/json/2/search.php?s=${artist[0]}"
+                "https://www.theaudiodb.com/api/v1/json/523532/search.php?s=${artist[0]}"
             val okHttpClient: OkHttpClient = OkHttpClient()
             val request: Request = Request.Builder().url(url).build()
             okHttpClient.newCall(request).enqueue(object : Callback {
@@ -737,9 +1010,35 @@ initAds()
         }
 
         override fun onPlayerError(error: PlaybackException) {
+            val er = getString(R.string.error_play_station)
             when (error.errorCode) {
+
                 ERROR_CODE_IO_NETWORK_CONNECTION_FAILED -> {
+                    titleTextViewPlayer?.visibility = View.INVISIBLE
+                    mNameTextView?.visibility = View.INVISIBLE
+                    titleTextView.visibility = View.INVISIBLE
+                    favoriteImageButton?.visibility = View.INVISIBLE
+                    mVisualizer?.visibility = View.INVISIBLE
+                    mPosterImageView?.visibility = View.INVISIBLE
+                    posterImageView.visibility = View.INVISIBLE
                     animNetLottieAnimationView?.visibility = View.VISIBLE
+
+                    Log.d("Mylog", "ОШИБКА ЗАПУСКА 0 ")
+
+                    Toast.makeText(
+                        this@MainActivity,
+                        getString(R.string.error_network),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    Log.d("Mylog", "Пропажа интернета там где дожна біть анимация")
+
+                    //проверка на наличия интернета
+                    chekInternet()
+
+                    //конец проверка на наличия интернета
+
+
+
                 }
                 ERROR_CODE_IO_FILE_NOT_FOUND -> {
                     Toast.makeText(
@@ -747,12 +1046,78 @@ initAds()
                         getString(R.string.error_payback),
                         Toast.LENGTH_SHORT
                     ).show()
+                    Log.d("Mylog", "ОШИБКА ЗАПУСКА 1 ")
+                }
+                ERROR_CODE_AUDIO_TRACK_INIT_FAILED -> {
+                    Log.d("Mylog", "ОШИБКА ЗАПУСКА 2")
+                }
+                ERROR_CODE_FAILED_RUNTIME_CHECK ->{
+                    Log.d("Mylog", "ОШИБКА ЗАПУСКА 3")
+                }
+                TYPE_REMOTE -> {
+                    Log.d("Mylog", "ОШИБКА ЗАПУСКА 4 ")
+                }
+                TYPE_RENDERER -> {
+                    Log.d("Mylog", "ОШИБКА ЗАПУСКА 5")
+                }
+                TYPE_SOURCE -> {
+                    Log.d("Mylog", "ОШИБКА ЗАПУСКА 6")
+                }
+                TYPE_UNEXPECTED -> {
+                    Log.d("Mylog", "ОШИБКА ЗАПУСКА 7")
+                }
+                ERROR_CODE_IO_NETWORK_CONNECTION_TIMEOUT ->{
+                    Log.d("Mylog", "ОШИБКА ЗАПУСКА 8")
+                }
+                ERROR_CODE_TIMEOUT ->{
+                    Log.d("Mylog", "ОШИБКА ЗАПУСКА 9")
+                }
+
+                else -> {
+                    Toast.makeText(
+                        this@MainActivity,
+                        er.toString(),
+                        Toast.LENGTH_LONG
+
+                    ).show()
+
+                    Log.d("Mylog", "ОШИБКА ЗАПУСКА 10")
+                    //chekInternet()
+
                 }
             }
-        }
+
+            }
+        //проверка на наличия интернета
+fun chekInternet(){
+            val timerTask = object : TimerTask() {
+                override fun run() {
+                    runOnUiThread {
+                        Log.d("Mylog", "Попытка запуска радиостанции после отключения интернета")
+                        mExoPlayer?.prepare()
+                        mExoPlayer?.play()
+
+                        timer.cancel()
+                    }
+                }
+            }
+            timer = Timer()
+            timer.schedule(timerTask, noDelay, everyFiveSeconds)
+            if (mExoPlayer?.isPlaying == true){
+                //animNetLottieAnimationView?.visibility = View.INVISIBLE
+//                                        timer.cancel()
+//                                        timer.purge()
+                Log.d("Mylog", "выключится таймер")
+            }
+}
+
+
+        //конец проверка на наличия интернета
 
         override fun onPlayerErrorChanged(error: PlaybackException?) {
-            animNetLottieAnimationView?.visibility = View.INVISIBLE
+            //убрал с основного кода
+            //animNetLottieAnimationView?.visibility = View.INVISIBLE
+            //Log.d("Mylog","ОШИБКА ЗАПУСКА РАДИОСТАНЦИИ")
         }
     }
 
@@ -774,10 +1139,22 @@ initAds()
     private fun isPlayingMedia(isPlaying: Boolean) {
         if (isPlaying) {
             playImageView?.setImageResource(R.drawable.ic_baseline_pause_24)
+            titleTextViewPlayer?.visibility = View.VISIBLE
+            mNameTextView?.visibility = View.VISIBLE
+            titleTextView.visibility = View.VISIBLE
+            favoriteImageButton?.visibility = View.VISIBLE
+            mVisualizer?.visibility = View.VISIBLE
+            mPosterImageView?.visibility = View.VISIBLE
+            posterImageView.visibility = View.VISIBLE
+
+            animNetLottieAnimationView?.visibility = View.INVISIBLE
 
             motionLayout?.transitionToEnd()
+
+            //Log.d("Mylog","открылся еквалайзер")
         } else {
             playImageView?.setImageResource(R.drawable.ic_baseline_play_arrow_24)
+            //Log.d("Mylog","НЕ!!!!  открылся еквалайзер")
         }
     }
 
@@ -787,6 +1164,7 @@ initAds()
         startService(intent)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         motionLayout?.transitionToStart()
     }
@@ -930,4 +1308,89 @@ initAds()
 
     fun setSettingListener(fragmentSettingListener: FragmentSettingListener) {
         this.fragmentSettingListener = fragmentSettingListener
-    }}
+    }
+    private fun requestRecordPermission() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(
+                this,
+                Manifest.permission.RECORD_AUDIO
+            )
+        ) {
+            AlertDialog.Builder(this)
+                .setTitle(R.string.permosion_messege_top)
+                .setMessage(R.string.permosion_messege_test)
+                .setPositiveButton(
+                    "Ok"
+                ) { dialog, which ->
+                    ActivityCompat.requestPermissions(
+                        this@MainActivity,
+                        arrayOf(Manifest.permission.RECORD_AUDIO),
+                        RECORD_PERMISSION_CODE
+                      )
+
+                }
+                .setNegativeButton(
+                    R.string.permosion_messege_cancel
+                ) { dialog, which -> dialog.dismiss() }
+                .create().show()
+
+        }
+        else
+            ActivityCompat.requestPermissions(
+            this,
+            arrayOf(Manifest.permission.RECORD_AUDIO),
+            RECORD_PERMISSION_CODE
+        )
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String?>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == RECORD_PERMISSION_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                setMediaSessionAndVisual()
+                //Toast.makeText(this, "Permission GRANTED", Toast.LENGTH_LONG).show()
+            } else {
+                //requestRecordPermission()
+                //Toast.makeText(this, "Permission DENIED", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
+    //проверка обновления программы
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(
+        requestCode: Int,
+        resultCode: Int,
+        @Nullable data: Intent?
+    ) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == RC_APP_UPDATE && resultCode != RESULT_OK) {
+            // Handle the update cancellation
+            Toast.makeText(this, updateCanceled, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private val installStateUpdatedListener =
+        InstallStateUpdatedListener { state ->
+            if (state.installStatus() == InstallStatus.DOWNLOADED) {
+                // Show the update completion message
+                showCompletedUpdate()
+            }
+        }
+    private fun showCompletedUpdate() {
+        val snackbar = newAppIsReady?.let {
+            Snackbar.make(
+                findViewById(android.R.id.content), it,
+                Snackbar.LENGTH_INDEFINITE
+            )
+        }
+        snackbar?.setAction(
+            updateInstall
+        ) { mAppUpdateManager.completeUpdate() }
+        snackbar?.show()
+    }
+    //конец проверки обновления программы
+}

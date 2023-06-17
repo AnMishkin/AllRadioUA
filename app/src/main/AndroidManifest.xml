@@ -6,7 +6,18 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
-
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" /> <!-- Разрешение на получения статуса соединения -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- Разрешение будильник -->
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+    <uses-permission android:name="Manifest.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="Manifest.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".di.App"
@@ -17,6 +28,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RadioUa"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".alarm.StopAlarmActivity"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+
         <receiver
             android:name=".widget.PlayerWidget"
             android:exported="true">
@@ -28,7 +44,13 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/player_widget_info" />
         </receiver>
-
+        <receiver
+            android:name=".alarm.AlarmReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.ALARM_ALERT" />
+            </intent-filter>
+        </receiver> <!-- <receiver android:name=".alarm.StopReceiver" /> -->
         <activity
             android:name=".ui.splash.SplashActivity"
             android:exported="true"
@@ -41,6 +63,10 @@
         </activity>
         <activity
             android:name=".ui.main.MainActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".alarm.AlarmReceiver"
             android:exported="true"
             android:screenOrientation="portrait" />
 
@@ -58,7 +84,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </service>
-        <service android:name=".services.TimerService" />
+        <service android:name="download.mishkindeveloper.AllRadioUA.services.TimerService" />
+        <service
+            android:name=".services.AlarmRadioPlayerService"
+            android:enabled="true"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"

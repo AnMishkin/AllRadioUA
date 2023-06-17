@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.sqlite:sqlite-framework:2.3.0-alpha03@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/ad58b784bf14c464e565fcd2ba5fc5c3/transformed/sqlite-framework-2.3.0-alpha03/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/ad58b784bf14c464e565fcd2ba5fc5c3/transformed/sqlite-framework-2.3.0-alpha03/res" />
-      <root url="file://$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/ad58b784bf14c464e565fcd2ba5fc5c3/transformed/sqlite-framework-2.3.0-alpha03/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/.gradle/caches/transforms-3/dd2be58e33485b2d294d9280be396365/transformed/sqlite-framework-2.3.0-alpha03/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/.gradle/caches/transforms-3/dd2be58e33485b2d294d9280be396365/transformed/sqlite-framework-2.3.0-alpha03/AndroidManifest.xml" />
+      <root url="file://$PROJECT_DIR$/.gradle/caches/transforms-3/dd2be58e33485b2d294d9280be396365/transformed/sqlite-framework-2.3.0-alpha03/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/modules-2/files-2.1/androidx.sqlite/sqlite-framework/2.3.0-alpha03/46eeb367ff2c70738e80ade89f1ca3937fa18174/sqlite-framework-2.3.0-alpha03-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/.gradle/caches/modules-2/files-2.1/androidx.sqlite/sqlite-framework/2.3.0-alpha03/46eeb367ff2c70738e80ade89f1ca3937fa18174/sqlite-framework-2.3.0-alpha03-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

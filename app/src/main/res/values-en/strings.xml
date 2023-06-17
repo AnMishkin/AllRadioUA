@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">All Radio of Ukraine</string>
+    <string name="app_name">All Radio UA</string>
     <string name="error_network">No internet access</string>
     <string name="dev_name">Developed by Mishkin</string>
     <string name="name_station">Station name</string>
@@ -43,4 +43,28 @@
 
     <string name="add_radio_station_message">Your station has been added to the list of radio stations!</string>
     <string name="del_radio_station_message">Your station has been removed from the list of radio stations!</string>
+    <string name="error_play_station">This radio station is currently unavailable!</string>
+
+    <string name="stations">Stations</string>
+    <string name="love_stations">Favorite</string>
+    <string name="history">History</string>
+    <string name="settings">Settings</string>
+
+    <string name="permosion_messege_test">Consent to record audio is required for visualization of radio station playback! The program does not record anything!</string>
+    <string name="permosion_messege_top">Consent is required!</string>
+    <string name="permosion_messege_cancel">Cancel</string>
+
+    <string name="update_available">Update available</string>
+    <string name="update_yes">Yes</string>
+    <string name="update_no">No</string>
+    <string name="update_text">Your app has an update available. Do you want to go to the Google Play page to update?</string>
+    <string name="update_canceled">Update canceled!</string>
+    <string name="new_app_is_ready">New app is ready!</string>
+    <string name="update_install">Install</string>
+
+    <string name="leave_review">Please leave a review</string>
+    <string name="text_review">Every review is very important for us! Spend 1 minute of your time - help develop the application! Thanks a lot! Glory to Ukraine!</string>
+    <string name="laiter_review">Later</string>
+    <string name="ok_review">With pleasure!</string>
+
 </resources>

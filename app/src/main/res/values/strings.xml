@@ -4,6 +4,9 @@
     <string name="get_name_shared_prefs_variable" translatable="false">name</string>
     <string name="get_shared_prefs_init" translatable="false">base</string>
 
+
+    <string name="packadge_name" translatable="false">download.mishkindeveloper.AllRadioUA</string>
+
     <string name="firebase_ref" translatable="false">RadioWaves</string>
     <string name="firebase_url" translatable="false">https://allradioua-default-rtdb.europe-west1.firebasedatabase.app/</string>
     <string name="default_logo_url" translatable="false">"http://mishkindeveloper.download/assets/img/default_image.png"</string>
@@ -14,6 +17,7 @@
     <string name="serializable_extra_min" translatable="false">minutes</string>
     <string name="tag_work" translatable="false">work</string>
     <string name="tag_stop" translatable="false">stop</string>
+    <string name="ad_unit_id" translatable="false">"ca-app-pub-3971991853344828/4649536656"</string>
 
     <string name="app_name">All Radio UA</string>
     <string name="error_network">No internet access</string>
@@ -59,6 +63,30 @@
 
     <string name="add_radio_station_message">Your station has been added to the list of radio stations!</string>
     <string name="del_radio_station_message">Your station has been removed from the list of radio stations!</string>
+    <string name="error_play_station">В даний момент, дана радіостанція недоступна!</string>
+
+    <string name="stations">Станції</string>
+    <string name="love_stations">Улюблене</string>
+    <string name="history">Історія</string>
+    <string name="settings">Налаштування</string>
+
+    <string name="permosion_messege_top">Потрібна згода!</string>
+    <string name="permosion_messege_test">Згода на запис аудио потрібна,для візуалізації програвання радіостанції! Программа не робить ніякого запису!</string>
+    <string name="permosion_messege_cancel">Скасувати</string>
+
+    <string name="update_available">Update available</string>
+    <string name="update_text">Your app has an update available. Do you want to go to the Google Play page to update?</string>
+    <string name="update_yes">Yes</string>
+    <string name="update_no">No</string>
+
+    <string name="update_canceled">Update canceled!</string>
+    <string name="new_app_is_ready">New update is ready!</string>
+    <string name="update_install">Install</string>
+
+    <string name="text_review">Для нас дуже важливий кожен відгук! Витратьте 1 хвилину вашого часу – допоможіть у розвитку програми! Величезне спасибі! Слава Україні!</string>
+    <string name="laiter_review">Пізніше</string>
+    <string name="leave_review">Залишіть будь ласка відгук!</string>
+    <string name="ok_review">Із задоволенням!</string>
 
 
 </resources>

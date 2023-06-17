@@ -1,13 +1,12 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.loader:loader:1.0.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/0f411a6a17ac1cea9b498224e7764fe9/transformed/loader-1.0.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/0f411a6a17ac1cea9b498224e7764fe9/transformed/loader-1.0.0/res" />
-      <root url="file://$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/transforms-3/0f411a6a17ac1cea9b498224e7764fe9/transformed/loader-1.0.0/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/.gradle/caches/transforms-3/8318169868548016fb1ecbcb65e2b11c/transformed/loader-1.0.0/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/.gradle/caches/transforms-3/8318169868548016fb1ecbcb65e2b11c/transformed/loader-1.0.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$USER_HOME$/.jdks/liberica-1.8.0_333/jre/caches/modules-2/files-2.1/androidx.loader/loader/1.0.0/b9ef587f3e46c7fe5b00264989764e43ff45cada/loader-1.0.0-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/.gradle/caches/modules-2/files-2.1/androidx.loader/loader/1.0.0/b9ef587f3e46c7fe5b00264989764e43ff45cada/loader-1.0.0-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

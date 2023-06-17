@@ -2,6 +2,7 @@ package download.mishkindeveloper.AllRadioUA.data.entity
 
 
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.Index
 import androidx.room.PrimaryKey
 import java.io.Serializable
@@ -14,9 +15,11 @@ data class RadioWave(
     var image: String?,
     var url: String?,
     var fmFrequency: String?,
+
     var favorite: Boolean?,
     var custom:Boolean?,
-    var countOpen:Int?
+    var countOpen: Int?
 ) : Serializable {
-    constructor() : this(null, null, null, null, null, false, false, 0)
+    @Ignore
+    constructor() : this(null, null, null, null, null, false, false, 1)
 }

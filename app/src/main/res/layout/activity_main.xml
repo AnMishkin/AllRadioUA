@@ -99,6 +99,15 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_baseline_add_24" />
 
+            <ImageButton
+                android:id="@+id/alertButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#001860"
+                android:layout_gravity="center"
+                android:layout_marginEnd="5dp"
+                app:srcCompat="@drawable/baseline_add_alert_24" />
+
 
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
@@ -141,8 +150,10 @@
             app:controller_layout_id="@layout/custom_player_view"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
             app:show_timeout="0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

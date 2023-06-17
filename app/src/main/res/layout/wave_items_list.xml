@@ -80,11 +80,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginEnd="4dp"
             android:layout_weight="1"
             android:visibility="invisible"
             app:srcCompat="@drawable/lover"
-            tools:visibility="invisible"
-            android:layout_marginEnd="4dp"/>
+            tools:visibility="invisible" />
 
         <ImageButton
             android:id="@+id/menuImageButton"
@@ -97,11 +97,11 @@
     </LinearLayout>
 
     <View
-        android:layout_width="320dp"
+        android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="5dp"
         android:background="#FFEB3B"
         android:foregroundGravity="center" />
 </LinearLayout>

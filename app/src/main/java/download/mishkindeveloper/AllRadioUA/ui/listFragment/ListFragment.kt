@@ -3,6 +3,7 @@ package download.mishkindeveloper.AllRadioUA.ui.listFragment
 import android.content.*
 import android.os.Bundle
 import android.os.IBinder
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.exoplayer2.ExoPlayer
+import com.google.android.gms.ads.MobileAds
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.firebase.database.*
@@ -31,24 +33,26 @@ import download.mishkindeveloper.AllRadioUA.ui.listFragment.adapter.ListFragment
 import download.mishkindeveloper.AllRadioUA.ui.main.MainActivity
 import download.mishkindeveloper.AllRadioUA.ui.main.MainViewModel
 import dagger.android.support.AndroidSupportInjection
+import download.mishkindeveloper.AllRadioUA.ui.adMobNative.AdmobNativeAdAdapter
 import javax.inject.Inject
 
 
+
 class ListFragment : Fragment(), MenuItemIdListener, FragmentSettingListener {
-    private var mRecyclerView: RecyclerView? =null
-    private  var mGridLayoutManager: GridLayoutManager?=null
-    private  var mAdapter: ListFragmentRecyclerViewAdapter?=null
-    private  var sortImageButton: ImageButton?=null
+    private var mRecyclerView: RecyclerView? = null
+    private var mGridLayoutManager: GridLayoutManager? = null
+    private var mAdapter: ListFragmentRecyclerViewAdapter? = null
+    private var sortImageButton: ImageButton? = null
     private var items: MutableList<RadioWave>? = null
     private var matchedRadioWave: ArrayList<RadioWave>? = null
-    private  var switch: SwitchMaterial?=null
+    private var switch: SwitchMaterial? = null
     private var mExoPlayer: ExoPlayer? = null
     private var mPlayerService: PlayerService? = null
-    private  var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>?=null
-    private  var bottomSheet: ConstraintLayout?=null
-    private  var sortNameRadioGroup: RadioGroup?=null
-    private  var hideBottomSheetImageButton: ImageButton?=null
-    private  var titleSortTextView: TextView?=null
+    private var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>? = null
+    private var bottomSheet: ConstraintLayout? = null
+    private var sortNameRadioGroup: RadioGroup? = null
+    private var hideBottomSheetImageButton: ImageButton? = null
+    private var titleSortTextView: TextView? = null
     private var checkStateSwitch: Boolean = false
 
     @Inject
@@ -56,7 +60,7 @@ class ListFragment : Fragment(), MenuItemIdListener, FragmentSettingListener {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    private  var displayListType: DisplayListType?=null
+    private var displayListType: DisplayListType? = null
 
     @Inject
     lateinit var viewModel: MainViewModel
@@ -106,9 +110,8 @@ class ListFragment : Fragment(), MenuItemIdListener, FragmentSettingListener {
 //попытка обновления базы при выборе сортировки
 
 
-
     private fun initListeners() {
-            hideBottomSheetImageButton?.setOnClickListener {
+        hideBottomSheetImageButton?.setOnClickListener {
             bottomSheetBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
         }
         switch?.setOnClickListener {
@@ -155,14 +158,14 @@ class ListFragment : Fragment(), MenuItemIdListener, FragmentSettingListener {
         }
     }
 
-     fun switchIsChecked() {
-        if (switch?.isChecked==true) {
+    fun switchIsChecked() {
+        if (switch?.isChecked == true) {
             preferencesHelper.setSwitchEnabled(true)
             defaultListItem = viewModel.getCustomAll()
             updateRecyclerView(defaultListItem)
         } else {
             preferencesHelper.setSwitchEnabled(false)
-            defaultListItem = viewModel.getCustomAll()+viewModel.getAllRadioWaves()
+            defaultListItem = viewModel.getCustomAll() + viewModel.getAllRadioWaves()
             updateRecyclerView(defaultListItem)
         }
     }
@@ -280,6 +283,8 @@ class ListFragment : Fragment(), MenuItemIdListener, FragmentSettingListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (activity as MainActivity?)?.setSettingListener(this@ListFragment)
+        // Инициализируйте AdMob
+        context?.let { MobileAds.initialize(it) }
     }
 
     companion object
@@ -359,7 +364,7 @@ class ListFragment : Fragment(), MenuItemIdListener, FragmentSettingListener {
             updateButtonEvent(nameEditText, radioWave, urlEditText, builder)
             switchIsChecked()
             //(activity as MainActivity?)?.updateDb()
-           // defaultListItem = viewModel.getCustomAll()+viewModel.getAllRadioWaves()
+            // defaultListItem = viewModel.getCustomAll()+viewModel.getAllRadioWaves()
         }
 
         delButton.setOnClickListener {
@@ -367,7 +372,8 @@ class ListFragment : Fragment(), MenuItemIdListener, FragmentSettingListener {
             switchIsChecked()
             (activity as MainActivity?)?.updateDb()
 
-            Toast.makeText(this.context, R.string.del_radio_station_message, Toast.LENGTH_LONG).show()
+            Toast.makeText(this.context, R.string.del_radio_station_message, Toast.LENGTH_LONG)
+                .show()
         }
     }
 
@@ -432,7 +438,45 @@ class ListFragment : Fragment(), MenuItemIdListener, FragmentSettingListener {
             mPlayerService!!,
             this@ListFragment
         )
-        mRecyclerView?.adapter = mAdapter
+        displayListType = preferencesHelper.getDisplayListType()
+        when (displayListType) {
+        DisplayListType.List ->
+            {
+                val currentAdapter = mAdapter
+                if (currentAdapter != null) {
+                    Log.d("MyLog", "small ad view")
+                    val nativeAdId = "ca-app-pub-3971991853344828/3417223330"
+                    val nativeAdsType = "small" // Замените на "small", "medium" или "custom"
+                    val interval = 4 // Замените на желаемый интервал повторения рекламы
+                    val admobNativeAdAdapter = AdmobNativeAdAdapter.Builder
+                        .with(nativeAdId, currentAdapter, nativeAdsType)
+                        .adItemIterval(interval)
+                        .build()
+
+                    mRecyclerView?.adapter = admobNativeAdAdapter
+                }
+            }
+
+        DisplayListType.Grid ->
+        {
+            val currentAdapter = mAdapter
+            if (currentAdapter != null) {
+                Log.d("MyLog", "cutom ad view")
+                val nativeAdId = "ca-app-pub-3971991853344828/3417223330"
+                val nativeAdsType = "custom" // Замените на "small", "medium" или "custom"
+                val interval = 3 // Замените на желаемый интервал повторения рекламы
+                val admobNativeAdAdapter = AdmobNativeAdAdapter.Builder
+                    .with(nativeAdId, currentAdapter, nativeAdsType)
+                    .adItemIterval(interval)
+                    .build()
+
+                mRecyclerView?.adapter = admobNativeAdAdapter
+            }
+
+        }
+            else -> {}
+        }
+
         mAdapter?.setDisplayListType(displayListType!!)
     }
 }
