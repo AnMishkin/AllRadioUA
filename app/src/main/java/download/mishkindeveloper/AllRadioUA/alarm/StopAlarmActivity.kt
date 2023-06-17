@@ -7,6 +7,7 @@ import android.content.ServiceConnection
 import android.os.Bundle
 import android.os.IBinder
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import download.mishkindeveloper.AllRadioUA.databinding.ActivityStopAlarmBinding
 import download.mishkindeveloper.AllRadioUA.services.AlarmRadioPlayerService
@@ -37,6 +38,8 @@ class StopAlarmActivity : AppCompatActivity() {
         binding.imageButtonStopAlarm.setOnClickListener {
             stopRadioPlayback()
             Log.d("MyLog", "Остановился будильник")
+            Toast.makeText(this.applicationContext,"Будильник СТОП", Toast.LENGTH_LONG).show()
+            finish()
         }
     }
 

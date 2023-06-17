@@ -6,6 +6,7 @@ import download.mishkindeveloper.AllRadioUA.ui.listFragment.ListFragment
 import download.mishkindeveloper.AllRadioUA.ui.settingFragment.SettingFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
+import download.mishkindeveloper.AllRadioUA.alarm.AlarmFragment
 
 @Module
 abstract class FragmentBuildersModule {
@@ -20,4 +21,7 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun historyFragment():HistoryFragment?
+
+    @ContributesAndroidInjector
+    abstract fun contributeAlarmFragment(): AlarmFragment
 }
