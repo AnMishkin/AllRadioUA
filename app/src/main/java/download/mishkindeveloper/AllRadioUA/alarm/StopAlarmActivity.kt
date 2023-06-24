@@ -32,7 +32,7 @@ class StopAlarmActivity : AppCompatActivity() {
     private lateinit var preferenceAlarmHelper: PreferenceAlarmHelper
     private var alertImageButton: ImageButton? = null
     private lateinit var mAdView: AdView
-    private lateinit var vibrator : Vibrator
+    //private lateinit var vibrator : Vibrator
 
     private val serviceConnection = object : ServiceConnection {
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
