@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:background="#000822"
-        android:text="Выберите время для будильника и радиостанцию"
+        android:text="@string/set_alarm_and_radiostation"
         android:textColor="#FFEB3B"
         android:textSize="20sp"
         android:textStyle="bold"

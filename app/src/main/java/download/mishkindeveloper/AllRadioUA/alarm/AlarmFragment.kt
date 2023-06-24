@@ -6,6 +6,8 @@ import android.content.Intent
 import android.content.ServiceConnection
 import android.os.Bundle
 import android.os.IBinder
+import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,6 +30,7 @@ import download.mishkindeveloper.AllRadioUA.enums.DisplayListType
 import download.mishkindeveloper.AllRadioUA.helper.PreferenceHelper
 import download.mishkindeveloper.AllRadioUA.listeners.FragmentSettingListener
 import download.mishkindeveloper.AllRadioUA.listeners.MenuItemIdListener
+import download.mishkindeveloper.AllRadioUA.services.AlarmRadioPlayerService
 import download.mishkindeveloper.AllRadioUA.services.PlayerService
 import download.mishkindeveloper.AllRadioUA.ui.adMobNative.AdmobNativeAdAdapter
 import download.mishkindeveloper.AllRadioUA.ui.listFragment.ListFragment
@@ -53,7 +56,7 @@ class AlarmFragment : Fragment(), MenuItemIdListener, FragmentSettingListener {
     private var hideBottomSheetImageButton: ImageButton? = null
     private var titleSortTextView: TextView? = null
     private var checkStateSwitch: Boolean = false
-
+    private var mainActivity:MainActivity = MainActivity()
     @Inject
     lateinit var preferencesHelper: PreferenceHelper
 
@@ -198,7 +201,6 @@ class AlarmFragment : Fragment(), MenuItemIdListener, FragmentSettingListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (activity as MainActivity?)?.setSettingListener(this@AlarmFragment)
-        // Инициализируйте AdMob
         context?.let { MobileAds.initialize(it) }
     }
 
@@ -392,136 +394,6 @@ class AlarmFragment : Fragment(), MenuItemIdListener, FragmentSettingListener {
         mAdapter?.setDisplayListType(displayListType!!)
     }
 
+
+
 }
-
-
-
-
-//import android.app.*
-//import android.content.Context
-//import android.content.Intent
-//import android.os.Build
-//import android.os.Bundle
-//import android.util.Log
-//import android.view.LayoutInflater
-//import android.view.View
-//import android.widget.Toast
-//import androidx.annotation.RequiresApi
-//import androidx.appcompat.app.AlertDialog
-//import androidx.fragment.app.Fragment
-//import androidx.lifecycle.ViewModelProvider
-//import androidx.recyclerview.widget.LinearLayoutManager
-//import androidx.recyclerview.widget.RecyclerView
-//import com.google.android.material.timepicker.MaterialTimePicker
-//import dagger.android.support.AndroidSupportInjection
-//import download.mishkindeveloper.AllRadioUA.R
-//import download.mishkindeveloper.AllRadioUA.ui.main.MainViewModel
-//import java.util.*
-//
-//
-//class AlarmFragment : Fragment() {
-//
-//    private lateinit var alarmRecyclerView: RecyclerView
-//    private lateinit var alarmAdapter: RadioStationAdapter
-//    private lateinit var viewModel: MainViewModel
-//    private lateinit var timePicker: MaterialTimePicker
-//    lateinit var viewModelFactory: ViewModelProvider.Factory
-//
-//    override fun onAttach(context: Context) {
-//        AndroidSupportInjection.inject(this)
-//        viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
-//        super.onAttach(context)
-//    }
-//
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_alarm, null)
-//        alarmRecyclerView = dialogView.findViewById(R.id.recyclerView)
-//        Log.d("Mylog","создается AlarmFragment : Fragment")
-//        val radioStations = viewModel.getAllRadioWaves().map { it.name }
-//        alarmAdapter = RadioStationAdapter(radioStations as List<String>, requireContext()) { radioStation ->
-//            setAlarm(radioStation, timePicker.hour, timePicker.minute)
-//        }
-//        alarmRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-//        alarmRecyclerView.adapter = alarmAdapter
-//
-////        val dialogBuilder = AlertDialog.Builder(requireContext())
-////            //.setTitle("Выберите радиостанцию")
-////            .setView(dialogView)
-////            .setPositiveButton("ОК") { dialog, _ ->
-////                val selectedRadioStation = alarmAdapter.getSelectedRadioStation()
-////
-////                if (selectedRadioStation != null) {
-////                    setAlarm(selectedRadioStation, timePicker.hour, timePicker.minute)
-////                    Toast.makeText(requireContext(), "Будильник установлен!", Toast.LENGTH_LONG).show()
-////                } else {
-////                    Toast.makeText(requireContext(), "Будильник не установлен! Выберите радиостанцию!", Toast.LENGTH_LONG).show()
-////                }
-////
-////                dialog.dismiss()
-////            }
-////            .setNegativeButton("Отмена") { dialog, _ ->
-////                dialog.dismiss()
-////            }
-////
-////        val alertDialog = dialogBuilder.create()
-////        alertDialog.show()
-//
-//    }
-//
-//    private fun setAlarm(radioStation: String, selectedHour: Int, selectedMinute: Int) {
-//        val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
-//        val intent = Intent(requireContext(), AlarmReceiver::class.java).apply {
-//            putExtra("radioStation", radioStation)
-//        }
-//
-//        val pendingIntent = PendingIntent.getBroadcast(
-//            requireContext(),
-//            0,
-//            intent,
-//            PendingIntent.FLAG_UPDATE_CURRENT
-//        )
-//
-//        val calendar = Calendar.getInstance()
-//        calendar.set(Calendar.HOUR_OF_DAY, selectedHour)
-//        calendar.set(Calendar.MINUTE, selectedMinute)
-//        calendar.set(Calendar.SECOND, 0)
-//
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            createNotificationChannelAlarm()
-//        }
-//
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//            alarmManager.setExactAndAllowWhileIdle(
-//                AlarmManager.RTC_WAKEUP,
-//                calendar.timeInMillis,
-//                pendingIntent
-//            )
-//        } else {
-//            alarmManager.setExact(
-//                AlarmManager.RTC_WAKEUP,
-//                calendar.timeInMillis,
-//                pendingIntent
-//            )
-//        }
-//    }
-//
-//    companion object {
-//        fun createAlarmFragment(): AlarmFragment {
-//            return AlarmFragment()
-//        }
-//    }
-//
-//    @RequiresApi(Build.VERSION_CODES.O)
-//    private fun createNotificationChannelAlarm() {
-//        val channelId = "mishkin"
-//        val channelName = "Alarm Reminder"
-//        val importance = NotificationManager.IMPORTANCE_HIGH
-//
-//        val channel = NotificationChannel(channelId, channelName, importance)
-//        channel.description = "Channel for Alarm Manager"
-//
-//        val notificationManager = requireContext().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-//        notificationManager.createNotificationChannel(channel)
-//    }
-//
-//}

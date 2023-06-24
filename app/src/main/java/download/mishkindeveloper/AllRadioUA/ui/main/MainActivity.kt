@@ -4,6 +4,7 @@ package download.mishkindeveloper.AllRadioUA.ui.main
 import android.Manifest
 import android.animation.Animator
 import android.annotation.SuppressLint
+import android.app.ActivityManager
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.*
@@ -57,14 +58,14 @@ import dagger.android.AndroidInjection
 import de.hdodenhof.circleimageview.CircleImageView
 import download.mishkindeveloper.AllRadioUA.R
 import download.mishkindeveloper.AllRadioUA.ReviewManager.ReviewManager
-import download.mishkindeveloper.AllRadioUA.alarm.AlarmFragment
-import download.mishkindeveloper.AllRadioUA.alarm.RadioStationAdapter
+import download.mishkindeveloper.AllRadioUA.alarm.*
 
 import download.mishkindeveloper.AllRadioUA.data.entity.RadioWave
 import download.mishkindeveloper.AllRadioUA.data.entity.Track
 import download.mishkindeveloper.AllRadioUA.helper.PreferenceHelper
 import download.mishkindeveloper.AllRadioUA.listeners.FragmentSettingListener
 import download.mishkindeveloper.AllRadioUA.listeners.MenuItemIdListener
+import download.mishkindeveloper.AllRadioUA.services.AlarmRadioPlayerService
 import download.mishkindeveloper.AllRadioUA.services.PlayerService
 import download.mishkindeveloper.AllRadioUA.services.TimerService
 import download.mishkindeveloper.AllRadioUA.ui.favoriteFragment.FavoriteFragment
@@ -78,7 +79,7 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
-
+import android.content.pm.ServiceInfo
 
 class MainActivity : AppCompatActivity() {
     private val RECORD_PERMISSION_CODE = 1
@@ -126,6 +127,15 @@ class MainActivity : AppCompatActivity() {
     private var trackInfoMiniPlayerTextView: TextView? = null
     private var artistPoster = ""
     private var fragmentSettingListener: FragmentSettingListener? = null
+    private lateinit var preferenceAlarmHelper: PreferenceAlarmHelper
+    private var mPlayerAlarmService: AlarmRadioPlayerService? = null
+    private var alarmPlayerService: AlarmRadioPlayerService? = null
+    private var isServiceBound = false
+    val packageNameForAlarm = "download.mishkindeveloper.AllRadioUA.services"
+    val serviceClassName = "download.mishkindeveloper.AllRadioUA.services.AlarmRadioPlayerService"
+    private var stopAlarmActivity: StopAlarmActivity? = null
+    private var alarmPendingIntent: PendingIntent? = null
+
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -209,6 +219,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         init()
+        checkAlarm()
         initPermission()
         checkFirstStartStatus()
         initBroadcastManager()
@@ -217,6 +228,7 @@ class MainActivity : AppCompatActivity() {
         setListeners()
         performSearch()
         initAds()
+
         ReviewManager(this).checkAndPromptForReview(textReview, laiterReview, leaveReview,okReview)
 
         mAppUpdateManager = AppUpdateManagerFactory.create(this)
@@ -248,6 +260,15 @@ class MainActivity : AppCompatActivity() {
 
         //checkDate()
         //titleToolTextView?.text = items.size.toString()+"-"+getString(R.string.list_menu_item)
+    }
+
+    private fun checkAlarm() {
+        var check = preferenceAlarmHelper.getBoolean("Alarm",false)
+        if (check) {
+            alertImageButton?.setImageResource(R.drawable.baseline_set_alert_24)
+        } else {
+            alertImageButton?.setImageResource(R.drawable.baseline_add_alert_24)
+        }
     }
 
     override fun onDestroy() {
@@ -395,8 +416,25 @@ class MainActivity : AppCompatActivity() {
 
         //кнопка будильника
         alertImageButton?.setOnClickListener {
-            createAlarmDialog()
+            var prefAlarm = preferenceAlarmHelper.getBoolean("Alarm",true)
+            Log.d("MyLog","$prefAlarm")
+            if (prefAlarm) {
+                //val stopAlarmIntent = Intent(this, StopAlarmActivity::class.java)
+                //stopAlarmIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+
+                //startActivity(stopAlarmIntent)
+                //StopAlarmActivity().stopAlarmDialog()
+
+                stopAlarmDialogInMain()
+            } else {
+                alertImageButton?.setImageResource(R.drawable.baseline_set_alert_24)
+                createAlarmDialog()
+
+            }
         }
+
+
+
     }
 
     fun onRadioStationSelected(radioStation: RadioWave) {
@@ -426,91 +464,16 @@ class MainActivity : AppCompatActivity() {
             editor.putInt("AlarmHour", selectedHour)
             editor.putInt("AlarmMinute", selectedMinute)
             editor.apply()
-
+            alertImageButton?.setImageResource(R.drawable.baseline_set_alert_24)
             createAlarmFragment()
+        }
+
+        timePicker.addOnNegativeButtonClickListener {
+            alertImageButton?.setImageResource(R.drawable.baseline_add_alert_24)
         }
 
         timePicker.show(supportFragmentManager, "timePicker")
     }
-
-//    private fun showRadioStationSelection() {
-//        val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_alarm, null)
-//        alarmRecyclerView = dialogView.findViewById(R.id.recyclerView)
-//
-//        val radioStations = viewModel.getAllRadioWaves().map { it.name }
-//        alarmAdapter = RadioStationAdapter(radioStations as List<String>, this) { radioStation ->
-//            setAlarm(radioStation, timePicker.hour, timePicker.minute)
-//        }
-//        alarmRecyclerView.layoutManager = LinearLayoutManager(this)
-//        alarmRecyclerView.adapter = alarmAdapter
-//
-//        val dialogBuilder = AlertDialog.Builder(this)
-//            //.setTitle("Выберите радиостанцию")
-//            .setView(dialogView)
-//            .setPositiveButton("ОК") { dialog, _ ->
-//                val selectedRadioStation = alarmAdapter.getSelectedRadioStation()
-//
-//                if (selectedRadioStation != null) {
-//                    setAlarm(selectedRadioStation, timePicker.hour, timePicker.minute)
-//                    Toast.makeText(this, "Будильник установлен!", Toast.LENGTH_LONG).show()
-//                } else {
-//                    Toast.makeText(this, "Будильник не установлен! Выберите радиостанцию!", Toast.LENGTH_LONG).show()
-//                }
-//
-//                dialog.dismiss()
-//            }
-//            .setNegativeButton("Отмена") { dialog, _ ->
-//                dialog.dismiss()
-//            }
-//
-//        val alertDialog = dialogBuilder.create()
-//        alertDialog.show()
-//    }
-
-//    private fun setAlarm(radioStation: String, selectedHour: Int, selectedMinute: Int) {
-//        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-//        val intent = Intent(this, AlarmReceiver::class.java).apply {
-//            putExtra("radioStation", radioStation)
-//        }
-//
-//        val pendingIntent = PendingIntent.getBroadcast(applicationContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
-//
-//        val calendar = Calendar.getInstance()
-//        calendar.set(Calendar.HOUR_OF_DAY, selectedHour)
-//        calendar.set(Calendar.MINUTE, selectedMinute)
-//        calendar.set(Calendar.SECOND, 0)
-//
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            createNotificationChannelAlarm()
-//        }
-//
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//            alarmManager.setExactAndAllowWhileIdle(
-//                AlarmManager.RTC_WAKEUP,
-//                calendar.timeInMillis,
-//                pendingIntent
-//            )
-//        } else {
-//            alarmManager.setExact(
-//                AlarmManager.RTC_WAKEUP,
-//                calendar.timeInMillis,
-//                pendingIntent
-//            )
-//        }
-//    }
-
-//    @RequiresApi(Build.VERSION_CODES.O)
-//    private fun createNotificationChannelAlarm() {
-//        val channelId = "mishkin"
-//        val channelName = "Alarm Reminder"
-//        val importance = NotificationManager.IMPORTANCE_HIGH
-//
-//        val channel = NotificationChannel(channelId, channelName, importance)
-//        channel.description = "Channel for Alarm Manager"
-//
-//        val notificationManager = getSystemService(NotificationManager::class.java)
-//        notificationManager.createNotificationChannel(channel)
-//    }
 
     fun createAlarmFragment() {
         fragment = AlarmFragment().newInstance()
@@ -784,6 +747,7 @@ initAds()
         laiterReview = getString(R.string.laiter_review)
         leaveReview = getString(R.string.leave_review)
         okReview = getString(R.string.ok_review)
+        preferenceAlarmHelper = PreferenceAlarmHelper(this)
     }
 
     private fun initPermission() {
@@ -1393,4 +1357,127 @@ fun chekInternet(){
         snackbar?.show()
     }
     //конец проверки обновления программы
+
+//    private fun checkAlarm() {
+//        val alarmIntent = Intent(this, AlarmReceiver::class.java)
+//        val pendingIntent = PendingIntent.getBroadcast(
+//            this, 0, alarmIntent, PendingIntent.FLAG_NO_CREATE
+//        )
+//        val isAlarmSet = pendingIntent != null
+//
+//        if (isAlarmSet) {
+//            Log.d("MyLog","Будильник уже запущен")
+//            alertImageButton?.setImageResource(R.drawable.baseline_alarm_off_24)
+//
+//        } else {
+//            Log.d("MyLog","Будильник не запуще")
+//
+//        }
+
+    fun stopAlarmDialogInMain() {
+        val yes  = resources.getText(R.string.update_yes)
+        val no  = resources.getText(R.string.update_no)
+        val title  = resources.getText(R.string.title_alarm_stop)
+        val sure  = resources.getText(R.string.text_alarm_stop)
+        val builder = AlertDialog.Builder(this)
+        builder.setPositiveButton("$yes"){ _, _ ->
+            //stopRadioPlayback()
+cancelAlarm()
+//            val stopAlarmIntent = Intent(this, StopAlarmActivity::class.java)
+//            startActivity(stopAlarmIntent)
+
+            //stopRadioStation()
+
+
+//var alarmReceiver = AlarmReceiver()
+//            val stopAlarmIntent = Intent(this, StopAlarmActivity::class.java)
+//            stopAlarmIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//            alarmReceiver.onReceive(this,stopAlarmIntent)
+
+
+            Log.d("MyLog", "Остановился будильник")
+            preferenceAlarmHelper.saveBoolean("Alarm",false)
+            alertImageButton?.setImageResource(R.drawable.baseline_add_alert_24)
+
+        }
+        builder.setNegativeButton("$no"){_, _ -> }
+        builder.setTitle("$title")
+        builder.setMessage("$sure")
+        builder.create().show()
+    }
+
+//    private fun stopRadioStation() {
+//        val serviceRunning = isServiceRunning(this, AlarmRadioPlayerService::class.java)
+//
+//        if (serviceRunning) {
+//            // Сервис запущен, выполните необходимые действия
+//            // Например, остановите его
+//            stopService(Intent(this, AlarmRadioPlayerService::class.java))
+//        } else {
+//            // Сервис не запущен, выполните необходимые действия
+//        }
+//    }
+//
+//
+//    fun isServiceRunning(context: Context, serviceClass: Class<*>): Boolean {
+//        val activityManager = context.getSystemService(Context.ACTIVITY_SERVICE) as? ActivityManager
+//        val runningServices = activityManager?.getRunningServices(Int.MAX_VALUE)
+//
+//        if (runningServices != null) {
+//            for (serviceInfo in runningServices) {
+//                if (serviceClass.name == serviceInfo.service.className) {
+//                    return true
+//                }
+//            }
+//        }
+//
+//        return false
+//    }
+
+//    private val serviceAlertConnection = object : ServiceConnection {
+//        override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
+//            val binder = service as? AlarmRadioPlayerService.PlayerBinder
+//            alarmPlayerService = binder?.getService()
+//            isServiceBound = true
+//        }
+//
+//        override fun onServiceDisconnected(name: ComponentName?) {
+//            alarmPlayerService = null
+//            isServiceBound = false
+//        }
+//    }
+//
+//    override fun onStart() {
+//        super.onStart()
+//        val serviceIntent = Intent(this, AlarmRadioPlayerService::class.java)
+//        bindService(serviceIntent, serviceAlertConnection, Context.BIND_AUTO_CREATE)
+//    }
+//
+//    private fun stopRadioStation() {
+//        alarmPlayerService?.stopRadioStation()
+//    }
+private fun cancelAlarm() {
+    val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+    val alarmIntent = Intent(this, AlarmReceiver::class.java)
+    val alarmPendingIntent = PendingIntent.getBroadcast(
+        this, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+    )
+    alarmPendingIntent?.let { pendingIntent ->
+        alarmManager.cancel(pendingIntent)
+        if (alarmIntent.hasExtra("isAlarmActive") && alarmIntent.getBooleanExtra("isAlarmActive", false)) {
+            // Остановить воспроизведение радиостанции
+            // stopMediaPlayback()
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
 }

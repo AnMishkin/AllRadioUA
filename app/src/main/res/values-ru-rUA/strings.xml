@@ -43,4 +43,32 @@
 
     <string name="add_radio_station_message">Ваша станция добавлена в список радиостанций!</string>
     <string name="del_radio_station_message">Ваша станция удалена из списка радиостанций!</string>
+
+    <string name="error_play_station">В данный момент,данная радиостанция недоступна!</string>
+
+    <string name="stations">Станции</string>
+    <string name="love_stations">Любимые</string>
+    <string name="history">История</string>
+    <string name="settings">Настройки</string>
+
+    <string name="permosion_messege_test">Согласие на запись аудио нужно для визуализации проигрывания радиостанции! Программа не производит никакой записи!</string>
+    <string name="permosion_messege_top">Нужно согласие!</string>
+    <string name="permosion_messege_cancel">Отмена</string>
+
+    <string name="update_available">Доступно обновление</string>
+    <string name="update_yes">Да</string>
+    <string name="update_no">Нет</string>
+    <string name="update_text">У вашего приложения доступно обновление. Хотите перейти на страницу в Google Play для обновления?</string>
+    <string name="update_canceled">Обновление отменено!</string>
+    <string name="new_app_is_ready">Новое обновление готово!</string>
+    <string name="update_install">Установить</string>
+
+    <string name="leave_review">Оставьте пожалуйста отзыв!</string>
+    <string name="text_review">Для нас очень важен каждый отзыв! Потратьте 1 минуту вашего времени - помогите в развитии приложения! Огромное спасибо! Слава Україні!</string>
+    <string name="laiter_review">Позже</string>
+    <string name="ok_review">С удовольствием!</string>
+    <string name="title_alarm_stop">Вы уверены?</string>
+    <string name="text_alarm_stop">Вы действительно хотите выключить будильник?</string>
+    <string name="alarm_set">Будильник установлен!</string>
+    <string name="set_alarm_and_radiostation">Выберите радиостанцию для будильника!</string>
 </resources>

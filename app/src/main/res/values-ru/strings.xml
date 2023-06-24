@@ -66,4 +66,6 @@
     <string name="text_review">Для нас очень важен каждый отзыв! Потратьте 1 минуту вашего времени - помогите в развитии приложения! Огромное спасибо! Слава Україні!</string>
     <string name="laiter_review">Позже</string>
     <string name="ok_review">С удовольствием!</string>
+    <string name="alarm_set">Будильник установлен!</string>
+    <string name="set_alarm_and_radiostation">Выберите радиостанцию для будильника!</string>
 </resources>

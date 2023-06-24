@@ -89,4 +89,11 @@
     <string name="ok_review">Із задоволенням!</string>
 
 
+    <string name="title_alarm_stop">You are sure?</string>
+    <string name="text_alarm_stop">Do you really want to turn off the alarm?</string>
+
+    <string name="alarm_set">Alarm clock set!</string>
+    <string name="set_alarm_and_radiostation">Choose a radio station for your alarm!</string>
+
+
 </resources>

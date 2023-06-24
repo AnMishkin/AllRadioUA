@@ -18,6 +18,8 @@
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
     <uses-permission android:name="Manifest.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="Manifest.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+
 
     <application
         android:name=".di.App"
@@ -31,6 +33,10 @@
         <activity
             android:name=".alarm.StopAlarmActivity"
             android:screenOrientation="portrait"
+            android:showOnLockScreen="true"
+            android:turnScreenOn="true"
+            android:excludeFromRecents="true"
+            android:theme="@style/Theme.RadioUa.AppCompat"
             android:exported="false" />
 
         <receiver
@@ -50,7 +56,11 @@
             <intent-filter>
                 <action android:name="android.intent.action.ALARM_ALERT" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="STOP_ALARM_ACTION" />
+            </intent-filter>
         </receiver> <!-- <receiver android:name=".alarm.StopReceiver" /> -->
+
         <activity
             android:name=".ui.splash.SplashActivity"
             android:exported="true"

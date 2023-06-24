@@ -66,5 +66,7 @@
     <string name="text_review">Every review is very important for us! Spend 1 minute of your time - help develop the application! Thanks a lot! Glory to Ukraine!</string>
     <string name="laiter_review">Later</string>
     <string name="ok_review">With pleasure!</string>
+    <string name="alarm_set">Alarm clock set!</string>
+    <string name="set_alarm_and_radiostation">Choose a radio station for your alarm!</string>
 
 </resources>

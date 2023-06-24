@@ -44,4 +44,6 @@
 
     <string name="add_radio_station_message">Twoja stacja została dodana do listy stacji radiowych!</string>
     <string name="del_radio_station_message">Twoja stacja została usunięta z listy stacji radiowych!</string>
+    <string name="alarm_set">Zestaw budzik!</string>
+    <string name="set_alarm_and_radiostation">Wybierz stację radiową dla swojego alarmu!</string>
 </resources>

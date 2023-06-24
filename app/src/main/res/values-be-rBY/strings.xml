@@ -42,4 +42,6 @@
     <string name="sub_title_widget">Трэк</string>
     <string name="add_radio_station_message">Ваша станцыя дададзена ў спіс радыёстанцый!</string>
     <string name="del_radio_station_message">Ваша станцыя была выдаленая са спісу радыёстанцый!</string>
+    <string name="alarm_set">Будзільнік усталяваны!</string>
+    <string name="set_alarm_and_radiostation">Абярыце радыёстанцыю для будзільніка!</string>
 </resources>

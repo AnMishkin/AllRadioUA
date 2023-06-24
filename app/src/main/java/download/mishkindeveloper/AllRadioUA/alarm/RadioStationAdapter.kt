@@ -9,7 +9,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -44,7 +47,10 @@ class RadioStationAdapter(
     private var selectedRadioStation: RadioWave? = null
     private var alarmHour: Int = 0
     private var alarmMinute: Int = 0
-    private lateinit var fragment: Fragment
+    private lateinit var fragment: AlarmFragment
+    private lateinit var preferenceAlarmHelper: PreferenceAlarmHelper
+    //private lateinit var alertImageButton : ImageButton
+    private var alarmPendingIntent: PendingIntent? = null
 
     fun setSelectedRadioStation(position: Int) {
         selectedPosition = position
@@ -97,30 +103,39 @@ class RadioStationAdapter(
     override fun onBindViewHolder(holder: WaveViewHolder, position: Int) {
         holder.frequencyTextView?.text = items[position].fmFrequency
         holder.nameTextView?.text = items[position].name
+        preferenceAlarmHelper = PreferenceAlarmHelper(context!!)
 
         checkImageNull(position, holder)
         checkFavItem(position, holder)
         checkCustomItem(position, holder)
+
         holder.menuImageButton?.setOnClickListener {
             menuItemIdListener?.getItemMenu(items[position].id)
         }
 
         // нажатие на радио элемент
         holder.itemView.setOnClickListener {
-            Log.d("MyLog", "нажали на станцию")
+            //alertImageButton = holder.itemView.findViewById(R.id.alertButton)
+
             setSelectedRadioStation(items[position])
             menuItemIdListener?.updateCountOpenItem(items[position].id)
-            //items[position].url?.let { it1 -> setMediaItem(it1) } // Передаем URL станции
             startAlarm(items[position].url) // Передаем имя станции
+            fragment = AlarmFragment()
+            preferenceAlarmHelper.saveBoolean("Alarm",true)
+            val alertTextSet = context!!.getText(R.string.alarm_set)
+            Toast.makeText(context,alertTextSet,Toast.LENGTH_LONG).show()
+            startMainActivity()
 
-            //holder.lottieAnimationView?.visibility = View.VISIBLE
         }
 
         holder.setAlarmImageButton?.setOnClickListener {
             setSelectedRadioStation(items[position])
             menuItemIdListener?.updateCountOpenItem(items[position].id)
-            startAlarm(items[position].url) // Передаем имя станции
-            Log.d("MyLog", "нажали на станцию именно на ++++++++++")
+            startAlarm(items[position].url)
+            preferenceAlarmHelper.saveBoolean("Alarm",true)
+            val alertTextSet = context!!.getText(R.string.alarm_set)
+            Toast.makeText(context,alertTextSet,Toast.LENGTH_LONG).show()
+            startMainActivity()
 
         }
 
@@ -139,10 +154,12 @@ class RadioStationAdapter(
         val alarmIntent = Intent(context, AlarmReceiver::class.java).apply {
             putExtra("radioStation", radioStationUrl)
         }
-        val pendingIntent = PendingIntent.getBroadcast(
-            context, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT
+//        val pendingIntent = PendingIntent.getBroadcast(
+//            context, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT
+//        )
+        alarmPendingIntent = PendingIntent.getBroadcast(
+            context, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
-
         val calendar = Calendar.getInstance()
         val sharedPreferences = context?.getSharedPreferences("AlarmPrefs", Context.MODE_PRIVATE)
         alarmHour = sharedPreferences?.getInt("AlarmHour", -1)!!
@@ -156,8 +173,10 @@ class RadioStationAdapter(
 
         // Установите повторяющийся будильник с заданным временем
         alarmManager.setExactAndAllowWhileIdle(
-            AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent
+            AlarmManager.RTC_WAKEUP, calendar.timeInMillis, alarmPendingIntent
         )
+        alarmIntent.putExtra("isAlarmActive", true)
+
         // Запуск воспроизведения после срабатывания будильника
         //setMediaItem(radioStationUrl ?: "")
     }
@@ -216,5 +235,12 @@ class RadioStationAdapter(
         fun onRadioStationSelected(radioWave: RadioWave)
         fun onRadioStationSelectionCanceled()
     }
+
+    fun startMainActivity() {
+        val intent = Intent(context, MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        context?.startActivity(intent)
+    }
+
 }
 
