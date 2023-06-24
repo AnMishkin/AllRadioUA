@@ -95,5 +95,8 @@
     <string name="alarm_set">Alarm clock set!</string>
     <string name="set_alarm_and_radiostation">Choose a radio station for your alarm!</string>
 
+    <string name="alarm_text_notification">Turn off the alarm!</string>
+    <string name="alarm_show_notification">Alarm</string>
+
 
 </resources>

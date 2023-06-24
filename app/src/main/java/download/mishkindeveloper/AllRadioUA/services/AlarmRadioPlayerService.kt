@@ -9,8 +9,7 @@ import android.os.*
 import androidx.core.app.NotificationCompat
 import download.mishkindeveloper.AllRadioUA.R
 import download.mishkindeveloper.AllRadioUA.alarm.StopAlarmActivity
-import download.mishkindeveloper.AllRadioUA.ui.main.MainActivity
-import java.util.*
+
 
 
 class AlarmRadioPlayerService : Service() {
@@ -93,6 +92,8 @@ class AlarmRadioPlayerService : Service() {
     private fun createNotification(): Notification {
         val channelId = "mishkin"
         val channelName = "Alarm"
+        var alarmTitle = applicationContext.getString(R.string.alarm_show_notification)
+        var alarmText = applicationContext.getString(R.string.alarm_text_notification)
         val notificationIntent = Intent(this, StopAlarmActivity::class.java)
         val pendingIntent = PendingIntent.getActivity(
             this,
@@ -113,8 +114,8 @@ class AlarmRadioPlayerService : Service() {
 
         return NotificationCompat.Builder(this, channelId)
             .setSmallIcon(R.mipmap.ic_launcher)
-            .setContentTitle("Foreground Service")
-            .setContentText("Radio is playing...")
+            .setContentTitle(alarmTitle)
+            .setContentText(alarmText)
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
             .build()

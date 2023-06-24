@@ -71,4 +71,6 @@
     <string name="text_alarm_stop">Вы действительно хотите выключить будильник?</string>
     <string name="alarm_set">Будильник установлен!</string>
     <string name="set_alarm_and_radiostation">Выберите радиостанцию для будильника!</string>
+    <string name="alarm_show_notification">Будильник</string>
+    <string name="alarm_text_notification">Отключите будильник!</string>
 </resources>

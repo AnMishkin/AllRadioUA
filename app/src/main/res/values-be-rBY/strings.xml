@@ -44,4 +44,6 @@
     <string name="del_radio_station_message">Ваша станцыя была выдаленая са спісу радыёстанцый!</string>
     <string name="alarm_set">Будзільнік усталяваны!</string>
     <string name="set_alarm_and_radiostation">Абярыце радыёстанцыю для будзільніка!</string>
+    <string name="alarm_show_notification">Сігналізацыя</string>
+    <string name="alarm_text_notification">Адключыце будзільнік!</string>
 </resources>
