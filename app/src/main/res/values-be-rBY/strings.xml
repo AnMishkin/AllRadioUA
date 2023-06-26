@@ -46,4 +46,5 @@
     <string name="set_alarm_and_radiostation">Абярыце радыёстанцыю для будзільніка!</string>
     <string name="alarm_show_notification">Сігналізацыя</string>
     <string name="alarm_text_notification">Адключыце будзільнік!</string>
+    <string name="time_picker_text">Выберыце час для будзільніка!</string>
 </resources>

@@ -66,11 +66,13 @@
     <string name="text_review">Every review is very important for us! Spend 1 minute of your time - help develop the application! Thanks a lot! Glory to Ukraine!</string>
     <string name="laiter_review">Later</string>
     <string name="ok_review">With pleasure!</string>
+
     <string name="title_alarm_stop">You are sure?</string>
     <string name="text_alarm_stop">Do you really want to turn off the alarm?</string>
     <string name="alarm_set">Alarm clock set!</string>
     <string name="set_alarm_and_radiostation">Choose a radio station for your alarm!</string>
     <string name="alarm_show_notification">Alarm</string>
     <string name="alarm_text_notification">Turn off the alarm!</string>
+    <string name="time_picker_text">Pick a time for the alarm!</string>
 
 </resources>

@@ -63,16 +63,16 @@
 
     <string name="add_radio_station_message">Your station has been added to the list of radio stations!</string>
     <string name="del_radio_station_message">Your station has been removed from the list of radio stations!</string>
-    <string name="error_play_station">В даний момент, дана радіостанція недоступна!</string>
+    <string name="error_play_station">This radio station is currently unavailable!</string>
 
-    <string name="stations">Станції</string>
-    <string name="love_stations">Улюблене</string>
-    <string name="history">Історія</string>
-    <string name="settings">Налаштування</string>
+    <string name="stations">Stations</string>
+    <string name="love_stations">Favorite</string>
+    <string name="history">History</string>
+    <string name="settings">Settings</string>
 
-    <string name="permosion_messege_top">Потрібна згода!</string>
-    <string name="permosion_messege_test">Згода на запис аудио потрібна,для візуалізації програвання радіостанції! Программа не робить ніякого запису!</string>
-    <string name="permosion_messege_cancel">Скасувати</string>
+    <string name="permosion_messege_test">Consent to record audio is required for visualization of radio station playback! The program does not record anything!</string>
+    <string name="permosion_messege_top">Consent is required!</string>
+    <string name="permosion_messege_cancel">Cancel</string>
 
     <string name="update_available">Update available</string>
     <string name="update_text">Your app has an update available. Do you want to go to the Google Play page to update?</string>
@@ -83,10 +83,10 @@
     <string name="new_app_is_ready">New update is ready!</string>
     <string name="update_install">Install</string>
 
-    <string name="text_review">Для нас дуже важливий кожен відгук! Витратьте 1 хвилину вашого часу – допоможіть у розвитку програми! Величезне спасибі! Слава Україні!</string>
-    <string name="laiter_review">Пізніше</string>
-    <string name="leave_review">Залишіть будь ласка відгук!</string>
-    <string name="ok_review">Із задоволенням!</string>
+    <string name="leave_review">Please leave a review</string>
+    <string name="text_review">Every review is very important for us! Spend 1 minute of your time - help develop the application! Thanks a lot! Glory to Ukraine!</string>
+    <string name="laiter_review">Later</string>
+    <string name="ok_review">With pleasure!</string>
 
 
     <string name="title_alarm_stop">You are sure?</string>
