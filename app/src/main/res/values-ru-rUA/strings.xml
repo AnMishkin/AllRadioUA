@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Все Радіо України</string>
+    <string name="app_name">All Radio UA - Все Радіо України</string>
     <string name="error_network">Нет доступа к интернету</string>
     <string name="dev_name">Developed by Mishkin</string>
     <string name="name_station">Название станции</string>

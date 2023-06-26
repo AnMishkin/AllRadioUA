@@ -163,8 +163,21 @@ class MainActivity : AppCompatActivity() {
     private lateinit var laiterReview : String
     private lateinit var leaveReview : String
     private lateinit var okReview : String
+    private var alarmRadioPlayerService: AlarmRadioPlayerService? = null
 
-    private val radioWaveBroadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+    private val serviceConnection = object : ServiceConnection {
+        override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
+            val binder = service as AlarmRadioPlayerService.PlayerBinder
+            alarmRadioPlayerService = binder.getService()
+        }
+
+        override fun onServiceDisconnected(name: ComponentName?) {
+            alarmRadioPlayerService = null
+        }
+    }
+
+
+        private val radioWaveBroadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent) {
             val radioWave: RadioWave =
                 intent.getSerializableExtra(getString(R.string.serializable_extra)) as RadioWave
@@ -446,19 +459,18 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun createAlarmDialog() {
+        var timePickerTitle = getString(R.string.time_picker_text)
         timePicker = MaterialTimePicker.Builder()
             .setTimeFormat(TimeFormat.CLOCK_24H)
             .setHour(12)
             .setMinute(0)
             .setInputMode(MaterialTimePicker.INPUT_MODE_CLOCK)
-            .setTitleText("Выберите время для будильника")
+            .setTitleText(timePickerTitle)
             .build()
 
         timePicker.addOnPositiveButtonClickListener {
             val selectedHour = timePicker.hour
             val selectedMinute = timePicker.minute
-
-
             val sharedPreferences = getSharedPreferences("AlarmPrefs", Context.MODE_PRIVATE)
             val editor = sharedPreferences.edit()
             editor.putInt("AlarmHour", selectedHour)
@@ -748,6 +760,9 @@ initAds()
         leaveReview = getString(R.string.leave_review)
         okReview = getString(R.string.ok_review)
         preferenceAlarmHelper = PreferenceAlarmHelper(this)
+
+        val serviceIntent = Intent(this, AlarmRadioPlayerService::class.java)
+        bindService(serviceIntent, serviceConnection, Context.BIND_AUTO_CREATE)
     }
 
     private fun initPermission() {
@@ -1383,6 +1398,10 @@ fun chekInternet(){
         builder.setPositiveButton("$yes"){ _, _ ->
             //stopRadioPlayback()
 cancelAlarm()
+           // stopAlarmService()
+            alarmRadioPlayerService?.stopRadioStation()
+            alarmRadioPlayerService?.stopVibration()
+            alarmRadioPlayerService?.stopForegroundNotification()
 //            val stopAlarmIntent = Intent(this, StopAlarmActivity::class.java)
 //            startActivity(stopAlarmIntent)
 
@@ -1406,56 +1425,7 @@ cancelAlarm()
         builder.create().show()
     }
 
-//    private fun stopRadioStation() {
-//        val serviceRunning = isServiceRunning(this, AlarmRadioPlayerService::class.java)
-//
-//        if (serviceRunning) {
-//            // Сервис запущен, выполните необходимые действия
-//            // Например, остановите его
-//            stopService(Intent(this, AlarmRadioPlayerService::class.java))
-//        } else {
-//            // Сервис не запущен, выполните необходимые действия
-//        }
-//    }
-//
-//
-//    fun isServiceRunning(context: Context, serviceClass: Class<*>): Boolean {
-//        val activityManager = context.getSystemService(Context.ACTIVITY_SERVICE) as? ActivityManager
-//        val runningServices = activityManager?.getRunningServices(Int.MAX_VALUE)
-//
-//        if (runningServices != null) {
-//            for (serviceInfo in runningServices) {
-//                if (serviceClass.name == serviceInfo.service.className) {
-//                    return true
-//                }
-//            }
-//        }
-//
-//        return false
-//    }
 
-//    private val serviceAlertConnection = object : ServiceConnection {
-//        override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
-//            val binder = service as? AlarmRadioPlayerService.PlayerBinder
-//            alarmPlayerService = binder?.getService()
-//            isServiceBound = true
-//        }
-//
-//        override fun onServiceDisconnected(name: ComponentName?) {
-//            alarmPlayerService = null
-//            isServiceBound = false
-//        }
-//    }
-//
-//    override fun onStart() {
-//        super.onStart()
-//        val serviceIntent = Intent(this, AlarmRadioPlayerService::class.java)
-//        bindService(serviceIntent, serviceAlertConnection, Context.BIND_AUTO_CREATE)
-//    }
-//
-//    private fun stopRadioStation() {
-//        alarmPlayerService?.stopRadioStation()
-//    }
 private fun cancelAlarm() {
     val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
     val alarmIntent = Intent(this, AlarmReceiver::class.java)
@@ -1471,7 +1441,10 @@ private fun cancelAlarm() {
     }
 }
 
-
+    private fun stopAlarmService() {
+        val stopIntent = Intent(this, AlarmRadioPlayerService::class.java)
+        stopService(stopIntent)
+    }
 
 
 

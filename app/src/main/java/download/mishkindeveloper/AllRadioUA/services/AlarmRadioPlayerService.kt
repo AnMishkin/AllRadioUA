@@ -5,18 +5,21 @@ import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.media.MediaPlayer
-import android.os.*
+import android.os.Binder
+import android.os.Build
+import android.os.IBinder
+import android.os.Vibrator
 import androidx.core.app.NotificationCompat
 import download.mishkindeveloper.AllRadioUA.R
 import download.mishkindeveloper.AllRadioUA.alarm.StopAlarmActivity
-
+import download.mishkindeveloper.AllRadioUA.ui.main.MainActivity
+import java.util.*
 
 
 class AlarmRadioPlayerService : Service() {
     private var mediaPlayer: MediaPlayer? = null
     private var isStationPlaying = false
-    private lateinit var vibrator: Vibrator
-
+    private var volume = 0.0f
     inner class PlayerBinder : Binder() {
         fun getService(): AlarmRadioPlayerService = this@AlarmRadioPlayerService
     }
@@ -29,8 +32,7 @@ class AlarmRadioPlayerService : Service() {
     override fun onCreate() {
         super.onCreate()
         mediaPlayer = MediaPlayer()
-        vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-        vibrate()
+
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -63,10 +65,12 @@ class AlarmRadioPlayerService : Service() {
 
         mediaPlayer?.setOnPreparedListener { mp ->
             mp.start()
-            fadeVolumeIn(mediaPlayer!!)
             isStationPlaying = true // Установка флага, что станция начала воспроизводиться
+
+            fadeVolumeIn(mediaPlayer!!)
         }
     }
+
 
      fun stopRadioStation() {
          if (isStationPlaying && mediaPlayer?.isPlaying == true) {
@@ -84,11 +88,21 @@ class AlarmRadioPlayerService : Service() {
         val valueAnimator = ValueAnimator.ofFloat(startVolume, maxVolume)
         valueAnimator.duration = duration.toLong()
         valueAnimator.addUpdateListener { animator ->
-            val volume = animator.animatedValue as Float
+            volume = animator.animatedValue as Float
+
+            // Проверка диапазона громкости
+            if (volume < 0.0f) {
+                volume = 0.0f
+            } else if (volume > 1.0f) {
+                volume = 1.0f
+            }
+
             mediaPlayer.setVolume(volume, volume)
         }
         valueAnimator.start()
     }
+
+
     private fun createNotification(): Notification {
         val channelId = "mishkin"
         val channelName = "Alarm"
@@ -126,21 +140,11 @@ class AlarmRadioPlayerService : Service() {
 
         // stopSelf()
     }
-    private fun vibrate() {
-        val vibrationPattern = longArrayOf(0, 1000, 1000)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            vibrator.vibrate(
-                VibrationEffect.createWaveform(
-                    vibrationPattern,
-                    0
-                )
-            )
-        } else {
-            vibrator.vibrate(vibrationPattern, 0)
-        }
-    }
 
     fun stopVibration() {
+        val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         vibrator.cancel()
     }
+
+
 }

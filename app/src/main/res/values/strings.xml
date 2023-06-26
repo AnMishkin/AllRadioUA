@@ -98,5 +98,7 @@
     <string name="alarm_text_notification">Turn off the alarm!</string>
     <string name="alarm_show_notification">Alarm</string>
 
+    <string name="time_picker_text">Pick a time for the alarm!</string>
+
 
 </resources>
