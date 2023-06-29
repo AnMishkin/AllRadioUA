@@ -4,12 +4,11 @@ package download.mishkindeveloper.AllRadioUA.ui.main
 import android.Manifest
 import android.animation.Animator
 import android.annotation.SuppressLint
-import android.app.ActivityManager
-import android.app.AlarmManager
-import android.app.PendingIntent
+import android.app.*
 import android.content.*
 import android.content.IntentSender.SendIntentException
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.IBinder
@@ -25,6 +24,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
@@ -79,7 +79,12 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
-import android.content.pm.ServiceInfo
+import android.content.Context
+import android.content.Intent
+import android.provider.Settings
+import androidx.core.app.NotificationCompat
+
+
 
 class MainActivity : AppCompatActivity() {
     private val RECORD_PERMISSION_CODE = 1
@@ -164,6 +169,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var leaveReview : String
     private lateinit var okReview : String
     private var alarmRadioPlayerService: AlarmRadioPlayerService? = null
+    private lateinit var reviewManager: ReviewManager
 
     private val serviceConnection = object : ServiceConnection {
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
@@ -233,6 +239,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         init()
         checkAlarm()
+        ReviewManager(this).checkAndPromptForReview(textReview, laiterReview, leaveReview,okReview)
+
+//        runOnUiThread {
+//            checkReview()
+//        }
         initPermission()
         checkFirstStartStatus()
         initBroadcastManager()
@@ -242,7 +253,7 @@ class MainActivity : AppCompatActivity() {
         performSearch()
         initAds()
 
-        ReviewManager(this).checkAndPromptForReview(textReview, laiterReview, leaveReview,okReview)
+
 
         mAppUpdateManager = AppUpdateManagerFactory.create(this)
         mAppUpdateManager.registerListener(installStateUpdatedListener)
@@ -274,6 +285,25 @@ class MainActivity : AppCompatActivity() {
         //checkDate()
         //titleToolTextView?.text = items.size.toString()+"-"+getString(R.string.list_menu_item)
     }
+
+//    private fun checkReview() {
+//        val activity = this as? Activity
+//        if (activity != null && !activity.isFinishing) {
+//            val sharedPreferences = getSharedPreferences("ReviewPrefs", Context.MODE_PRIVATE)
+//            val reviewLeft = sharedPreferences.getBoolean("reviewLeft", false)
+//
+//            if (!reviewLeft) {
+//                reviewManager = ReviewManagerSingleton.ReviewManagerSingleton.getInstance(activity)
+//
+//                reviewManager.checkAndPromptForReview(
+//                    textReview,
+//                    laiterReview,
+//                    leaveReview,
+//                    okReview
+//                )
+//            }
+//        }
+//    }
 
     private fun checkAlarm() {
         var check = preferenceAlarmHelper.getBoolean("Alarm",false)
@@ -440,8 +470,9 @@ class MainActivity : AppCompatActivity() {
 
                 stopAlarmDialogInMain()
             } else {
-                alertImageButton?.setImageResource(R.drawable.baseline_set_alert_24)
-                createAlarmDialog()
+
+                showNotificationWithPermissionCheck(this)
+
 
             }
         }
@@ -760,7 +791,7 @@ initAds()
         leaveReview = getString(R.string.leave_review)
         okReview = getString(R.string.ok_review)
         preferenceAlarmHelper = PreferenceAlarmHelper(this)
-
+        //reviewManager = ReviewManager(this)
         val serviceIntent = Intent(this, AlarmRadioPlayerService::class.java)
         bindService(serviceIntent, serviceConnection, Context.BIND_AUTO_CREATE)
     }
@@ -1446,8 +1477,52 @@ private fun cancelAlarm() {
         stopService(stopIntent)
     }
 
+    // Проверка разрешений на показ уведомлений
+    fun areNotificationsEnabled(context: Context): Boolean {
+        val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
+        // Для Android версии Oreo и выше используется новый метод
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            return notificationManager.areNotificationsEnabled()
+        }
 
+        // Для Android версии ниже Oreo используется метод из NotificationManagerCompat
+        return NotificationManagerCompat.from(context).areNotificationsEnabled()
+    }
+
+    // Отображение диалогового окна с запросом разрешений
+    fun showNotificationPermissionDialog(context: Context) {
+        AlertDialog.Builder(context)
+            .setTitle(R.string.title_notification_permission)
+            .setMessage(R.string.text_notification_permission)
+            .setPositiveButton(R.string.settings_notification_permission) { _, _ ->
+                // Открываем настройки приложения для разрешений
+                openNotificationSettings(context)
+            }
+            .setNegativeButton(R.string.cancel_notification_permission) { dialog, _ ->
+                // Закрываем диалоговое окно
+                dialog.dismiss()
+            }
+            .show()
+    }
+
+    // Открытие настроек приложения для разрешений
+    fun openNotificationSettings(context: Context) {
+        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+        intent.data = Uri.fromParts("package", context.packageName, null)
+        context.startActivity(intent)
+    }
+
+    // Метод для отображения уведомления с проверкой разрешений
+    fun showNotificationWithPermissionCheck(context: Context) {
+        if (areNotificationsEnabled(context)) {
+            // Уведомления разрешены, отображаем уведомление
+            createAlarmDialog()
+        } else {
+            // Уведомления не разрешены, показываем диалоговое окно для запроса разрешений
+            showNotificationPermissionDialog(context)
+        }
+    }
 
 
 

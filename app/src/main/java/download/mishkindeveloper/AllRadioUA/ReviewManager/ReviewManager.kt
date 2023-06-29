@@ -1,5 +1,6 @@
 package download.mishkindeveloper.AllRadioUA.ReviewManager
 
+import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
@@ -23,7 +24,9 @@ class ReviewManager(private val context: Context) {
         val appLaunchCount = sharedPreferences.getInt("appLaunchCount", 0)
         if (appLaunchCount >= 2) {
             val reviewLeft = sharedPreferences.getBoolean("reviewLeft", false)
-            if (!reviewLeft) {
+            val remindTime = sharedPreferences.getLong("remindTime", 0)
+            val currentTime = Calendar.getInstance().timeInMillis
+            if (!reviewLeft && currentTime >= remindTime) {
                 showReviewPromptDialog(textReview,laiterReview,leaveReview,okReview)
             }
         }
@@ -57,7 +60,7 @@ class ReviewManager(private val context: Context) {
         alertDialogBuilder.setNegativeButton(laiterReview) { _, _ ->
             // Обработка нажатия кнопки "Позже"
             val calendar = Calendar.getInstance()
-            calendar.add(Calendar.DAY_OF_MONTH, 3) // Добавляем 2 дня
+            calendar.add(Calendar.DAY_OF_MONTH, 3) // Добавляем 3 дня
             val remindTime = calendar.timeInMillis
             sharedPreferences.edit().putLong("remindTime", remindTime).apply()
         }

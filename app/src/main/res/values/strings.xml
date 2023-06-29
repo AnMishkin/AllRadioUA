@@ -100,5 +100,8 @@
 
     <string name="time_picker_text">Pick a time for the alarm!</string>
 
-
+    <string name="title_notification_permission">Please give permission!</string>
+    <string name="text_notification_permission">This permission is necessary for the correct operation of the alarm clock, namely the display of a notification during its operation!</string>
+    <string name="cancel_notification_permission">Cancel</string>
+    <string name="settings_notification_permission">Go to settings</string>
 </resources>

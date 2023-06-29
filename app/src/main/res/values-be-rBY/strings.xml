@@ -47,4 +47,8 @@
     <string name="alarm_show_notification">Сігналізацыя</string>
     <string name="alarm_text_notification">Адключыце будзільнік!</string>
     <string name="time_picker_text">Выберыце час для будзільніка!</string>
+    <string name="title_notification_permission">Дайце калі ласка дазвол!</string>
+    <string name="text_notification_permission">Дадзенае дазвол трэба для карэктнай працы будзільніка, а менавіта паказ апавяшчэння падчас яго спрацоўвання!</string>
+    <string name="settings_notification_permission">Перайсці да налад</string>
+    <string name="cancel_notification_permission">Адмяніць</string>
 </resources>

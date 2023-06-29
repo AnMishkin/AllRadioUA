@@ -51,7 +51,7 @@ class RadioStationAdapter(
     private lateinit var preferenceAlarmHelper: PreferenceAlarmHelper
     //private lateinit var alertImageButton : ImageButton
     private var alarmPendingIntent: PendingIntent? = null
-
+    private var alertImageButton: ImageButton? = null
     fun setSelectedRadioStation(position: Int) {
         selectedPosition = position
     }
@@ -124,6 +124,7 @@ class RadioStationAdapter(
             preferenceAlarmHelper.saveBoolean("Alarm",true)
             val alertTextSet = context!!.getText(R.string.alarm_set)
             Toast.makeText(context,alertTextSet,Toast.LENGTH_LONG).show()
+            alertImageButton?.setImageResource(R.drawable.baseline_set_alert_24)
             startMainActivity()
 
         }
@@ -135,6 +136,7 @@ class RadioStationAdapter(
             preferenceAlarmHelper.saveBoolean("Alarm",true)
             val alertTextSet = context!!.getText(R.string.alarm_set)
             Toast.makeText(context,alertTextSet,Toast.LENGTH_LONG).show()
+            alertImageButton?.setImageResource(R.drawable.baseline_set_alert_24)
             startMainActivity()
 
         }

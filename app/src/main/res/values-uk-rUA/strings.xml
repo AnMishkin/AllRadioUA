@@ -75,4 +75,9 @@
     <string name="alarm_show_notification">Будильник</string>
     <string name="alarm_text_notification">Вимкніть будильник!</string>
     <string name="time_picker_text">Виберіть час для будильника!</string>
+
+    <string name="title_notification_permission">Дайте будь ласка дозвіл!</string>
+    <string name="text_notification_permission">Даний дозвіл потрібен для коректної роботи будильника, а саме показ повідомлення під час його спрацювання!</string>
+    <string name="settings_notification_permission">Перейти до налаштувань</string>
+    <string name="cancel_notification_permission">Відміна</string>
 </resources>

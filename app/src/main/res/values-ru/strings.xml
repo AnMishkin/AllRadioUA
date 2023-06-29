@@ -73,4 +73,9 @@
     <string name="alarm_show_notification">Будильник</string>
     <string name="alarm_text_notification">Отключите будильник!</string>
     <string name="time_picker_text">Выберите время для будильника!</string>
+
+    <string name="title_notification_permission">Дайте пожалуйста разрешение!</string>
+    <string name="text_notification_permission">Данное разрешение нужно для корректной работы будильника,а именно показ уведомления во время его срабатывания!</string>
+    <string name="settings_notification_permission">Перейти к настройкам</string>
+    <string name="cancel_notification_permission">Отмена</string>
 </resources>

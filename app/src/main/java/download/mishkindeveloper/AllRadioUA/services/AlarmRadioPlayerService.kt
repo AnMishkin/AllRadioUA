@@ -48,7 +48,7 @@ class AlarmRadioPlayerService : Service() {
             vibrator.vibrate(pattern, 0) // Запуск вибрации с заданным паттерном
 
         }
-        return START_STICKY
+        return START_STICKY_COMPATIBILITY
     }
 
     override fun onDestroy() {
@@ -82,8 +82,8 @@ class AlarmRadioPlayerService : Service() {
 
     private fun fadeVolumeIn(mediaPlayer: MediaPlayer) {
         val maxVolume = 1.0f
-        val duration = 195000
-        val startVolume = 0.02f
+        val duration = 190000
+        val startVolume = 0.01f
 
         val valueAnimator = ValueAnimator.ofFloat(startVolume, maxVolume)
         valueAnimator.duration = duration.toLong()

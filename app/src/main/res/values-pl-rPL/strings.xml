@@ -45,8 +45,14 @@
     <string name="add_radio_station_message">Twoja stacja została dodana do listy stacji radiowych!</string>
     <string name="del_radio_station_message">Twoja stacja została usunięta z listy stacji radiowych!</string>
     <string name="alarm_set">Zestaw budzik!</string>
+    <string name="permosion_messege_cancel">Anulować</string>
     <string name="set_alarm_and_radiostation">Wybierz stację radiową dla swojego alarmu!</string>
     <string name="alarm_show_notification">Alarm</string>
     <string name="alarm_text_notification">Wyłącz alarm!</string>
     <string name="time_picker_text">Wybierz godzinę alarmu!</string>
+
+    <string name="title_notification_permission">Proszę o pozwolenie!</string>
+    <string name="text_notification_permission">Uprawnienie to jest niezbędne do prawidłowego działania budzika, a mianowicie wyświetlania powiadomienia podczas jego działania!</string>
+    <string name="settings_notification_permission">Przejdź do ustawień</string>
+    <string name="cancel_notification_permission">Anulować</string>
 </resources>
