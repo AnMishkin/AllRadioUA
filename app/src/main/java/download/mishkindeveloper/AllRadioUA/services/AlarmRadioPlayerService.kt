@@ -32,7 +32,6 @@ class AlarmRadioPlayerService : Service() {
     override fun onCreate() {
         super.onCreate()
         mediaPlayer = MediaPlayer()
-
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -59,7 +58,7 @@ class AlarmRadioPlayerService : Service() {
     }
 
     private fun startRadioStation(url: String) {
-        mediaPlayer = MediaPlayer()
+        //mediaPlayer = MediaPlayer()
         mediaPlayer?.setDataSource(url)
         mediaPlayer?.prepareAsync()
 
@@ -70,9 +69,7 @@ class AlarmRadioPlayerService : Service() {
             fadeVolumeIn(mediaPlayer!!)
         }
     }
-
-
-     fun stopRadioStation() {
+    fun stopRadioStation() {
          if (isStationPlaying && mediaPlayer?.isPlaying == true) {
              mediaPlayer?.stop()
          }

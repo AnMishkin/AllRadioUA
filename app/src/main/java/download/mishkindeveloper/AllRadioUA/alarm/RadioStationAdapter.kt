@@ -117,9 +117,9 @@ class RadioStationAdapter(
         holder.itemView.setOnClickListener {
             //alertImageButton = holder.itemView.findViewById(R.id.alertButton)
 
-            setSelectedRadioStation(items[position])
+            //setSelectedRadioStation(items[position])
             menuItemIdListener?.updateCountOpenItem(items[position].id)
-            startAlarm(items[position].url) // Передаем имя станции
+            startAlarm(items[position].url) // Передаем адрес станции
             fragment = AlarmFragment()
             preferenceAlarmHelper.saveBoolean("Alarm",true)
             val alertTextSet = context!!.getText(R.string.alarm_set)
@@ -130,7 +130,7 @@ class RadioStationAdapter(
         }
 
         holder.setAlarmImageButton?.setOnClickListener {
-            setSelectedRadioStation(items[position])
+            //setSelectedRadioStation(items[position])
             menuItemIdListener?.updateCountOpenItem(items[position].id)
             startAlarm(items[position].url)
             preferenceAlarmHelper.saveBoolean("Alarm",true)
@@ -156,9 +156,7 @@ class RadioStationAdapter(
         val alarmIntent = Intent(context, AlarmReceiver::class.java).apply {
             putExtra("radioStation", radioStationUrl)
         }
-//        val pendingIntent = PendingIntent.getBroadcast(
-//            context, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT
-//        )
+
         alarmPendingIntent = PendingIntent.getBroadcast(
             context, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
@@ -179,8 +177,7 @@ class RadioStationAdapter(
         )
         alarmIntent.putExtra("isAlarmActive", true)
 
-        // Запуск воспроизведения после срабатывания будильника
-        //setMediaItem(radioStationUrl ?: "")
+
     }
 
 

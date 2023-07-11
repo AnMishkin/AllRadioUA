@@ -12,7 +12,7 @@ android {
         applicationId "download.mishkindeveloper.AllRadioUA"
         minSdk 24
         targetSdk 33
-        versionCode 34
+        versionCode 36
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
