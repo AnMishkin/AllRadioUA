@@ -132,7 +132,7 @@ class RadioStationAdapter(
         holder.setAlarmImageButton?.setOnClickListener {
             //setSelectedRadioStation(items[position])
             menuItemIdListener?.updateCountOpenItem(items[position].id)
-            startAlarm(items[position].url)
+            //startAlarm(items[position].url)
             preferenceAlarmHelper.saveBoolean("Alarm",true)
             val alertTextSet = context!!.getText(R.string.alarm_set)
             Toast.makeText(context,alertTextSet,Toast.LENGTH_LONG).show()
@@ -164,19 +164,28 @@ class RadioStationAdapter(
         val sharedPreferences = context?.getSharedPreferences("AlarmPrefs", Context.MODE_PRIVATE)
         alarmHour = sharedPreferences?.getInt("AlarmHour", -1)!!
         alarmMinute = sharedPreferences?.getInt("AlarmMinute", -1)!!
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+        calendar.set(Calendar.YEAR, year)
+        calendar.set(Calendar.MONTH, month)
+        calendar.set(Calendar.DAY_OF_MONTH, day)
         calendar.set(Calendar.HOUR_OF_DAY, alarmHour)
         calendar.set(Calendar.MINUTE, alarmMinute)
         calendar.set(Calendar.SECOND, 0)
+
 
         // Получите AlarmManager
         val alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
         // Установите повторяющийся будильник с заданным временем
-        alarmManager.setExactAndAllowWhileIdle(
+        alarmManager.setExact(
             AlarmManager.RTC_WAKEUP, calendar.timeInMillis, alarmPendingIntent
         )
         alarmIntent.putExtra("isAlarmActive", true)
-
+Log.d("MyLog","alarmintent - $alarmIntent")
+Log.d("MyLog","alarmhour - $alarmHour")
+Log.d("MyLog","alarmminute - $alarmMinute")
 
     }
 

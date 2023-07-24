@@ -35,6 +35,7 @@
             android:screenOrientation="portrait"
             android:showOnLockScreen="true"
             android:turnScreenOn="true"
+            android:label="Stop Alarm Activity"
             android:excludeFromRecents="true"
             android:theme="@style/Theme.RadioUa.AppCompat"
             android:exported="false" />
@@ -52,6 +53,7 @@
         </receiver>
         <receiver
             android:name=".alarm.AlarmReceiver"
+            android:enabled="true"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.ALARM_ALERT" />
