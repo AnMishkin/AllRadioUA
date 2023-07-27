@@ -73,7 +73,7 @@
     <string name="alarm_set">Будильник встановлений!</string>
     <string name="set_alarm_and_radiostation">Оберіть  радіостанцію для будильнику!</string>
     <string name="alarm_show_notification">Будильник</string>
-    <string name="alarm_text_notification">Вимкніть будильник!</string>
+    <string name="alarm_text_notification">Натисніть сюди для відключення будильнику!</string>
     <string name="time_picker_text">Виберіть час для будильника!</string>
 
     <string name="title_notification_permission">Дайте будь ласка дозвіл!</string>

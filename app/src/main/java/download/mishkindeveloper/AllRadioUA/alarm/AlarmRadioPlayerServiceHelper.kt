@@ -1,34 +1,22 @@
 package download.mishkindeveloper.AllRadioUA.alarm
 
 import android.content.Context
-import android.content.Intent
 import android.os.Build
-import androidx.core.content.ContextCompat
-import download.mishkindeveloper.AllRadioUA.services.AlarmRadioPlayerService
+import android.os.VibrationEffect
+import android.os.Vibrator
 
-object AlarmRadioPlayerServiceHelper {
-    private var alarmRadioPlayerService: AlarmRadioPlayerService? = null
+class AlarmRadioPlayerServiceHelper(private val context: Context) {
+    private val vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
 
-    fun startRadioStation(context: Context, url: String) {
-        // Здесь запускаем радиостанцию, как вы делали ранее, и сохраняем ссылку на экземпляр службы
-        alarmRadioPlayerService = AlarmRadioPlayerService()
-        val serviceIntent = Intent(context, AlarmRadioPlayerService::class.java).apply {
-            putExtra("radioStationUrl", url)
-        }
+    fun startVibration() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            ContextCompat.startForegroundService(context, serviceIntent)
+            vibrator.vibrate(VibrationEffect.createWaveform(longArrayOf(1000, 1000), 0))
         } else {
-            context.startService(serviceIntent)
+            vibrator.vibrate(longArrayOf(1000, 1000), 0)
         }
     }
 
-    fun stopRadioStation(context: Context) {
-        // Здесь останавливаем радиостанцию и убиваем службу
-        alarmRadioPlayerService?.let {
-            it.stopRadioStation()
-            it.stopForegroundNotification()
-            it.stopVibration()
-        }
-        alarmRadioPlayerService = null
+    fun stopVibration() {
+        vibrator.cancel()
     }
 }

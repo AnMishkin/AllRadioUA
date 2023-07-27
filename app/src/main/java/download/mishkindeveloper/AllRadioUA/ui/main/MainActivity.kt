@@ -1434,7 +1434,7 @@ cancelAlarm()
            // stopAlarmService()
             alarmRadioPlayerService?.stopRadioStation()
             alarmRadioPlayerService?.stopVibration()
-            alarmRadioPlayerService?.stopForegroundNotification()
+            alarmRadioPlayerService?.stopForeground(Service.STOP_FOREGROUND_REMOVE)
 //            val stopAlarmIntent = Intent(this, StopAlarmActivity::class.java)
 //            startActivity(stopAlarmIntent)
 

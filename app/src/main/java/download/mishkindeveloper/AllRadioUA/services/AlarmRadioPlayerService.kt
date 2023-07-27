@@ -1,187 +1,174 @@
 package download.mishkindeveloper.AllRadioUA.services
 
 import android.animation.ValueAnimator
-import android.app.*
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.app.Service
 import android.content.Context
 import android.content.Intent
+import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.*
-import android.os.PowerManager.WakeLock
-import android.os.Vibrator
-import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import download.mishkindeveloper.AllRadioUA.R
 import download.mishkindeveloper.AllRadioUA.alarm.StopAlarmActivity
 
 class AlarmRadioPlayerService : Service() {
-    private var valueAnimator: ValueAnimator? = null
+    private val binder = PlayerBinder()
     private var mediaPlayer: MediaPlayer? = null
-    private var isStationPlaying = false
-    private var volume = 0.0f
-    private var wakeLock: WakeLock? = null
-    private var isServiceDestroyed = false
+    private lateinit var vibrator: Vibrator
+    private var volumeHandler: Handler? = null
+    private val maxVolume = 1.0f
+    private val volumeIncrement = 0.1f
+    private var targetVolume = 0.0f
+    private lateinit var audioManager: AudioManager
 
-    inner class PlayerBinder : Binder() {
-        fun getService(): AlarmRadioPlayerService = this@AlarmRadioPlayerService
+    override fun onCreate() {
+        super.onCreate()
+        vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
     }
 
-    private val playerBinder = PlayerBinder()
+    override fun onBind(intent: Intent): IBinder? {
+        return binder
+    }
 
-    override fun onBind(intent: Intent?): IBinder? {
-        return playerBinder
+    inner class PlayerBinder : Binder() {
+        fun getService(): AlarmRadioPlayerService {
+            return this@AlarmRadioPlayerService
+        }
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        if (intent?.hasExtra("radioStationUrl") == true) {
-            val radioStationUrl = intent.getStringExtra("radioStationUrl")
-            radioStationUrl?.let { startRadioStationAndNotification(this, it) }
+        val radioStationUrl = intent?.getStringExtra("radioStation")
+        if (radioStationUrl != null) {
+            startRadioStation(radioStationUrl)
+            startVibration()
         }
-
-        // Создаем канал уведомлений для службы в фоновом режиме (для Android Oreo и выше)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            createNotificationChannel()
-        }
-
-        // Возвращаем START_STICKY, чтобы служба продолжала работу в случае, если ее остановят
+        startForeground(NOTIFICATION_ID, createNotification())
         return START_STICKY
     }
 
-    private fun startRadioStation(url: String) {
-        // При запуске радиостанции активируем WakeLock
-        val powerManager = getSystemService(Context.POWER_SERVICE) as PowerManager
-        wakeLock = powerManager.newWakeLock(
-            PowerManager.PARTIAL_WAKE_LOCK,
-            "AllRadioUA::AlarmWakeLock"
-        )
-        wakeLock?.acquire(24 * 60 * 60 * 1000L /* 24 часа */)
-
-        mediaPlayer = MediaPlayer()
-        mediaPlayer?.setDataSource(url)
-        mediaPlayer?.prepareAsync()
-
-        mediaPlayer?.setOnPreparedListener { mp ->
-            if (!isServiceDestroyed) {
-                mp.start()
-                isStationPlaying = true // Устанавливаем флаг, что радиостанция начала воспроизведение
-
-                fadeVolumeIn(mediaPlayer!!)
-            } else {
-                mp.release()
-                mediaPlayer = null
+    fun startRadioStation(radioStationUrl: String) {
+        mediaPlayer = MediaPlayer().apply {
+            setDataSource(radioStationUrl)
+            prepareAsync()
+            setOnPreparedListener {
+                // Start playing the sound with gradually increasing volume
+                it.start()
+                startVolumeIncrease()
             }
         }
     }
 
     fun stopRadioStation() {
-        if (isStationPlaying && mediaPlayer?.isPlaying == true) {
-            mediaPlayer?.stop()
+        mediaPlayer?.apply {
+            stop()
+            reset()
+            release()
         }
-        mediaPlayer?.reset()
-        isStationPlaying = false
+        mediaPlayer = null
     }
 
-    private fun fadeVolumeIn(mediaPlayer: MediaPlayer) {
-        val maxVolume = 1.0f
-        val duration = 190000
-        val startVolume = 0.01f
-
-        valueAnimator = ValueAnimator.ofFloat(startVolume, maxVolume)
-        valueAnimator?.duration = duration.toLong()
-        valueAnimator?.addUpdateListener { animator ->
-            if (isServiceDestroyed) {
-                stopFadeVolumeAnimation()
-                return@addUpdateListener
-            }
-
-            volume = animator.animatedValue as Float
-
-            // Проверяем диапазон громкости
-            if (volume < 0.0f) {
-                volume = 0.0f
-            } else if (volume > 1.0f) {
-                volume = 1.0f
-            }
-
-            // Проверяем, что mediaPlayer не равен null перед вызовом setVolume
-            mediaPlayer.setVolume(volume, volume)
+    fun startVibration() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            vibrator.vibrate(VibrationEffect.createWaveform(longArrayOf(1000, 1000), 0))
+        } else {
+            vibrator.vibrate(longArrayOf(1000, 1000), 0)
         }
-        valueAnimator?.start()
-    }
-
-    private fun stopFadeVolumeAnimation() {
-        valueAnimator?.cancel()
-        valueAnimator = null
-    }
-
-    fun stopForegroundNotification() {
-        stopForeground(true)
     }
 
     fun stopVibration() {
-        val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         vibrator.cancel()
     }
 
-    private fun startRadioStationAndNotification(context: Context, url: String) {
-        startRadioStation(url)
-
-        // Создаем PendingIntent для запуска StopAlarmActivity
-        val stopAlarmIntent = Intent(context, StopAlarmActivity::class.java)
-        stopAlarmIntent.putExtra("radioStation", url) // Передаем URL радиостанции в StopAlarmActivity
-        stopAlarmIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        val pendingIntent = PendingIntent.getActivity(
-            context,
-            0,
-            stopAlarmIntent,
-            PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE
-        )
-
-        // Получаем сервис уведомлений
+    private fun createNotification(): Notification {
+        val alarmTitle = applicationContext.getString(R.string.alarm_show_notification)
+        val alarmText = applicationContext.getString(R.string.alarm_text_notification)
+        val channelId = "alarm_channel"
         val notificationManager =
-            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        // Проверяем версию Android для создания канала уведомлений
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            createNotificationChannel()
+            val channel =
+                NotificationChannel(channelId, "Alarm Channel", NotificationManager.IMPORTANCE_DEFAULT)
+            notificationManager.createNotificationChannel(channel)
         }
 
-        // Создаем уведомление (для всех версий Android)
-        val notification = NotificationCompat.Builder(context, "alarm_service_channel")
-            .setContentTitle("Плеер радио будильника")
-            .setContentText("Воспроизведение радиостанции...")
+        val notificationIntent = Intent(this, StopAlarmActivity::class.java)
+        val contentIntent = PendingIntent.getActivity(
+            this,
+            0,
+            notificationIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE // Add FLAG_IMMUTABLE here
+        )
+
+        return NotificationCompat.Builder(this, channelId)
+            .setContentTitle(alarmTitle)
+            .setContentText(alarmText)
             .setSmallIcon(R.mipmap.ic_launcher)
+            .setContentIntent(contentIntent)
             .setAutoCancel(true)
-            .setDefaults(NotificationCompat.DEFAULT_ALL)
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setContentIntent(pendingIntent) // Устанавливаем PendingIntent для запуска StopAlarmActivity
             .build()
-
-        startForeground(123, notification)
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun createNotificationChannel() {
-        val channelId = "alarm_service_channel"
-        val channelName = "Служба будильника"
-        val importance = NotificationManager.IMPORTANCE_HIGH
-        val channel = NotificationChannel(channelId, channelName, importance)
 
-        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        notificationManager.createNotificationChannel(channel)
+    companion object {
+        private const val NOTIFICATION_ID = 1
+
+        fun stopVibration(context: Context) {
+            val vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+            vibrator.cancel()
+        }
     }
 
-    override fun onDestroy() {
-        mediaPlayer?.stop()
-        mediaPlayer?.release()
-        mediaPlayer = null
 
-        // Освобождаем WakeLock перед уничтожением службы
-        wakeLock?.release()
-        wakeLock = null
+    private fun startVolumeIncrease() {
+        val targetVolume = maxVolume // Устанавливаем максимальную громкость как целевую
+        mediaPlayer?.let { player ->
+            player.setVolume(0f, 0f) // Начинаем с громкости 0
+            player.start() // Запускаем MediaPlayer
 
-        isServiceDestroyed = true // Устанавливаем флаг, что служба будет уничтожена
-        stopFadeVolumeAnimation() // Остановка анимации громкости
+            val volumeSteps = 5000 // Количество шагов до достижения целевой громкости
+            val step = targetVolume / volumeSteps
 
-        super.onDestroy()
+            volumeHandler = Handler(Looper.getMainLooper())
+            var currentStep = 1
+
+            volumeHandler?.postDelayed(object : Runnable {
+                override fun run() {
+                    if (currentStep <= volumeSteps) {
+                        val newVolume = step * currentStep
+                        player.setVolume(newVolume, newVolume)
+                        currentStep++
+                        volumeHandler?.postDelayed(this, 100) // Задержка между шагами, можете изменить по своему усмотрению
+                    } else {
+                        // Достигнута целевая громкость, останавливаем увеличение
+                        player.setVolume(targetVolume, targetVolume)
+                    }
+                }
+            }, 1000) // Задержка перед первым увеличением громкости, можете изменить по своему усмотрению
+        }
     }
+
+     fun stopVolumeIncrease() {
+        volumeHandler?.removeCallbacksAndMessages(null)
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
