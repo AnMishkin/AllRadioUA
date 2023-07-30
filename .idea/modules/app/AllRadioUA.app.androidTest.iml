@@ -25,6 +25,7 @@
                 <arg>$MODULE_DIR$/../../../.gradle/caches/transforms-3/35bd244ce237d840fe90e413598d8f56/transformed/jetified-firebase-messaging-ktx-23.1.2-api.jar</arg>
                 <arg>$MODULE_DIR$/../../../.gradle/caches/transforms-3/2c0ec2d29bdc5fc8a581f6a85c96fafc/transformed/jetified-firebase-common-ktx-20.3.1-api.jar</arg>
                 <arg>$MODULE_DIR$/../../../.gradle/caches/transforms-3/744cb3670c273040f9c5621171f993f6/transformed/jetified-lifecycle-viewmodel-ktx-2.4.1-api.jar</arg>
+                <arg>$MODULE_DIR$/../../../.gradle/caches/transforms-3/78f30398a4e8f72dc934e52e5463af22/transformed/work-runtime-ktx-2.7.0-api.jar</arg>
                 <arg>$MODULE_DIR$/../../../.gradle/caches/transforms-3/56d8e38a2d74183d256bcac5ff250c7b/transformed/material-1.9.0-api.jar</arg>
                 <arg>$MODULE_DIR$/../../../.gradle/caches/transforms-3/0d8029cae06d06ee723ce31fa2785195/transformed/jetified-dagger-android-support-2.20-api.jar</arg>
                 <arg>$MODULE_DIR$/../../../.gradle/caches/transforms-3/ea17c5d22ec2b0215162eede7fe9a9e3/transformed/appcompat-1.6.1-api.jar</arg>
@@ -82,10 +83,10 @@
                 <arg>$MODULE_DIR$/../../../.gradle/caches/transforms-3/2288856354299a007561ef53e468dc29/transformed/jetified-lottie-5.2.0-api.jar</arg>
                 <arg>$MODULE_DIR$/../../../.gradle/caches/transforms-3/c226ff65612e37a8e43fa5e509119139/transformed/jetified-dagger-android-2.20-api.jar</arg>
                 <arg>$MODULE_DIR$/../../../.gradle/caches/transforms-3/0de4197131b9af4f15fe5387500ae1ff/transformed/jetified-dagger-2.20.jar</arg>
+                <arg>$MODULE_DIR$/../../../.gradle/caches/transforms-3/1efdffd19a3219a1de9a237ad53cfad8/transformed/work-runtime-2.7.0-api.jar</arg>
                 <arg>$MODULE_DIR$/../../../.gradle/caches/transforms-3/fbfbbb3e65358e81f94d539834eed5f8/transformed/dynamicanimation-1.0.0-api.jar</arg>
                 <arg>$MODULE_DIR$/../../../.gradle/caches/transforms-3/891eb4e4e690cce8d9fdde8142d0be3f/transformed/legacy-support-core-utils-1.0.0-api.jar</arg>
                 <arg>$MODULE_DIR$/../../../.gradle/caches/transforms-3/f7ce1b2fa5e57dae05a39abc2aadfbc1/transformed/loader-1.0.0-api.jar</arg>
-                <arg>$MODULE_DIR$/../../../.gradle/caches/transforms-3/1efdffd19a3219a1de9a237ad53cfad8/transformed/work-runtime-2.7.0-api.jar</arg>
                 <arg>$MODULE_DIR$/../../../.gradle/caches/transforms-3/c06a0c2c5141502b3108db70e6a977fd/transformed/lifecycle-livedata-2.4.1-api.jar</arg>
                 <arg>$MODULE_DIR$/../../../.gradle/caches/transforms-3/355dfa7628a23a02c758cef95f831a18/transformed/jetified-rxandroid-2.1.1-api.jar</arg>
                 <arg>$MODULE_DIR$/../../../.gradle/caches/transforms-3/4de3dc85fd913b5bc2c9d74ab2f78831/transformed/jetified-rxjava-2.2.9.jar</arg>
@@ -158,8 +159,8 @@
                 <arg>$MODULE_DIR$/../../../.gradle/caches/transforms-3/f6fba7b404a37ff1bcc8c76975001a46/transformed/jetified-error_prone_annotations-2.9.0.jar</arg>
                 <arg>$MODULE_DIR$/../../../.gradle/caches/transforms-3/a30a04a2033ac77788862f0ee1e6065e/transformed/jetified-guava-31.0.1-android.jar</arg>
                 <arg>$MODULE_DIR$/../../../.gradle/caches/transforms-3/af6ff46ef4adc31104c3ea9e9d45233d/transformed/jetified-listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar</arg>
-                <arg>$MODULE_DIR$/../../../.gradle/caches/transforms-3/7e4149e0592aa7a3fc19ed675cb59461/transformed/jetified-failureaccess-1.0.1.jar</arg>
                 <arg>$MODULE_DIR$/../../../.gradle/caches/transforms-3/4f3843293a98d175ca4c57a1e8eaf300/transformed/jetified-startup-runtime-1.0.0-api.jar</arg>
+                <arg>$MODULE_DIR$/../../../.gradle/caches/transforms-3/7e4149e0592aa7a3fc19ed675cb59461/transformed/jetified-failureaccess-1.0.1.jar</arg>
                 <arg>$USER_HOME$/AppData/Local/Android/Sdk/platforms/android-33/android.jar</arg>
                 <arg>$USER_HOME$/AppData/Local/Android/Sdk/build-tools/30.0.3/core-lambda-stubs.jar</arg>
               </args>
@@ -383,6 +384,7 @@
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.android.ump:user-messaging-platform:2.0.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.android.gms:play-services-appset:16.0.1@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.android.play:core:1.10.3@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.work:work-runtime-ktx:2.7.0@aar" level="project" />
   </component>
   <component name="TestModuleProperties" production-module="AllRadioUA.app.main" />
 </module>

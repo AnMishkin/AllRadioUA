@@ -83,6 +83,9 @@ class StopAlarmActivity : AppCompatActivity() {
             isServiceBound = false
         }
         mPlayerService?.stopVibration()
+        mPlayerService?.stopRadioStation()
+        mPlayerService?.stopVolumeIncrease()
+        mPlayerService?.stopForeground(Service.STOP_FOREGROUND_REMOVE)
     }
 
     private fun stopAlarmDialog() {

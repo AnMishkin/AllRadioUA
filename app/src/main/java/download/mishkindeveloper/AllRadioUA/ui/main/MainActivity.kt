@@ -1432,20 +1432,12 @@ fun chekInternet(){
             //stopRadioPlayback()
 cancelAlarm()
            // stopAlarmService()
+            mPlayerAlarmService?.stopVolumeIncrease()
             alarmRadioPlayerService?.stopRadioStation()
             alarmRadioPlayerService?.stopVibration()
             alarmRadioPlayerService?.stopForeground(Service.STOP_FOREGROUND_REMOVE)
-//            val stopAlarmIntent = Intent(this, StopAlarmActivity::class.java)
-//            startActivity(stopAlarmIntent)
-
-            //stopRadioStation()
-
-
-//var alarmReceiver = AlarmReceiver()
-//            val stopAlarmIntent = Intent(this, StopAlarmActivity::class.java)
-//            stopAlarmIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//            alarmReceiver.onReceive(this,stopAlarmIntent)
-
+            mPlayerAlarmService?.stopVibration()
+            mPlayerAlarmService?.stopForeground(Service.STOP_FOREGROUND_REMOVE)
 
             Log.d("MyLog", "Остановился будильник")
             preferenceAlarmHelper.saveBoolean("Alarm",false)
@@ -1460,6 +1452,7 @@ cancelAlarm()
 
 
 private fun cancelAlarm() {
+    mPlayerAlarmService?.stopVolumeIncrease()
     val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
     val alarmIntent = Intent(this, AlarmReceiver::class.java)
     val alarmPendingIntent = PendingIntent.getBroadcast(

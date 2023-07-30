@@ -4,6 +4,7 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
@@ -29,7 +30,10 @@ import download.mishkindeveloper.AllRadioUA.ui.listFragment.ListFragment
 import download.mishkindeveloper.AllRadioUA.ui.listFragment.adapter.WaveViewHolder
 import download.mishkindeveloper.AllRadioUA.ui.main.MainActivity
 import java.util.*
-
+import androidx.work.Data
+import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkManager
+import androidx.work.WorkRequest
 
 class RadioStationAdapter(
     private var items: List<RadioWave>,
@@ -153,6 +157,25 @@ class RadioStationAdapter(
             return
         }
 
+        val calendar = Calendar.getInstance()
+        val sharedPreferences = context?.getSharedPreferences("AlarmPrefs", Context.MODE_PRIVATE)
+        alarmHour = sharedPreferences?.getInt("AlarmHour", -1)!!
+        alarmMinute = sharedPreferences?.getInt("AlarmMinute", -1)!!
+        val currentTime = System.currentTimeMillis()
+        calendar.timeInMillis = currentTime
+        calendar.set(Calendar.HOUR_OF_DAY, alarmHour)
+        calendar.set(Calendar.MINUTE, alarmMinute)
+        calendar.set(Calendar.SECOND, 0)
+
+        // Если установленное время уже прошло сегодня, то устанавливаем на завтра
+        if (calendar.timeInMillis <= currentTime) {
+            calendar.add(Calendar.DAY_OF_MONTH, 1)
+        }
+
+        // Получите AlarmManager
+        val alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+        // Создайте Intent для AlarmReceiver
         val alarmIntent = Intent(context, AlarmReceiver::class.java).apply {
             putExtra("radioStation", radioStationUrl)
         }
@@ -160,34 +183,27 @@ class RadioStationAdapter(
         alarmPendingIntent = PendingIntent.getBroadcast(
             context, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
-        val calendar = Calendar.getInstance()
-        val sharedPreferences = context?.getSharedPreferences("AlarmPrefs", Context.MODE_PRIVATE)
-        alarmHour = sharedPreferences?.getInt("AlarmHour", -1)!!
-        alarmMinute = sharedPreferences?.getInt("AlarmMinute", -1)!!
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
-        calendar.set(Calendar.YEAR, year)
-        calendar.set(Calendar.MONTH, month)
-        calendar.set(Calendar.DAY_OF_MONTH, day)
-        calendar.set(Calendar.HOUR_OF_DAY, alarmHour)
-        calendar.set(Calendar.MINUTE, alarmMinute)
-        calendar.set(Calendar.SECOND, 0)
-
-
-        // Получите AlarmManager
-        val alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
         // Установите повторяющийся будильник с заданным временем
-        alarmManager.setExact(
-            AlarmManager.RTC_WAKEUP, calendar.timeInMillis, alarmPendingIntent
-        )
-        alarmIntent.putExtra("isAlarmActive", true)
-Log.d("MyLog","alarmintent - $alarmIntent")
-Log.d("MyLog","alarmhour - $alarmHour")
-Log.d("MyLog","alarmminute - $alarmMinute")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            alarmManager.setExactAndAllowWhileIdle(
+                AlarmManager.RTC_WAKEUP, calendar.timeInMillis, alarmPendingIntent
+            )
+        } else {
+            alarmManager.setExact(
+                AlarmManager.RTC_WAKEUP, calendar.timeInMillis, alarmPendingIntent
+            )
+        }
 
+        // Сохраните установленное время в SharedPreferences
+        preferenceAlarmHelper.saveBoolean("Alarm", true)
+        preferenceAlarmHelper.saveHour("AlarmHour", alarmHour)
+        preferenceAlarmHelper.saveMinute("AlarmMinute", alarmMinute)
+
+        Log.d("MyLog", "Alarm set for: $alarmHour:$alarmMinute")
     }
+
+
 
 
     fun clearItems(){

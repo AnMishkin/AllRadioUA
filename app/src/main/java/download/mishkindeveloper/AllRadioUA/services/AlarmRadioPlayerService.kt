@@ -93,7 +93,7 @@ class AlarmRadioPlayerService : Service() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel =
-                NotificationChannel(channelId, "Alarm Channel", NotificationManager.IMPORTANCE_DEFAULT)
+                NotificationChannel(channelId, "Alarm Channel", NotificationManager.IMPORTANCE_HIGH)
             notificationManager.createNotificationChannel(channel)
         }
 
@@ -126,13 +126,14 @@ class AlarmRadioPlayerService : Service() {
 
 
     private fun startVolumeIncrease() {
-        val targetVolume = maxVolume // Устанавливаем максимальную громкость как целевую
+        val targetVolume = maxVolume
         mediaPlayer?.let { player ->
-            player.setVolume(0f, 0f) // Начинаем с громкости 0
-            player.start() // Запускаем MediaPlayer
+            player.setVolume(0f, 0f)
+            player.start()
 
-            val volumeSteps = 5000 // Количество шагов до достижения целевой громкости
-            val step = targetVolume / volumeSteps
+            val volumeSteps = 13 // Количество шагов до достижения целевой громкости
+            val volumeStepDuration = 7000L // Продолжительность каждого шага (в миллисекундах)
+            val volumeStepValue = targetVolume / volumeSteps
 
             volumeHandler = Handler(Looper.getMainLooper())
             var currentStep = 1
@@ -140,20 +141,20 @@ class AlarmRadioPlayerService : Service() {
             volumeHandler?.postDelayed(object : Runnable {
                 override fun run() {
                     if (currentStep <= volumeSteps) {
-                        val newVolume = step * currentStep
+                        val newVolume = volumeStepValue * currentStep
                         player.setVolume(newVolume, newVolume)
                         currentStep++
-                        volumeHandler?.postDelayed(this, 100) // Задержка между шагами, можете изменить по своему усмотрению
+                        volumeHandler?.postDelayed(this, volumeStepDuration)
                     } else {
-                        // Достигнута целевая громкость, останавливаем увеличение
                         player.setVolume(targetVolume, targetVolume)
                     }
                 }
-            }, 1000) // Задержка перед первым увеличением громкости, можете изменить по своему усмотрению
+            }, volumeStepDuration)
         }
     }
 
-     fun stopVolumeIncrease() {
+
+    fun stopVolumeIncrease() {
         volumeHandler?.removeCallbacksAndMessages(null)
     }
 

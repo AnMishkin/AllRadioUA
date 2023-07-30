@@ -14,13 +14,13 @@
           <stringArguments>
             <stringArg name="classpath">
               <args>
-                <arg>$MODULE_DIR$/../../../app/build/intermediates/compile_and_runtime_not_namespaced_r_class_jar/debug/R.jar</arg>
                 <arg>$MODULE_DIR$/../../../.gradle/caches/transforms-3/9f08fcf97f1e5b3460f681b2437ff998/transformed/jetified-viewbinding-7.4.0-api.jar</arg>
                 <arg>$MODULE_DIR$/../../../.gradle/caches/transforms-3/dc7ecb2b15bca65a67efcbdc3898f3d6/transformed/room-rxjava2-2.5.0-alpha02-api.jar</arg>
                 <arg>$MODULE_DIR$/../../../.gradle/caches/transforms-3/e3ffee6ced859759e4d7b00356e0acd5/transformed/room-guava-2.5.0-alpha02-api.jar</arg>
                 <arg>$MODULE_DIR$/../../../.gradle/caches/transforms-3/1dd71b7acf21f9709a85a8cba98e4d0d/transformed/room-runtime-2.5.0-alpha02-api.jar</arg>
                 <arg>$MODULE_DIR$/../../../.gradle/caches/modules-2/files-2.1/androidx.room/room-common/2.5.0-alpha02/a863b0977eba29a5069d1301fee3cc72e6141a83/room-common-2.5.0-alpha02.jar</arg>
                 <arg>$MODULE_DIR$/../../../.gradle/caches/transforms-3/744cb3670c273040f9c5621171f993f6/transformed/jetified-lifecycle-viewmodel-ktx-2.4.1-api.jar</arg>
+                <arg>$MODULE_DIR$/../../../.gradle/caches/transforms-3/78f30398a4e8f72dc934e52e5463af22/transformed/work-runtime-ktx-2.7.0-api.jar</arg>
                 <arg>$MODULE_DIR$/../../../.gradle/caches/transforms-3/56d8e38a2d74183d256bcac5ff250c7b/transformed/material-1.9.0-api.jar</arg>
                 <arg>$MODULE_DIR$/../../../.gradle/caches/transforms-3/0d8029cae06d06ee723ce31fa2785195/transformed/jetified-dagger-android-support-2.20-api.jar</arg>
                 <arg>$MODULE_DIR$/../../../.gradle/caches/transforms-3/ea17c5d22ec2b0215162eede7fe9a9e3/transformed/appcompat-1.6.1-api.jar</arg>
@@ -365,5 +365,6 @@
     <orderEntry type="library" name="Gradle: com.google.android.ump:user-messaging-platform:2.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-appset:16.0.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.play:core:1.10.3@aar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.work:work-runtime-ktx:2.7.0@aar" level="project" />
   </component>
 </module>

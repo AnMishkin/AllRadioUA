@@ -12,7 +12,7 @@ android {
         applicationId "download.mishkindeveloper.AllRadioUA"
         minSdk 24
         targetSdk 33
-        versionCode 38
+        versionCode 44
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -115,7 +115,7 @@ dependencies {
     //implementation 'com.google.android.gms:play-services:12.0.1'
     implementation 'com.google.android.play:core:1.10.3'
     //implementation "com.google.android.gms.ads.nativead"
-
+    implementation "androidx.work:work-runtime-ktx:2.7.0"
 }
 // ADD THIS AT THE BOTTOM
 //apply plugin: 'com.google.gms.google-services'

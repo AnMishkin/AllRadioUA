@@ -28,5 +28,12 @@ class PreferenceAlarmHelper(context: Context) {
         sharedPrefs.edit().putBoolean("isFirstRun", value).apply()
     }
 
+    fun saveHour(key: String,value: Int ) {
+        sharedPrefs.edit().putInt(key,value).apply()
+    }
+
+    fun saveMinute(key: String,value: Int ) {
+        sharedPrefs.edit().putInt(key,value).apply()
+    }
 }
 
