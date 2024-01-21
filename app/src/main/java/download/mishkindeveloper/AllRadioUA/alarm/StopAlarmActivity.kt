@@ -77,6 +77,7 @@ class StopAlarmActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        mPlayerService?.stopVolumeIncrease()
         // Unbind from the service
         if (isServiceBound) {
             unbindService(serviceConnection)

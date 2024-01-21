@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.firebase:firebase-database-ktx:20.3.0@aar">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/.gradle/caches/transforms-3/2d8fecd7f103e04020b731a99eec70fa/transformed/jetified-firebase-database-ktx-20.3.0/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/.gradle/caches/transforms-3/2d8fecd7f103e04020b731a99eec70fa/transformed/jetified-firebase-database-ktx-20.3.0/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/.gradle/caches/modules-2/files-2.1/com.google.firebase/firebase-database-ktx/20.3.0/7931fb4e5181ff1ba9e0a7c4da4a988d3beff4d3/firebase-database-ktx-20.3.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

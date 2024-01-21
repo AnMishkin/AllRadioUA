@@ -187,11 +187,11 @@ class RadioStationAdapter(
         // Установите повторяющийся будильник с заданным временем
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             alarmManager.setExactAndAllowWhileIdle(
-                AlarmManager.RTC_WAKEUP, calendar.timeInMillis, alarmPendingIntent
+                AlarmManager.RTC_WAKEUP, calendar.timeInMillis, alarmPendingIntent!!
             )
         } else {
             alarmManager.setExact(
-                AlarmManager.RTC_WAKEUP, calendar.timeInMillis, alarmPendingIntent
+                AlarmManager.RTC_WAKEUP, calendar.timeInMillis, alarmPendingIntent!!
             )
         }
 

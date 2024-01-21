@@ -44,10 +44,10 @@ class AlarmRadioPlayerService : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         val radioStationUrl = intent?.getStringExtra("radioStation")
         if (radioStationUrl != null) {
+            startForeground(NOTIFICATION_ID, createNotification())
             startRadioStation(radioStationUrl)
             startVibration()
         }
-        startForeground(NOTIFICATION_ID, createNotification())
         return START_STICKY
     }
 

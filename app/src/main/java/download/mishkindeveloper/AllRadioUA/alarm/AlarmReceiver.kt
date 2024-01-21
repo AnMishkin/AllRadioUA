@@ -15,7 +15,12 @@ class AlarmReceiver : BroadcastReceiver() {
         val radioStationUrl = intent.getStringExtra("radioStation")
         val serviceIntent = Intent(context, AlarmRadioPlayerService::class.java)
         serviceIntent.putExtra("radioStation", radioStationUrl)
-        ContextCompat.startForegroundService(context, serviceIntent)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            context.startForegroundService(serviceIntent)
+        } else {
+            context.startService(serviceIntent)
+        }
+
         // Start StopAlarmActivity when the alarm is received
         val stopAlarmIntent = Intent(context, StopAlarmActivity::class.java)
         stopAlarmIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -23,3 +28,4 @@ class AlarmReceiver : BroadcastReceiver() {
     }
 
 }
+
