@@ -61,7 +61,6 @@ import de.hdodenhof.circleimageview.CircleImageView
 import download.mishkindeveloper.AllRadioUA.R
 import download.mishkindeveloper.AllRadioUA.ReviewManager.ReviewManager
 import download.mishkindeveloper.AllRadioUA.alarm.*
-
 import download.mishkindeveloper.AllRadioUA.data.entity.RadioWave
 import download.mishkindeveloper.AllRadioUA.data.entity.Track
 import download.mishkindeveloper.AllRadioUA.helper.PreferenceHelper
@@ -256,23 +255,12 @@ class MainActivity : AppCompatActivity() {
         initAds()
 
 
-
-        mAppUpdateManager = AppUpdateManagerFactory.create(this)
-        mAppUpdateManager.registerListener(installStateUpdatedListener)
-
-        mAppUpdateManager.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
-            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
-                && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)
-            ) {
-                try {
-                    mAppUpdateManager.startUpdateFlowForResult(
-                        appUpdateInfo, AppUpdateType.FLEXIBLE, this, RC_APP_UPDATE
-                    )
-                } catch (e: SendIntentException) {
-                    e.printStackTrace()
-                }
-            }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            initAppUpdateManagerUpperS()
+        } else {
+            initAppUpdateManagerDownS()
         }
+
 
 
 // Implement InstallStateUpdatedListener interface
@@ -1178,6 +1166,7 @@ fun chekInternet(){
 
     @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
+        super.onBackPressed()
         motionLayout?.transitionToStart()
     }
 
@@ -1518,7 +1507,44 @@ private fun cancelAlarm() {
             showNotificationPermissionDialog(context)
         }
     }
+    @RequiresApi(Build.VERSION_CODES.S)
+    private fun initAppUpdateManagerUpperS() {
+        mAppUpdateManager = AppUpdateManagerFactory.create(this)
+        mAppUpdateManager.registerListener(installStateUpdatedListener)
 
+        mAppUpdateManager.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)
+            ) {
+                try {
+                    mAppUpdateManager.startUpdateFlowForResult(
+                        appUpdateInfo, AppUpdateType.FLEXIBLE, this, RC_APP_UPDATE
+                    )
+                } catch (e: SendIntentException) {
+                    e.printStackTrace()
+                }
+            }
+        }
+    }
+
+    private fun initAppUpdateManagerDownS() {
+        mAppUpdateManager = AppUpdateManagerFactory.create(this)
+        mAppUpdateManager.registerListener(installStateUpdatedListener)
+
+        mAppUpdateManager.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)
+            ) {
+                try {
+                    mAppUpdateManager.startUpdateFlowForResult(
+                        appUpdateInfo, AppUpdateType.FLEXIBLE, this, RC_APP_UPDATE
+                    )
+                } catch (e: SendIntentException) {
+                    e.printStackTrace()
+                }
+            }
+        }
+    }
 
 
 

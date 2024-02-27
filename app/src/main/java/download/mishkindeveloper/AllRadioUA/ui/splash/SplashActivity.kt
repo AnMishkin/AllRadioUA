@@ -15,7 +15,8 @@ import com.google.android.ump.*
 import download.mishkindeveloper.AllRadioUA.R
 import download.mishkindeveloper.AllRadioUA.ui.main.MainActivity
 
-@SuppressLint("CustomSplashScreen")
+
+//@SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
 
     private lateinit var consentInformation: ConsentInformation
@@ -32,14 +33,14 @@ class SplashActivity : AppCompatActivity() {
         consentInformation.requestConsentInfoUpdate(
             this,
             params,
-            ConsentInformation.OnConsentInfoUpdateSuccessListener {
+            {
                 // The consent information state was updated.
                 // You are now ready to check if a form is available.
                 if (consentInformation.isConsentFormAvailable) {
                     loadForm()
                 }
             },
-            ConsentInformation.OnConsentInfoUpdateFailureListener {
+            {
                 // Handle the error.
             })
 
@@ -53,7 +54,7 @@ class SplashActivity : AppCompatActivity() {
     private fun loadForm() {
         UserMessagingPlatform.loadConsentForm(
             this,
-            UserMessagingPlatform.OnConsentFormLoadSuccessListener {
+            {
                 this.consentForm = it
                 if (consentInformation.consentStatus == ConsentInformation.ConsentStatus.REQUIRED) {
                     consentForm.show(
@@ -67,7 +68,7 @@ class SplashActivity : AppCompatActivity() {
                     )
                 }
             },
-            UserMessagingPlatform.OnConsentFormLoadFailureListener { errorCode ->
+            { errorCode ->
                 // Handle the error.
 
             }

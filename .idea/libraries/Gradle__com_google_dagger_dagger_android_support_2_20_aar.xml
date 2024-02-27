@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.dagger:dagger-android-support:2.20@aar" external-system-id="GRADLE">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/7d8dbfb7be4620a2319579091f339558/transformed/jetified-dagger-android-support-2.20/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/7d8dbfb7be4620a2319579091f339558/transformed/jetified-dagger-android-support-2.20/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/cdbf74c06f0ac51b910cc9940a34737f/transformed/jetified-dagger-android-support-2.20/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/cdbf74c06f0ac51b910cc9940a34737f/transformed/jetified-dagger-android-support-2.20/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.dagger/dagger-android-support/2.20/e1a7a33f7e17d4173c36745755922fa7d8471f4e/dagger-android-support-2.20-javadoc.jar!/" />

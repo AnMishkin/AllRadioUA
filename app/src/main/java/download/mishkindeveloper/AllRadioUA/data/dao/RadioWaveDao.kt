@@ -15,7 +15,7 @@ interface RadioWaveDao {
     fun delete(radioWave: RadioWave)
 
     @Update
-    fun update(vararg radioWave: RadioWave?)
+    fun update(vararg radioWave: RadioWave)
 
     @Query("SELECT * FROM radiowave")
     fun getAll(): List<RadioWave>
