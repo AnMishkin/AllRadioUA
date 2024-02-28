@@ -233,20 +233,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-//    private val updateReceiver = object : BroadcastReceiver() {
-//        override fun onReceive(context: Context?, intent: Intent?) {
-//            if (intent?.action == UPDATE_ACTION) {
-//                // Отримано трансляцію про оновлення, викликайте вашу функціональність
-//                checkUpdateStatus()
-//            }
-//        }
-//    }
 
-//    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-//        initAppUpdateManagerUpperS()
-//    } else {
-//        initAppUpdateManagerDownS()
-//    }
 
     //@RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -257,10 +244,7 @@ class MainActivity : AppCompatActivity() {
         init()
         checkAlarm()
         ReviewManager(this).checkAndPromptForReview(textReview, laiterReview, leaveReview,okReview)
-        //registerUpdateReceiver()
-//        runOnUiThread {
-//            checkReview()
-//        }
+
         initPermission()
         checkFirstStartStatus()
         initBroadcastManager()
@@ -280,24 +264,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-//            initAppUpdateManagerUpperS()
-//        } else {
-//            initAppUpdateManagerDownS()
-//        }
-
-
-
-
-
-
 // Implement InstallStateUpdatedListener interface
         val installStateUpdatedListener = InstallStateUpdatedListener {
             // Handle update state changes here
         }
-
-
-
         //isRecordAudioPermissionGranted()
 
         //checkDate()
