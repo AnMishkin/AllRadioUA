@@ -1,16 +1,16 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.browser:browser:1.4.0@aar" external-system-id="GRADLE">
     <ANNOTATIONS>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/afce72d1a0f13514bf58433b213b0ed0/transformed/browser-1.4.0/annotations.zip!/" />
+      <root url="jar://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/transforms-3/afce72d1a0f13514bf58433b213b0ed0/transformed/browser-1.4.0/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/afce72d1a0f13514bf58433b213b0ed0/transformed/browser-1.4.0/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/afce72d1a0f13514bf58433b213b0ed0/transformed/browser-1.4.0/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/afce72d1a0f13514bf58433b213b0ed0/transformed/browser-1.4.0/jars/classes.jar!/" />
+      <root url="file://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/transforms-3/afce72d1a0f13514bf58433b213b0ed0/transformed/browser-1.4.0/res" />
+      <root url="jar://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/transforms-3/afce72d1a0f13514bf58433b213b0ed0/transformed/browser-1.4.0/jars/classes.jar!/" />
+      <root url="file://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/transforms-3/afce72d1a0f13514bf58433b213b0ed0/transformed/browser-1.4.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.browser/browser/1.4.0/2a2741f63427dcdb3b6821dd17703bc16ced13a1/browser-1.4.0-sources.jar!/" />
+      <root url="jar://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/modules-2/files-2.1/androidx.browser/browser/1.4.0/2a2741f63427dcdb3b6821dd17703bc16ced13a1/browser-1.4.0-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

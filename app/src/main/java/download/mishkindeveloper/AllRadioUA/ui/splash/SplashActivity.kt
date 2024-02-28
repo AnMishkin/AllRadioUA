@@ -25,24 +25,24 @@ class SplashActivity : AppCompatActivity() {
     private var repeatImageButton: ImageButton? = null
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        val params = ConsentRequestParameters
-            .Builder()
-            .setTagForUnderAgeOfConsent(false)
-            .build()
-        consentInformation = UserMessagingPlatform.getConsentInformation(this)
-        consentInformation.requestConsentInfoUpdate(
-            this,
-            params,
-            {
-                // The consent information state was updated.
-                // You are now ready to check if a form is available.
-                if (consentInformation.isConsentFormAvailable) {
-                    loadForm()
-                }
-            },
-            {
-                // Handle the error.
-            })
+//        val params = ConsentRequestParameters
+//            .Builder()
+//            .setTagForUnderAgeOfConsent(false)
+//            .build()
+//        consentInformation = UserMessagingPlatform.getConsentInformation(this)
+//        consentInformation.requestConsentInfoUpdate(
+//            this,
+//            params,
+//            ConsentInformation.OnConsentInfoUpdateSuccessListener {
+//                // The consent information state was updated.
+//                // You are now ready to check if a form is available.
+//                if (consentInformation.isConsentFormAvailable) {
+//                    loadForm()
+//                }
+//            },
+//            ConsentInformation.OnConsentInfoUpdateFailureListener {
+//                // Handle the error.
+//            })
 
         window.statusBarColor = ContextCompat.getColor(this, R.color.black)
         super.onCreate(savedInstanceState)
@@ -51,29 +51,29 @@ class SplashActivity : AppCompatActivity() {
         startActivityOrShowToastsError()
     }
 
-    private fun loadForm() {
-        UserMessagingPlatform.loadConsentForm(
-            this,
-            {
-                this.consentForm = it
-                if (consentInformation.consentStatus == ConsentInformation.ConsentStatus.REQUIRED) {
-                    consentForm.show(
-                        this,
-                        ConsentForm.OnConsentFormDismissedListener {
-                            if (consentInformation.consentStatus == ConsentInformation.ConsentStatus.OBTAINED) {
-                                // App can start requesting ads.
-                            }
-                            loadForm()
-                        }
-                    )
-                }
-            },
-            { errorCode ->
-                // Handle the error.
-
-            }
-        )
-    }
+//    private fun loadForm() {
+//        UserMessagingPlatform.loadConsentForm(
+//            this,
+//            UserMessagingPlatform.OnConsentFormLoadSuccessListener {
+//                this.consentForm = it
+//                if (consentInformation.consentStatus == ConsentInformation.ConsentStatus.REQUIRED) {
+//                    consentForm.show(
+//                        this,
+//                        ConsentForm.OnConsentFormDismissedListener {
+//                            if (consentInformation.consentStatus == ConsentInformation.ConsentStatus.OBTAINED) {
+//                                // App can start requesting ads.
+//                            }
+//                            loadForm()
+//                        }
+//                    )
+//                }
+//            },
+//            UserMessagingPlatform.OnConsentFormLoadFailureListener { errorCode ->
+//                // Handle the error.
+//
+//            }
+//        )
+//    }
 
     private fun checkNetworkConnection(): Boolean {
         val connectivityManager =

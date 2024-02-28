@@ -1,16 +1,16 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.android.exoplayer:exoplayer-core:2.19.1@aar" external-system-id="GRADLE">
     <ANNOTATIONS>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/68bf9d5b4a041cca20aca5481c4f37e9/transformed/jetified-exoplayer-core-2.19.1/annotations.zip!/" />
+      <root url="jar://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/transforms-3/68bf9d5b4a041cca20aca5481c4f37e9/transformed/jetified-exoplayer-core-2.19.1/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/68bf9d5b4a041cca20aca5481c4f37e9/transformed/jetified-exoplayer-core-2.19.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/68bf9d5b4a041cca20aca5481c4f37e9/transformed/jetified-exoplayer-core-2.19.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/68bf9d5b4a041cca20aca5481c4f37e9/transformed/jetified-exoplayer-core-2.19.1/AndroidManifest.xml" />
+      <root url="jar://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/transforms-3/68bf9d5b4a041cca20aca5481c4f37e9/transformed/jetified-exoplayer-core-2.19.1/jars/classes.jar!/" />
+      <root url="file://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/transforms-3/68bf9d5b4a041cca20aca5481c4f37e9/transformed/jetified-exoplayer-core-2.19.1/AndroidManifest.xml" />
+      <root url="file://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/transforms-3/68bf9d5b4a041cca20aca5481c4f37e9/transformed/jetified-exoplayer-core-2.19.1/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.exoplayer/exoplayer-core/2.19.1/2983a32a375668f5fb93efa714750cb9e75aac74/exoplayer-core-2.19.1-sources.jar!/" />
+      <root url="jar://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/modules-2/files-2.1/com.google.android.exoplayer/exoplayer-core/2.19.1/2983a32a375668f5fb93efa714750cb9e75aac74/exoplayer-core-2.19.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

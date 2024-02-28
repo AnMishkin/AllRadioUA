@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.sqlite:sqlite-framework:2.4.0@aar" external-system-id="GRADLE">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/881c00d7859f9152d69689cd0252ba5b/transformed/sqlite-framework-2.4.0/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/881c00d7859f9152d69689cd0252ba5b/transformed/sqlite-framework-2.4.0/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/881c00d7859f9152d69689cd0252ba5b/transformed/sqlite-framework-2.4.0/jars/classes.jar!/" />
+      <root url="file://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/transforms-3/881c00d7859f9152d69689cd0252ba5b/transformed/sqlite-framework-2.4.0/res" />
+      <root url="jar://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/transforms-3/881c00d7859f9152d69689cd0252ba5b/transformed/sqlite-framework-2.4.0/jars/classes.jar!/" />
+      <root url="file://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/transforms-3/881c00d7859f9152d69689cd0252ba5b/transformed/sqlite-framework-2.4.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.sqlite/sqlite-framework/2.4.0/edd5d14792596229407204bf8e4a68e6f9b6cddc/sqlite-framework-2.4.0-sources.jar!/" />
+      <root url="jar://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/modules-2/files-2.1/androidx.sqlite/sqlite-framework/2.4.0/edd5d14792596229407204bf8e4a68e6f9b6cddc/sqlite-framework-2.4.0-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

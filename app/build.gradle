@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "download.mishkindeveloper.AllRadioUA"
-        minSdk 24
+        minSdk 26
         targetSdk 34
         versionCode 47
         versionName "1.0"
