@@ -66,11 +66,14 @@
 
         <receiver
             android:name=".updateAp.UpdateApp"
+            android:enabled="true"
             android:exported="false">
             <intent-filter>
-                <action android:name="your.intent.action.UPDATE_ACTION" />
+                <action android:name="android.intent.action.PACKAGE_REPLACED" />
+                <data android:scheme="package" android:path="download.mishkindeveloper.AllRadioUA" />
             </intent-filter>
         </receiver>
+
 
 
         <activity

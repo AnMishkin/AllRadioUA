@@ -1,48 +1,51 @@
 package download.mishkindeveloper.AllRadioUA.updateAp
 
-import android.app.Activity
+import android.app.AlertDialog
 import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.play.core.appupdate.AppUpdateManager
-import com.google.android.play.core.appupdate.AppUpdateManagerFactory
-import com.google.android.play.core.install.model.InstallStatus
+import android.net.Uri
+import android.util.Log
+import android.widget.Toast
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 
 class UpdateApp : BroadcastReceiver() {
-    private val UPDATE_ACTION = "download.mishkindeveloper.AllRadioUA.UPDATE_ACTION"
-    private lateinit var mAppUpdateManager: AppUpdateManager
-
     override fun onReceive(context: Context?, intent: Intent?) {
-        if (intent?.action == UPDATE_ACTION) {
-            // Отримано трансляцію про оновлення, викликайте вашу функціональність
-            checkUpdateStatus(context)
+        if (intent?.action == Intent.ACTION_PACKAGE_REPLACED) {
+            showUpdateReadyDialog(context)
         }
     }
 
-    fun checkUpdateStatus(context: Context?) {
-        mAppUpdateManager = AppUpdateManagerFactory.create(context!!)
-        mAppUpdateManager.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
-            if (appUpdateInfo.installStatus() == InstallStatus.DOWNLOADED) {
-                // Покажіть повідомлення про завершення оновлення
-                showCompletedUpdate(context)
+    private fun showUpdateReadyDialog(context: Context?) {
+        Log.d("UpdateApp", "Оновлення встановлено. Показуємо діалог.")
+
+        AlertDialog.Builder(context)
+            .setMessage("Оновлення готове до встановлення")
+            .setPositiveButton("Встановити") { dialog, _ ->
+                installUpdate(context)
+                dialog.dismiss()
             }
-        }
+            .setCancelable(false)
+            .show()
     }
 
-    fun showCompletedUpdate(context: Context?) {
-        val newAppIsReady = "New app is ready"
-        val updateInstall = "Update Install"
+    private fun installUpdate(context: Context?) {
+        Log.d("UpdateApp", "Встановлення оновлення...")
 
-        val snackbar = newAppIsReady?.let {
-            Snackbar.make(
-                (context as Activity).findViewById(android.R.id.content), it,
-                Snackbar.LENGTH_INDEFINITE
-            )
+        // Запустіть інтент для встановлення оновлення
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse("market://details?id=${context?.packageName}")
+        context?.startActivity(intent)
+    }
+
+    companion object {
+        fun sendUpdateBroadcast(context: Context) {
+            Log.d("UpdateApp", "Відправлення broadcast про підготовку оновлення.")
+
+            val updateIntent = Intent(Intent.ACTION_PACKAGE_REPLACED)
+            updateIntent.data = Uri.parse("package:" + context.packageName)
+            LocalBroadcastManager.getInstance(context).sendBroadcast(updateIntent)
         }
-        snackbar?.setAction(updateInstall) {
-            context?.let { it1 -> AppUpdateManagerFactory.create(it1) }?.completeUpdate()
-        }
-        snackbar?.show()
     }
 }

@@ -1,14 +1,11 @@
 package download.mishkindeveloper.AllRadioUA.ui.main
 
-
-
 import download.mishkindeveloper.AllRadioUA.alarm.StopAlarmActivity
 import android.Manifest
 import android.animation.Animator
 import android.annotation.SuppressLint
 import android.app.*
 import android.content.*
-import android.content.IntentSender.SendIntentException
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
@@ -19,7 +16,6 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.*
 import androidx.annotation.NonNull
-import androidx.annotation.Nullable
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -44,15 +40,9 @@ import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import com.google.android.play.core.appupdate.AppUpdateManager
-import com.google.android.play.core.appupdate.AppUpdateManagerFactory
-import com.google.android.play.core.install.InstallStateUpdatedListener
-import com.google.android.play.core.install.model.AppUpdateType
-import com.google.android.play.core.install.model.InstallStatus
-import com.google.android.play.core.install.model.UpdateAvailability
 import com.google.firebase.database.*
 import com.google.firebase.database.annotations.NotNull
 import com.squareup.picasso.Picasso
@@ -83,7 +73,11 @@ import javax.inject.Inject
 import android.content.Context
 import android.content.Intent
 import android.provider.Settings
-import androidx.core.app.NotificationCompat
+import com.google.android.play.core.appupdate.AppUpdateInfo
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.google.android.play.core.install.model.ActivityResult.RESULT_IN_APP_UPDATE_FAILED
+import com.google.android.play.core.install.model.AppUpdateType.IMMEDIATE
+import com.google.android.play.core.install.model.UpdateAvailability
 import download.mishkindeveloper.AllRadioUA.updateAp.UpdateApp
 
 
@@ -142,6 +136,8 @@ class MainActivity : AppCompatActivity() {
     private var stopAlarmActivity: StopAlarmActivity? = null
     private var alarmPendingIntent: PendingIntent? = null
     private lateinit var updateReceiver: BroadcastReceiver
+    private val appUpdateManager by lazy { AppUpdateManagerFactory.create(this) }
+    private val MY_REQUEST_CODE = 42
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -161,6 +157,7 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var mAppUpdateManager: AppUpdateManager
     private val RC_APP_UPDATE = 100
+    private val updateApp = UpdateApp()
     private var updateCanceled: String? = null
     private var newAppIsReady: String? = null
     private var updateInstall: String? = null
@@ -244,7 +241,7 @@ class MainActivity : AppCompatActivity() {
         init()
         checkAlarm()
         ReviewManager(this).checkAndPromptForReview(textReview, laiterReview, leaveReview,okReview)
-
+        checkForAppUpdate()
         initPermission()
         checkFirstStartStatus()
         initBroadcastManager()
@@ -254,21 +251,24 @@ class MainActivity : AppCompatActivity() {
         performSearch()
         initAds()
 
+        //checkForUpdate()
+        //updateApp.checkUpdateStatus(this)
+        //updateApp.startUpdateFlow(this)
+        //checkUpdateStatus()
         // Initialize updateReceiver
-        updateReceiver = object : BroadcastReceiver() {
-            override fun onReceive(context: Context?, intent: Intent?) {
-                if (intent?.action == "download.mishkindeveloper.AllRadioUA.UPDATE_ACTION") {
-                    // Received broadcast about update, call your functionality
-                    UpdateApp().checkUpdateStatus(context)
-                }
-            }
-        }
+//        updateReceiver = object : BroadcastReceiver() {
+//            override fun onReceive(context: Context?, intent: Intent?) {
+//                if (intent?.action == "download.mishkindeveloper.AllRadioUA.UPDATE_ACTION") {
+//                    // Received broadcast about update, call your functionality
+//                    UpdateApp().checkUpdateStatus(context)
+//                }
+//            }
+//        }
+        //updateApp()
 
-// Implement InstallStateUpdatedListener interface
-        val installStateUpdatedListener = InstallStateUpdatedListener {
-            // Handle update state changes here
-        }
-        //isRecordAudioPermissionGranted()
+
+
+    //isRecordAudioPermissionGranted()
 
         //checkDate()
         //titleToolTextView?.text = items.size.toString()+"-"+getString(R.string.list_menu_item)
@@ -333,6 +333,10 @@ class MainActivity : AppCompatActivity() {
 
         registerReceiver(timerBroadcastReceiver, intentFilter, null, null, flags)
         mAdView.resume()
+        // Перевірка статусу оновлення при відновленні активності
+        //updateApp.checkUpdateStatus(this)
+
+        //registerUpdateReceiver()
         //requestRecordPermission()
         // Проверка состояния обновления
 //        mAppUpdateManager.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
@@ -358,6 +362,7 @@ class MainActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         unregisterReceiver(timerBroadcastReceiver)
+        //registerUpdateReceiver()
     }
 
     override fun onStop() {
@@ -1486,104 +1491,174 @@ private fun cancelAlarm() {
     }
 
 //проверка обновления программы
-@Deprecated("Deprecated in Java")
-override fun onActivityResult(
-    requestCode: Int,
-    resultCode: Int,
-    data: Intent?
-) {
-    super.onActivityResult(requestCode, resultCode, data)
-    if (requestCode == RC_APP_UPDATE && resultCode != RESULT_OK) {
-        // Handle the update cancellation
-        // ... Your handling code
+//@Deprecated("Deprecated in Java")
+//override fun onActivityResult(
+//    requestCode: Int,
+//    resultCode: Int,
+//    data: Intent?
+//) {
+//    super.onActivityResult(requestCode, resultCode, data)
+//    if (requestCode == RC_APP_UPDATE && resultCode != RESULT_OK) {
+//        // Handle the update cancellation
+//        Toast.makeText(this, updateCanceled, Toast.LENGTH_SHORT).show()
+//    }
+//}
+//
+//    private val installStateUpdatedListener =
+//        InstallStateUpdatedListener { state ->
+//            if (state.installStatus() == InstallStatus.DOWNLOADED) {
+//                // Show the update completion message
+//                UpdateApp().checkUpdateStatus(this)
+//            }
+//        }
+//
+//    @RequiresApi(Build.VERSION_CODES.S)
+//    private fun initAppUpdateManagerUpperS() {
+//        val mAppUpdateManager = AppUpdateManagerFactory.create(this)
+//        mAppUpdateManager.registerListener(installStateUpdatedListener)
+//
+//        mAppUpdateManager.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
+//            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+//                && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)
+//            ) {
+//                try {
+//                    mAppUpdateManager.startUpdateFlowForResult(
+//                        appUpdateInfo, AppUpdateType.FLEXIBLE, this, RC_APP_UPDATE
+//                    )
+//                } catch (e: SendIntentException) {
+//                    e.printStackTrace()
+//                }
+//            }
+//        }
+//    }
+//
+//    private fun initAppUpdateManagerDownS() {
+//        val mAppUpdateManager = AppUpdateManagerFactory.create(this)
+//        mAppUpdateManager.registerListener(installStateUpdatedListener)
+//
+//        mAppUpdateManager.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
+//            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+//                && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)
+//            ) {
+//                try {
+//                    mAppUpdateManager.startUpdateFlowForResult(
+//                        appUpdateInfo, AppUpdateType.FLEXIBLE, this, RC_APP_UPDATE
+//                    )
+//                } catch (e: SendIntentException) {
+//                    e.printStackTrace()
+//                }
+//            }
+//        }
+//    }
+//
+//    //реєстрація отримувача оновлень
+//    private fun registerUpdateReceiver() {
+//        val intentFilter = IntentFilter("download.mishkindeveloper.AllRadioUA.UPDATE_ACTION")
+//
+//        val updateReceiver = object : BroadcastReceiver() {
+//            override fun onReceive(context: Context?, intent: Intent?) {
+//                if (intent?.action == "download.mishkindeveloper.AllRadioUA.UPDATE_ACTION") {
+//                    // Received broadcast about update, call your functionality
+//                    UpdateApp().checkUpdateStatus(context)
+//                }
+//            }
+//        }
+//
+//        val flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+//            // For Android 13 and above, use RECEIVER_NOT_EXPORTED
+//            ContextCompat.RECEIVER_NOT_EXPORTED
+//        } else {
+//            // For versions prior to Android 13, flags are not needed
+//            0
+//        }
+//
+//        registerReceiver(updateReceiver, intentFilter, null, null, flags)
+//    }
+//
+//    private fun unregisterUpdateReceiver() {
+//        unregisterReceiver(updateReceiver)
+//    }
+//
+//    private fun checkUpdateStatus() {
+//        // Get the installation status
+//        val mAppUpdateManager = AppUpdateManagerFactory.create(this)
+//        mAppUpdateManager.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
+//            if (appUpdateInfo.installStatus() == InstallStatus.DOWNLOADED) {
+//                // Show the update completion message
+//                UpdateApp().showCompletedUpdate(this)
+//            }
+//        }
+//    }
+//
+//    private fun updateApp() {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+//            initAppUpdateManagerUpperS()
+//        } else {
+//            initAppUpdateManagerDownS()
+//        }
+//    }
+    //конец проверки обновления программы
+//private fun checkForUpdate() {
+//    // Отримайте номер поточної версії додатку
+//    val currentVersionCode = packageManager.getPackageInfo(packageName, 0).longVersionCode
+//
+//    // Отримайте номер останньої версії додатку, наприклад, з сервера або з Google Play
+//    val latestVersionCode = // Логіка для отримання останньої версії, можливо, через API Google Play
+//
+//        if (latestVersionCode > currentVersionCode) {
+//            // Оновлення готове
+//            Log.d("UpdateApp", "Оновлення готове до встановлення")
+//
+//            // Відправте broadcast для підготовки оновлення
+//            UpdateApp.sendUpdateBroadcast(this)
+//        } else {
+//            // Оновлення не доступне
+//            Log.d("UpdateApp", "Оновлення не доступне")
+//        }
+//}
+//
+//}
+    //оновлення програми
+private fun checkForAppUpdate() {
+    val appUpdateInfoTask = appUpdateManager.appUpdateInfo
+
+    appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
+        if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+            && appUpdateInfo.isUpdateTypeAllowed(IMMEDIATE)
+        ) {
+            requestUpdate(appUpdateInfo)
+        }
+    }.addOnFailureListener {
+        Log.e("update", "Failed to retrieve app update info: $it")
     }
 }
 
-    private val installStateUpdatedListener =
-        InstallStateUpdatedListener { state ->
-            if (state.installStatus() == InstallStatus.DOWNLOADED) {
-                // Show the update completion message
-                UpdateApp().checkUpdateStatus(this)
-            }
-        }
+    private fun requestUpdate(appUpdateInfo: AppUpdateInfo) {
+        appUpdateManager.startUpdateFlowForResult(
+            appUpdateInfo,
+            IMMEDIATE,
+            this,
+            MY_REQUEST_CODE
+        )
+    }
 
-    @RequiresApi(Build.VERSION_CODES.S)
-    private fun initAppUpdateManagerUpperS() {
-        val mAppUpdateManager = AppUpdateManagerFactory.create(this)
-        mAppUpdateManager.registerListener(installStateUpdatedListener)
-
-        mAppUpdateManager.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
-            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
-                && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)
-            ) {
-                try {
-                    mAppUpdateManager.startUpdateFlowForResult(
-                        appUpdateInfo, AppUpdateType.FLEXIBLE, this, RC_APP_UPDATE
-                    )
-                } catch (e: SendIntentException) {
-                    e.printStackTrace()
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == MY_REQUEST_CODE) {
+            when (resultCode) {
+                RESULT_OK -> {
+                    Log.d("update", "App update successfully installed")
+                }
+                RESULT_CANCELED -> {
+                    // Користувач скасував оновлення
+                    Log.d("update", "App update cancelled by user")
+                }
+                RESULT_IN_APP_UPDATE_FAILED -> {
+                    // Сталася помилка під час оновлення
+                    Log.e("update", "App update failed: ${data?.getStringExtra("message")}")
                 }
             }
         }
     }
-
-    private fun initAppUpdateManagerDownS() {
-        val mAppUpdateManager = AppUpdateManagerFactory.create(this)
-        mAppUpdateManager.registerListener(installStateUpdatedListener)
-
-        mAppUpdateManager.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
-            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
-                && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)
-            ) {
-                try {
-                    mAppUpdateManager.startUpdateFlowForResult(
-                        appUpdateInfo, AppUpdateType.FLEXIBLE, this, RC_APP_UPDATE
-                    )
-                } catch (e: SendIntentException) {
-                    e.printStackTrace()
-                }
-            }
-        }
-    }
-
-    //реєстрація отримувача оновлень
-    private fun registerUpdateReceiver() {
-        val intentFilter = IntentFilter("download.mishkindeveloper.AllRadioUA.UPDATE_ACTION")
-
-        val updateReceiver = object : BroadcastReceiver() {
-            override fun onReceive(context: Context?, intent: Intent?) {
-                if (intent?.action == "download.mishkindeveloper.AllRadioUA.UPDATE_ACTION") {
-                    // Received broadcast about update, call your functionality
-                    UpdateApp().checkUpdateStatus(context)
-                }
-            }
-        }
-
-        val flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            // For Android 13 and above, use RECEIVER_NOT_EXPORTED
-            ContextCompat.RECEIVER_NOT_EXPORTED
-        } else {
-            // For versions prior to Android 13, flags are not needed
-            0
-        }
-
-        registerReceiver(updateReceiver, intentFilter, null, null, flags)
-    }
-
-    private fun unregisterUpdateReceiver() {
-        unregisterReceiver(updateReceiver)
-    }
-
-    private fun checkUpdateStatus() {
-        // Get the installation status
-        val mAppUpdateManager = AppUpdateManagerFactory.create(this)
-        mAppUpdateManager.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
-            if (appUpdateInfo.installStatus() == InstallStatus.DOWNLOADED) {
-                // Show the update completion message
-                UpdateApp().showCompletedUpdate(this)
-            }
-        }
-    }
-    //конец проверки обновления программы
 
 }
