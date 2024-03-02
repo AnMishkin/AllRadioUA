@@ -78,7 +78,6 @@ import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.install.model.ActivityResult.RESULT_IN_APP_UPDATE_FAILED
 import com.google.android.play.core.install.model.AppUpdateType.IMMEDIATE
 import com.google.android.play.core.install.model.UpdateAvailability
-import download.mishkindeveloper.AllRadioUA.updateAp.UpdateApp
 
 
 class MainActivity : AppCompatActivity() {
@@ -113,13 +112,7 @@ class MainActivity : AppCompatActivity() {
     private var timerTextView: TextView? = null
     private var timerImageButton: ImageButton? = null
     private var alertImageButton: ImageButton? = null
-    private lateinit var alarmManager: AlarmManager
-    private lateinit var calendar: Calendar
-    private lateinit var pendingIntent: PendingIntent
     private lateinit var timePicker: MaterialTimePicker
-    private lateinit var alarmRecyclerView: RecyclerView
-    private lateinit var alarmAdapter: RadioStationAdapter
-    private var selectedRadioStation: RadioWave? = null
     private var menuItemIdListener: MenuItemIdListener? = null
 
     private var addImageButton: ImageButton? = null
@@ -129,8 +122,6 @@ class MainActivity : AppCompatActivity() {
     private var fragmentSettingListener: FragmentSettingListener? = null
     private lateinit var preferenceAlarmHelper: PreferenceAlarmHelper
     private var mPlayerAlarmService: AlarmRadioPlayerService? = null
-    private var alarmPlayerService: AlarmRadioPlayerService? = null
-    private var isServiceBound = false
     val packageNameForAlarm = "download.mishkindeveloper.AllRadioUA.services"
     val serviceClassName = "download.mishkindeveloper.AllRadioUA.services.AlarmRadioPlayerService"
     private var stopAlarmActivity: StopAlarmActivity? = null
@@ -154,10 +145,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var searchImageButton: ImageButton
     private lateinit var mAdView: AdView
     private var mInterstitialAd: InterstitialAd? = null
-
-    lateinit var mAppUpdateManager: AppUpdateManager
-    private val RC_APP_UPDATE = 100
-    private val updateApp = UpdateApp()
     private var updateCanceled: String? = null
     private var newAppIsReady: String? = null
     private var updateInstall: String? = null
@@ -245,53 +232,12 @@ class MainActivity : AppCompatActivity() {
         initPermission()
         checkFirstStartStatus()
         initBroadcastManager()
-        //createNotificationChannelAlarm()
         setMediaInfoInMiniPlayer()
         setListeners()
         performSearch()
         initAds()
 
-        //checkForUpdate()
-        //updateApp.checkUpdateStatus(this)
-        //updateApp.startUpdateFlow(this)
-        //checkUpdateStatus()
-        // Initialize updateReceiver
-//        updateReceiver = object : BroadcastReceiver() {
-//            override fun onReceive(context: Context?, intent: Intent?) {
-//                if (intent?.action == "download.mishkindeveloper.AllRadioUA.UPDATE_ACTION") {
-//                    // Received broadcast about update, call your functionality
-//                    UpdateApp().checkUpdateStatus(context)
-//                }
-//            }
-//        }
-        //updateApp()
-
-
-
-    //isRecordAudioPermissionGranted()
-
-        //checkDate()
-        //titleToolTextView?.text = items.size.toString()+"-"+getString(R.string.list_menu_item)
     }
-
-//    private fun checkReview() {
-//        val activity = this as? Activity
-//        if (activity != null && !activity.isFinishing) {
-//            val sharedPreferences = getSharedPreferences("ReviewPrefs", Context.MODE_PRIVATE)
-//            val reviewLeft = sharedPreferences.getBoolean("reviewLeft", false)
-//
-//            if (!reviewLeft) {
-//                reviewManager = ReviewManagerSingleton.ReviewManagerSingleton.getInstance(activity)
-//
-//                reviewManager.checkAndPromptForReview(
-//                    textReview,
-//                    laiterReview,
-//                    leaveReview,
-//                    okReview
-//                )
-//            }
-//        }
-//    }
 
     private fun checkAlarm() {
         var check = preferenceAlarmHelper.getBoolean("Alarm",false)
@@ -309,7 +255,7 @@ class MainActivity : AppCompatActivity() {
         mAdView.destroy()
         mExoPlayer?.stop()
         mVisualizer?.release()
-        //unregisterUpdateReceiver()
+
 
     }
 
@@ -324,7 +270,7 @@ class MainActivity : AppCompatActivity() {
         val intentFilter = IntentFilter(getString(R.string.intent_filter))
 
         val flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            // Для Android 13 і вище, використовуйте RECEIVER_NOT_EXPORTED
+            // Для Android 13 і вище, треба RECEIVER_NOT_EXPORTED
             ContextCompat.RECEIVER_NOT_EXPORTED
         } else {
             // Для версій до Android 13, флаги не потрібні
@@ -333,29 +279,7 @@ class MainActivity : AppCompatActivity() {
 
         registerReceiver(timerBroadcastReceiver, intentFilter, null, null, flags)
         mAdView.resume()
-        // Перевірка статусу оновлення при відновленні активності
-        //updateApp.checkUpdateStatus(this)
 
-        //registerUpdateReceiver()
-        //requestRecordPermission()
-        // Проверка состояния обновления
-//        mAppUpdateManager.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
-//            if (appUpdateInfo.installStatus() == InstallStatus.DOWNLOADED) {
-//                // Обновление было загружено, отображаем сообщение
-//                //showCompletedUpdate()
-//            } else if (appUpdateInfo.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
-//                // Процесс обновления был приостановлен, возобновляем его
-//                try {
-//                    mAppUpdateManager.startUpdateFlowForResult(
-//                        appUpdateInfo,
-//                        AppUpdateType.FLEXIBLE,
-//                        this,
-//                        RC_APP_UPDATE
-//                    )
-//                } catch (e: SendIntentException) {
-//                    e.printStackTrace()
-//                }
-//            }
         }
 
 
@@ -1376,23 +1300,6 @@ fun chekInternet(){
         }
     }
 
-
-//    private fun checkAlarm() {
-//        val alarmIntent = Intent(this, AlarmReceiver::class.java)
-//        val pendingIntent = PendingIntent.getBroadcast(
-//            this, 0, alarmIntent, PendingIntent.FLAG_NO_CREATE
-//        )
-//        val isAlarmSet = pendingIntent != null
-//
-//        if (isAlarmSet) {
-//            Log.d("MyLog","Будильник уже запущен")
-//            alertImageButton?.setImageResource(R.drawable.baseline_alarm_off_24)
-//
-//        } else {
-//            Log.d("MyLog","Будильник не запуще")
-//
-//        }
-
     fun stopAlarmDialogInMain() {
         val yes  = resources.getText(R.string.update_yes)
         val no  = resources.getText(R.string.update_no)
@@ -1490,134 +1397,6 @@ private fun cancelAlarm() {
         }
     }
 
-//проверка обновления программы
-//@Deprecated("Deprecated in Java")
-//override fun onActivityResult(
-//    requestCode: Int,
-//    resultCode: Int,
-//    data: Intent?
-//) {
-//    super.onActivityResult(requestCode, resultCode, data)
-//    if (requestCode == RC_APP_UPDATE && resultCode != RESULT_OK) {
-//        // Handle the update cancellation
-//        Toast.makeText(this, updateCanceled, Toast.LENGTH_SHORT).show()
-//    }
-//}
-//
-//    private val installStateUpdatedListener =
-//        InstallStateUpdatedListener { state ->
-//            if (state.installStatus() == InstallStatus.DOWNLOADED) {
-//                // Show the update completion message
-//                UpdateApp().checkUpdateStatus(this)
-//            }
-//        }
-//
-//    @RequiresApi(Build.VERSION_CODES.S)
-//    private fun initAppUpdateManagerUpperS() {
-//        val mAppUpdateManager = AppUpdateManagerFactory.create(this)
-//        mAppUpdateManager.registerListener(installStateUpdatedListener)
-//
-//        mAppUpdateManager.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
-//            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
-//                && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)
-//            ) {
-//                try {
-//                    mAppUpdateManager.startUpdateFlowForResult(
-//                        appUpdateInfo, AppUpdateType.FLEXIBLE, this, RC_APP_UPDATE
-//                    )
-//                } catch (e: SendIntentException) {
-//                    e.printStackTrace()
-//                }
-//            }
-//        }
-//    }
-//
-//    private fun initAppUpdateManagerDownS() {
-//        val mAppUpdateManager = AppUpdateManagerFactory.create(this)
-//        mAppUpdateManager.registerListener(installStateUpdatedListener)
-//
-//        mAppUpdateManager.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
-//            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
-//                && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)
-//            ) {
-//                try {
-//                    mAppUpdateManager.startUpdateFlowForResult(
-//                        appUpdateInfo, AppUpdateType.FLEXIBLE, this, RC_APP_UPDATE
-//                    )
-//                } catch (e: SendIntentException) {
-//                    e.printStackTrace()
-//                }
-//            }
-//        }
-//    }
-//
-//    //реєстрація отримувача оновлень
-//    private fun registerUpdateReceiver() {
-//        val intentFilter = IntentFilter("download.mishkindeveloper.AllRadioUA.UPDATE_ACTION")
-//
-//        val updateReceiver = object : BroadcastReceiver() {
-//            override fun onReceive(context: Context?, intent: Intent?) {
-//                if (intent?.action == "download.mishkindeveloper.AllRadioUA.UPDATE_ACTION") {
-//                    // Received broadcast about update, call your functionality
-//                    UpdateApp().checkUpdateStatus(context)
-//                }
-//            }
-//        }
-//
-//        val flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-//            // For Android 13 and above, use RECEIVER_NOT_EXPORTED
-//            ContextCompat.RECEIVER_NOT_EXPORTED
-//        } else {
-//            // For versions prior to Android 13, flags are not needed
-//            0
-//        }
-//
-//        registerReceiver(updateReceiver, intentFilter, null, null, flags)
-//    }
-//
-//    private fun unregisterUpdateReceiver() {
-//        unregisterReceiver(updateReceiver)
-//    }
-//
-//    private fun checkUpdateStatus() {
-//        // Get the installation status
-//        val mAppUpdateManager = AppUpdateManagerFactory.create(this)
-//        mAppUpdateManager.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
-//            if (appUpdateInfo.installStatus() == InstallStatus.DOWNLOADED) {
-//                // Show the update completion message
-//                UpdateApp().showCompletedUpdate(this)
-//            }
-//        }
-//    }
-//
-//    private fun updateApp() {
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-//            initAppUpdateManagerUpperS()
-//        } else {
-//            initAppUpdateManagerDownS()
-//        }
-//    }
-    //конец проверки обновления программы
-//private fun checkForUpdate() {
-//    // Отримайте номер поточної версії додатку
-//    val currentVersionCode = packageManager.getPackageInfo(packageName, 0).longVersionCode
-//
-//    // Отримайте номер останньої версії додатку, наприклад, з сервера або з Google Play
-//    val latestVersionCode = // Логіка для отримання останньої версії, можливо, через API Google Play
-//
-//        if (latestVersionCode > currentVersionCode) {
-//            // Оновлення готове
-//            Log.d("UpdateApp", "Оновлення готове до встановлення")
-//
-//            // Відправте broadcast для підготовки оновлення
-//            UpdateApp.sendUpdateBroadcast(this)
-//        } else {
-//            // Оновлення не доступне
-//            Log.d("UpdateApp", "Оновлення не доступне")
-//        }
-//}
-//
-//}
     //оновлення програми
 private fun checkForAppUpdate() {
     val appUpdateInfoTask = appUpdateManager.appUpdateInfo
