@@ -73,6 +73,7 @@ import javax.inject.Inject
 import android.content.Context
 import android.content.Intent
 import android.provider.Settings
+import androidx.activity.OnBackPressedCallback
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.install.model.ActivityResult.RESULT_IN_APP_UPDATE_FAILED
@@ -236,6 +237,7 @@ class MainActivity : AppCompatActivity() {
         setListeners()
         performSearch()
         initAds()
+        backPress()
 
     }
 
@@ -1104,11 +1106,16 @@ fun chekInternet(){
         startService(intent)
     }
 
-    @Deprecated("Deprecated in Java")
-    override fun onBackPressed() {
-        super.onBackPressed()
-        motionLayout?.transitionToStart()
-    }
+fun backPress() {
+    onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            // Виконайте потрібну анімацію або іншу дію
+            motionLayout?.transitionToStart()
+
+            // Не завершуйте активність тут, щоб додаток не закривався
+        }
+    })
+}
 
     @SuppressLint("SetTextI18n")
     private fun updateGUI(intent: Intent) {
