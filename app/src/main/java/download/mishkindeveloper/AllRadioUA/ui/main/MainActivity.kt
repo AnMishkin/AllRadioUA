@@ -31,7 +31,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
-import com.gauravk.audiovisualizer.visualizer.CircleLineVisualizer
+
 import com.google.android.exoplayer2.*
 import com.google.android.exoplayer2.ExoPlaybackException.*
 import com.google.android.exoplayer2.ui.PlayerControlView
@@ -72,8 +72,13 @@ import java.util.*
 import javax.inject.Inject
 import android.content.Context
 import android.content.Intent
+import android.graphics.Canvas
+import android.graphics.Paint
+import android.opengl.ETC1.getHeight
+import android.opengl.ETC1.getWidth
 import android.provider.Settings
 import androidx.activity.OnBackPressedCallback
+import com.chibde.visualizer.CircleBarVisualizer
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.install.model.ActivityResult.RESULT_IN_APP_UPDATE_FAILED
@@ -100,7 +105,7 @@ class MainActivity : AppCompatActivity() {
     private  var mFmFrequencyTextView: TextView? = null
     private  var radioWave: RadioWave? = null
     private  var lottieAnimationView: LottieAnimationView? = null
-    private  var mVisualizer: CircleLineVisualizer? = null
+    private  var mVisualizer: CircleBarVisualizer? = null
     //заменил
     private var audioSessionId: Int? = null
     var motionLayout: MotionLayout? = null
@@ -658,25 +663,32 @@ initAds()
         mFmFrequencyTextView?.text = mPlayerService?.getRadioWave()?.fmFrequency
     }
 
-    fun setMediaSessionAndVisual() {
+    private fun setMediaSessionAndVisual() {
         try {
-            mExoPlayer?.let { player ->
-                audioSessionId = player.audioSessionId
-            }
+            if (mVisualizer == null) {
+                audioSessionId?.let {
+                    mVisualizer = CircleBarVisualizer(this,null,80).apply {
 
-            mVisualizer?.let { visualizer ->
-                audioSessionId?.let { session ->
-                    visualizer.setAudioSessionId(session)
+                        setColor(getColor(R.color.yellow))
+                    }
                 }
             }
+            mExoPlayer?.let {
+                var canvas = Canvas()
+                canvas.drawColor(getColor(R.color.yellow))
+                canvas.drawCircle(20F, 20F, 20F, Paint())
+
+               mVisualizer?.setColor(getColor(R.color.yellow))
+                mVisualizer?.setPlayer(it.audioSessionId) }
+
         } catch (e: Exception) {
-            Log.d("MyLog", "Вылетела ошибка - в setMediaSessionAndVisual")
+            Log.d("MyLog", "Виліт помилки в setMediaSessionAndVisual: ${e.message}")
             mVisualizer?.release()
-            audioSessionId?.let { session ->
-                mVisualizer?.setAudioSessionId(session)
-            }
         }
     }
+
+
+
 
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -892,26 +904,40 @@ initAds()
 
 
         private fun posterRequestOkhttp(mediaMetadata: MediaMetadata) {
-            val artist = mediaMetadata.title.toString().split("-")
-            val url =
-                "https://www.theaudiodb.com/api/v1/json/523532/search.php?s=${artist[0]}"
-            val okHttpClient: OkHttpClient = OkHttpClient()
-            val request: Request = Request.Builder().url(url).build()
+            // Отримуємо ім'я артиста з метаданих
+            val artist = mediaMetadata.title.toString().split("-")[0].trim()
+
+            // URL запиту до Last.fm API
+            val apiKey = "ede31e937767c8dfc80d2aca07a5c256" // Замініть на ваш API ключ
+            val url = "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=$artist&api_key=$apiKey&format=json"
+
+            val okHttpClient = OkHttpClient()
+            val request = Request.Builder().url(url).build()
+
             okHttpClient.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
-
+                    // Обробка помилки запиту
                 }
 
                 @SuppressLint("SimpleDateFormat")
                 override fun onResponse(call: Call, response: Response) {
                     val json = response.body?.string()?.let { JSONObject(it) }
-                    val jsonArray: JSONArray
                     try {
-                        jsonArray = json!!.getJSONArray("artists")
-                        runOnUiThread {
-                            insertTrackAndLoadPoster(mediaMetadata, jsonArray)
+                        // Отримуємо об'єкт артиста з відповіді JSON
+                        val artistObject = json?.getJSONObject("artist")
+                        if (artistObject != null) {
+                            // Викликаємо метод для обробки даних артиста
+                            runOnUiThread {
+                                insertTrackAndLoadPoster(mediaMetadata, artistObject)
+                            }
+                        } else {
+                            // Викликаємо метод для встановлення дефолтного постера
+                            runOnUiThread {
+                                insertTrackAndSetDefaultPoster(mediaMetadata)
+                            }
                         }
-                    } catch (e: java.lang.Exception) {
+                    } catch (e: Exception) {
+                        // Обробка винятків, встановлення дефолтного постера
                         runOnUiThread {
                             insertTrackAndSetDefaultPoster(mediaMetadata)
                         }
@@ -919,6 +945,7 @@ initAds()
                 }
             })
         }
+
 
         @SuppressLint("SimpleDateFormat")
         private fun insertTrackAndSetDefaultPoster(mediaMetadata: MediaMetadata) {
@@ -937,19 +964,28 @@ initAds()
         @SuppressLint("SimpleDateFormat")
         private fun insertTrackAndLoadPoster(
             mediaMetadata: MediaMetadata,
-            jsonArray: JSONArray
+            artistObject: JSONObject // Змінили JSONArray на JSONObject
         ) {
             val track = Track()
             val sdf = SimpleDateFormat("dd.MM.yyyy HH:mm:ss")
             val currentDate = sdf.format(Date())
             track.name = mediaMetadata.title.toString()
-            artistPoster =
-                jsonArray.getJSONObject(0)?.getString("strArtistFanart").toString()
+
+            // Витягуємо URL постера артиста з JSONObject
+            artistPoster = artistObject.optString("image", "")
+            if (artistPoster.isEmpty()) {
+                artistPoster =
+                    "http://mishkindeveloper.download/imageRadio/NoImageSong.jpg"
+            }
+
             track.date = currentDate
-            track.image = artistPoster.toString()
+            track.image = artistPoster
             track.station = mediaMetadata.station.toString()
+
+            // Вставка треку в базу даних
             viewModel.insertTrack(track)
         }
+
 
         override fun onPlayerError(error: PlaybackException) {
             val er = getString(R.string.error_play_station)
