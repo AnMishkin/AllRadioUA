@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.android.gms:play-services-ads-base:23.2.0@aar" external-system-id="GRADLE">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/transforms-3/5eb19a4bf8b0e2b2e5ddc66179e52c51/transformed/jetified-play-services-ads-base-23.2.0/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/transforms-3/5eb19a4bf8b0e2b2e5ddc66179e52c51/transformed/jetified-play-services-ads-base-23.2.0/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/modules-2/files-2.1/com.google.android.gms/play-services-ads-base/23.2.0/542b118e67c881d7c185064c52f881dae688492a/play-services-ads-base-23.2.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES />
+  </library>
+</component>

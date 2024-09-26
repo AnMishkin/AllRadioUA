@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.android.play:asset-delivery-ktx:2.2.2@aar" external-system-id="GRADLE">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/transforms-3/44de7c6067e48268f06e204541d15f59/transformed/jetified-asset-delivery-ktx-2.2.2/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/transforms-3/44de7c6067e48268f06e204541d15f59/transformed/jetified-asset-delivery-ktx-2.2.2/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

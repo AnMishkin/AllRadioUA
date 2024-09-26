@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="Gradle: androidx.webkit:webkit:1.11.0-alpha02@aar" external-system-id="GRADLE">
+    <ANNOTATIONS>
+      <root url="jar://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/transforms-3/217c3d845d0c95a58addc8f69c40a844/transformed/webkit-1.11.0-alpha02/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/transforms-3/217c3d845d0c95a58addc8f69c40a844/transformed/webkit-1.11.0-alpha02/res" />
+      <root url="jar://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/transforms-3/217c3d845d0c95a58addc8f69c40a844/transformed/webkit-1.11.0-alpha02/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/transforms-3/217c3d845d0c95a58addc8f69c40a844/transformed/webkit-1.11.0-alpha02/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/modules-2/files-2.1/androidx.webkit/webkit/1.11.0-alpha02/8f904500fb31808204cd71526806f5b0602a2d14/webkit-1.11.0-alpha02-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

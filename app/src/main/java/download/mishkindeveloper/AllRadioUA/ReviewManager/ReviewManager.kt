@@ -11,12 +11,12 @@ import java.util.*
 
 class ReviewManager(private val context: Context) {
     private val sharedPreferences: SharedPreferences = context.getSharedPreferences("ReviewPrefs", Context.MODE_PRIVATE)
-    private lateinit var textReview : String
-    private lateinit var laiterReview : String
-    private lateinit var leaveReview : String
-    private lateinit var okReview : String
+    private lateinit var textReview: String
+    private lateinit var laiterReview: String
+    private lateinit var leaveReview: String
+    private lateinit var okReview: String
 
-    fun checkAndPromptForReview(textReview : String,laiterReview : String,leaveReview : String,okReview : String) {
+    fun checkAndPromptForReview(textReview: String, laiterReview: String, leaveReview: String, okReview: String) {
         this.textReview = textReview
         this.laiterReview = laiterReview
         this.leaveReview = leaveReview
@@ -27,7 +27,7 @@ class ReviewManager(private val context: Context) {
             val remindTime = sharedPreferences.getLong("remindTime", 0)
             val currentTime = Calendar.getInstance().timeInMillis
             if (!reviewLeft && currentTime >= remindTime) {
-                showReviewPromptDialog(textReview,laiterReview,leaveReview,okReview)
+                showReviewPromptDialog()
             }
         }
 
@@ -35,11 +35,10 @@ class ReviewManager(private val context: Context) {
         sharedPreferences.edit().putInt("appLaunchCount", appLaunchCount + 1).apply()
     }
 
-    private fun showReviewPromptDialog(textReview : String,laiterReview : String,leaveReview : String,okReview : String) {
-        this.textReview = textReview
-        this.laiterReview = laiterReview
-        this.leaveReview = leaveReview
-        this.okReview = okReview
+    private fun showReviewPromptDialog() {
+        if (context !is Activity || context.isFinishing || context.isDestroyed) {
+            return
+        }
 
         val alertDialogBuilder = AlertDialog.Builder(context)
         alertDialogBuilder.setTitle(leaveReview)
