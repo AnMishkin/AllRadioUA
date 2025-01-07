@@ -12,8 +12,8 @@ android {
         applicationId "download.mishkindeveloper.AllRadioUA"
         minSdk 26
         targetSdk 34
-        versionCode 57
-        versionName "1.2"
+        versionCode 61
+        versionName "1.6"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -110,9 +110,9 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:$rxjava"
     implementation 'androidx.media:media:1.7.0'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
-    implementation 'com.google.android.gms:play-services-ads:23.2.0'
-    implementation 'com.google.android.gms:play-services-ads-identifier:18.1.0'
-    implementation 'com.google.android.ump:user-messaging-platform:2.2.0'
+    implementation 'com.google.android.gms:play-services-ads:23.6.0'
+    implementation 'com.google.android.gms:play-services-ads-identifier:18.2.0'
+    implementation 'com.google.android.ump:user-messaging-platform:3.1.0'
     implementation 'com.squareup.okhttp3:okhttp:4.10.0'
 
 
@@ -132,6 +132,10 @@ dependencies {
 
     //оновлення
     //implementation "com.google.android.play:core-ktx:1.8.1"
+
+    //in-app updates
+    implementation("com.google.android.play:app-update:2.1.0")
+    implementation("com.google.android.play:app-update-ktx:2.1.0")
 
 }
 // ADD THIS AT THE BOTTOM

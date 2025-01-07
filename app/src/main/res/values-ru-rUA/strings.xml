@@ -23,7 +23,7 @@
     <string name="list_rb">Список</string>
     <string name="grid_rb">Сетка</string>
     <string name="view_tv">Отображение</string>
-    <string name="list_menu_item">Станции</string>
+    <string name="list_menu_item">Станций в базе</string>
     <string name="fav_menu_item">Избранное</string>
     <string name="set_menu_item">Настройки</string>
     <string name="history_menu_item">История</string>
@@ -79,4 +79,7 @@
     <string name="text_notification_permission">Данное разрешение нужно для корректной работы будильника,а именно показ уведомления во время его срабатывания!</string>
     <string name="settings_notification_permission">Перейти к настройкам</string>
     <string name="cancel_notification_permission">Отмена</string>
+    <string name="update_stations_title">Оновлення радіостанцій</string>
+    <string name="added_stations_prefix">Додані станції:</string>
+    <string name="removed_stations_prefix">Видалені станції:</string>
 </resources>

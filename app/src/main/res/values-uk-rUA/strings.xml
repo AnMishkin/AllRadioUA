@@ -23,7 +23,7 @@
     <string name="list_rb">Список</string>
     <string name="grid_rb">Сітка</string>
     <string name="view_tv">Відображення</string>
-    <string name="list_menu_item">Станції</string>
+    <string name="list_menu_item">Станцій в базі</string>
     <string name="fav_menu_item">Вибране</string>
     <string name="set_menu_item">Налаштування</string>
     <string name="history_menu_item">Історія</string>
@@ -80,4 +80,7 @@
     <string name="text_notification_permission">Даний дозвіл потрібен для коректної роботи будильника, а саме показ повідомлення під час його спрацювання!</string>
     <string name="settings_notification_permission">Перейти до налаштувань</string>
     <string name="cancel_notification_permission">Відміна</string>
+    <string name="update_stations_title">Оновлення радіостанцій</string>
+    <string name="added_stations_prefix">Додані станції:</string>
+    <string name="removed_stations_prefix">Видалені станції:</string>
 </resources>

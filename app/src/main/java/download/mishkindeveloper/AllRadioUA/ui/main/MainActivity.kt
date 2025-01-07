@@ -135,6 +135,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var updateReceiver: BroadcastReceiver
     private val appUpdateManager by lazy { AppUpdateManagerFactory.create(this) }
     private val MY_REQUEST_CODE = 42
+    private var firebaseRadioWaves = mutableListOf<RadioWave>()
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -312,7 +313,7 @@ class MainActivity : AppCompatActivity() {
         firstStartStatus = preferencesHelper.getFirstStart()
         if (firstStartStatus) {
             initDb()
-            updateDb()
+            //updateDb()
 
         } else {
             updateDb()
@@ -520,9 +521,12 @@ class MainActivity : AppCompatActivity() {
         transaction.addToBackStack(null)
         transaction.commit()
     searchImageButton.visibility = View.VISIBLE
-    titleToolTextView?.text = getString(R.string.list_menu_item)
+    firebaseRadioWaves = viewModel.getAllRadioWaves().toMutableList()
+    titleToolTextView?.text = "${firebaseRadioWaves.size} - ${getString(R.string.list_menu_item)}"
+
+
     //titleToolTextView?.text = items.size.toString()+"-"+getString(R.string.list_menu_item)
-initAds()
+        initAds()
     Log.d("Mylog","создается список станций")
     }
 
@@ -713,7 +717,7 @@ initAds()
         backImageButton = findViewById(R.id.backImageButton)
         titleToolTextView = findViewById(R.id.titleToolTextView)
        // titleToolTextView?.text = items.size.toString()+"-"+getString(R.string.list_menu_item)
-        titleToolTextView?.text = getString(R.string.list_menu_item)
+        //titleToolTextView?.text = "${firebaseRadioWaves.size} - ${getString(R.string.list_menu_item)}"
 
         searchView = findViewById(R.id.radio_search)
         timerTextView = findViewById(R.id.timerTextView)
@@ -738,6 +742,7 @@ initAds()
         val serviceIntent = Intent(this, AlarmRadioPlayerService::class.java)
         bindService(serviceIntent, serviceConnection, Context.BIND_AUTO_CREATE)
         //registerUpdateReceiver()
+
     }
 
     private fun initPermission() {
@@ -758,6 +763,7 @@ initAds()
 
         val valueEventListener: ValueEventListener = object : ValueEventListener {
             override fun onDataChange(@NonNull @NotNull snapshot: DataSnapshot) {
+                items.clear()
                 for (dataSnapshot in snapshot.children) {
                     val radioWave: RadioWave? = dataSnapshot.getValue(RadioWave::class.java)
                     items.add(radioWave!!)
@@ -783,38 +789,93 @@ initAds()
         database = FirebaseDatabase.getInstance(getString(R.string.firebase_url)).getReference(getString(R.string.firebase_ref))
         val valueEventListener: ValueEventListener = object : ValueEventListener {
             override fun onDataChange(@NonNull @NotNull snapshot: DataSnapshot) {
-                // Создаем список радиостанций, которые будут добавлены в базу данных
-                val newRadioWaves = mutableListOf<RadioWave>()
 
+                val addedStations = mutableListOf<RadioWave>()
+                val removedStations = mutableListOf<RadioWave>()
+
+                // Завантаження радіостанцій із Firebase
                 for (dataSnapshot in snapshot.children) {
                     val radioWave: RadioWave? = dataSnapshot.getValue(RadioWave::class.java)
-
-                    // Если радиостанция уже есть в базе данных, то используем ее данные из базы данных
-                    // иначе добавляем новую радиостанцию в список новых радиостанций
-                    val existingRadioWave = viewModel.getRadioWaveForId(radioWave?.id)
-                    if (existingRadioWave != null) {
-                        radioWave?.favorite = existingRadioWave.favorite
-                        radioWave?.custom = existingRadioWave.custom
-                        radioWave?.countOpen = existingRadioWave.countOpen
-                        newRadioWaves.add(radioWave!!)
-                    } else {
-                        newRadioWaves.add(radioWave!!)
+                    if (radioWave != null) {
+                        firebaseRadioWaves.add(radioWave)
                     }
                 }
 
-                // Обновляем базу данных только с новыми радиостанциями
-                viewModel.createListRadioWave(newRadioWaves)
+                // IDs із Firebase
+                val firebaseIds = firebaseRadioWaves.map { it.id }.toSet()
 
-                // Устанавливаем флаг "FirstStart" в false, только если данные были успешно получены
+                // Завантаження радіостанцій із локальної бази (Room)
+                val localRadioWaves = viewModel.getAllRadioWaves()
+
+                // Перевірка на застарілі станції та видалення
+                for (localRadioWave in localRadioWaves) {
+                    if (!firebaseIds.contains(localRadioWave.id) && !localRadioWave.custom!!) {
+                        // Видалення радіостанції, якої немає у Firebase та яка не кастомна
+                        viewModel.deleteRadioWave(localRadioWave)
+                        removedStations.add(localRadioWave) // Додаємо до списку видалених
+                        Log.d("UpdateDb", "Видалено застарілу станцію: ${localRadioWave.id}")
+                    }
+                }
+
+                // Оновлення локальної бази новим списком із Firebase
+                for (firebaseRadioWave in firebaseRadioWaves) {
+                    val existingRadioWave = localRadioWaves.find { it.id == firebaseRadioWave.id }
+
+                    if (existingRadioWave != null) {
+                        // Якщо станція існує локально, зберігаємо її улюбленість та кастомність
+                        firebaseRadioWave.favorite = existingRadioWave.favorite
+                        firebaseRadioWave.custom = existingRadioWave.custom
+                        firebaseRadioWave.countOpen = existingRadioWave.countOpen
+                    } else {
+                        // Додаємо до списку нових станцій
+                        addedStations.add(firebaseRadioWave)
+                    }
+                }
+
+                viewModel.createListRadioWave(firebaseRadioWaves) // Оновлення локальної бази
+                Log.d("UpdateDb", "Оновлено локальну базу. IDs: ${firebaseIds}")
+                Log.d("UpdateDb", "В базі - ${firebaseRadioWaves.size}")
+                firebaseRadioWaves = viewModel.getAllRadioWaves().toMutableList()
+                titleToolTextView?.text = "${firebaseRadioWaves.size} - ${getString(R.string.list_menu_item)}"
+                // Показ діалогового вікна
+                showUpdateDialog(addedStations, removedStations)
+
+                // Установлення FirstStart у false
                 preferencesHelper.setFirstStart(false)
             }
 
-            override fun onCancelled(@NonNull @NotNull error: DatabaseError) {}
+            override fun onCancelled(@NonNull @NotNull error: DatabaseError) {
+                Log.e("UpdateDb", "Помилка оновлення: ${error.message}")
+            }
         }
 
-        // Запрашиваем данные из Firebase Realtime Database и обновляем их в приложении при каждом изменении
         database!!.addValueEventListener(valueEventListener)
     }
+
+    private fun showUpdateDialog(addedStations: List<RadioWave>, removedStations: List<RadioWave>) {
+        val addedNames = addedStations.joinToString("\n\n") { it.name.toString() }
+        val removedNames = removedStations.joinToString("\n\n") { it.name.toString() }
+
+
+        val message = StringBuilder()
+        if (addedNames.isNotEmpty()) {
+            message.append("Додані станції:\n\n$addedNames\n\n")
+        }
+        if (removedNames.isNotEmpty()) {
+            message.append("Видалені станції:\n\n$removedNames")
+        }
+
+        if (message.isNotEmpty()) {
+            AlertDialog.Builder(this)
+                .setTitle("Оновлення радіостанцій")
+                .setMessage(message.toString())
+                .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
+                .show()
+        } else {
+            Log.d("UpdateDb", "Змін у списку радіостанцій немає.")
+        }
+    }
+
 
 
 
@@ -1469,6 +1530,7 @@ private fun checkForAppUpdate() {
         if (requestCode == MY_REQUEST_CODE) {
             when (resultCode) {
                 RESULT_OK -> {
+
                     Log.d("update", "App update successfully installed")
                 }
                 RESULT_CANCELED -> {

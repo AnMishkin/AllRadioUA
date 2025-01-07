@@ -8,4 +8,11 @@
         <item name="android:background">?android:attr/colorBackground</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
     </style>
+
+    <style name="CustomDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">#FF5722</item> <!-- Колір акценту -->
+        <item name="android:background">#FFFFFF</item> <!-- Колір фону -->
+        <item name="android:textColorPrimary">#000000</item> <!-- Колір тексту -->
+    </style>
+
 </resources>

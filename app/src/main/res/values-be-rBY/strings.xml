@@ -51,4 +51,7 @@
     <string name="text_notification_permission">Дадзенае дазвол трэба для карэктнай працы будзільніка, а менавіта паказ апавяшчэння падчас яго спрацоўвання!</string>
     <string name="settings_notification_permission">Перайсці да налад</string>
     <string name="cancel_notification_permission">Адмяніць</string>
+    <string name="update_stations_title">Абнаўленне радыёстанцый</string>
+    <string name="added_stations_prefix">Дададзеныя радыёстанцыі:</string>
+    <string name="removed_stations_prefix">Вылучаныя радыёстанцыі:</string>
 </resources>

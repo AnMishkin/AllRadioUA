@@ -42,7 +42,7 @@
     <string name="list_rb">List</string>
     <string name="grid_rb">Grid</string>
     <string name="view_tv">Display</string>
-    <string name="list_menu_item">Stations</string>
+    <string name="list_menu_item">Stations in base</string>
     <string name="fav_menu_item">Favorites</string>
     <string name="set_menu_item">Settings</string>
     <string name="history_menu_item">Story</string>
@@ -104,4 +104,11 @@
     <string name="text_notification_permission">This permission is necessary for the correct operation of the alarm clock, namely the display of a notification during its operation!</string>
     <string name="cancel_notification_permission">Cancel</string>
     <string name="settings_notification_permission">Go to settings</string>
+
+
+    <string name="added_stations_prefix">Added stations: %s</string>
+    <string name="removed_stations_prefix">Removed stations: %s</string>
+    <string name="update_stations_title">Station Update</string>
+    <string name="ok_button">OK</string>
+
 </resources>
