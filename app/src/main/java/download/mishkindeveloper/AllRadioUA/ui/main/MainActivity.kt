@@ -79,11 +79,17 @@ import android.opengl.ETC1.getWidth
 import android.provider.Settings
 import androidx.activity.OnBackPressedCallback
 import com.chibde.visualizer.CircleBarVisualizer
+import com.google.android.exoplayer2.ext.okhttp.OkHttpDataSource
+import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
+import com.google.android.exoplayer2.upstream.HttpDataSource
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.install.model.ActivityResult.RESULT_IN_APP_UPDATE_FAILED
 import com.google.android.play.core.install.model.AppUpdateType.IMMEDIATE
 import com.google.android.play.core.install.model.UpdateAvailability
+import java.security.cert.X509Certificate
+import javax.net.ssl.SSLContext
+import javax.net.ssl.X509TrustManager
 
 
 class MainActivity : AppCompatActivity() {
@@ -885,21 +891,49 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun setMediaItem() {
-        //requestRecordPermission()
         val id = preferencesHelper.getIdPlayMedia()
         val url: String?
         try {
-            if (mExoPlayer!!.currentMediaItem == null)
-              {
-                    url = viewModel.getRadioWaveForId(id).url
-                    val mediaItem: MediaItem =
-                        MediaItem.fromUri(url!!)
-                    mPlayerService?.getPlayer()?.setMediaItem(mediaItem)
-                    mPlayerService?.setRadioWave(viewModel.getRadioWaveForId(id))
+            if (mExoPlayer!!.currentMediaItem == null) {
+                url = viewModel.getRadioWaveForId(id).url
+                val dataSourceFactory = if (url == "https://giss.tv:666/xradio_channel.ogg") {
+                    createUnsafeHttpDataSourceFactory() // Обхід SSL
+                } else {
+                    createDefaultHttpDataSourceFactory() // Стандартна поведінка
+                }
+                val mediaItem = MediaItem.Builder()
+                    .setUri(url)
+                    .build()
+                mPlayerService?.getPlayer()?.setMediaItem(mediaItem)
+                mPlayerService?.setRadioWave(viewModel.getRadioWaveForId(id))
             }
         } catch (e: NullPointerException) {
-            e.stackTrace
+            e.printStackTrace()
         }
+    }
+
+    // Додайте ці методи в MainActivity
+    private fun createUnsafeHttpDataSourceFactory(): HttpDataSource.Factory {
+        val trustAllCerts = arrayOf(object : X509TrustManager {
+            override fun checkClientTrusted(chain: Array<out X509Certificate>?, authType: String?) {}
+            override fun checkServerTrusted(chain: Array<out X509Certificate>?, authType: String?) {}
+            override fun getAcceptedIssuers(): Array<X509Certificate> = emptyArray()
+        })
+
+        val sslContext = SSLContext.getInstance("SSL").apply {
+            init(null, trustAllCerts, java.security.SecureRandom())
+        }
+
+        val okHttpClient = OkHttpClient.Builder()
+            .sslSocketFactory(sslContext.socketFactory, trustAllCerts[0] as X509TrustManager)
+            .hostnameVerifier { _, _ -> true }
+            .build()
+
+        return OkHttpDataSource.Factory(okHttpClient)
+    }
+
+    private fun createDefaultHttpDataSourceFactory(): HttpDataSource.Factory {
+        return DefaultHttpDataSource.Factory()
     }
 
     private var myConnection = object : ServiceConnection {

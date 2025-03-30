@@ -44,7 +44,15 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
-
+import com.google.android.exoplayer2.upstream.HttpDataSource
+import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
+import com.google.android.exoplayer2.ext.okhttp.OkHttpDataSource
+import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.source.ProgressiveMediaSource
+import okhttp3.OkHttpClient
+import java.security.cert.X509Certificate
+import javax.net.ssl.SSLContext
+import javax.net.ssl.X509TrustManager
 
 class PlayerService() : Service(), Parcelable {
 
@@ -118,13 +126,41 @@ class PlayerService() : Service(), Parcelable {
         }
     }
 
+    // Ініціалізація плеєра без фабрики за замовчуванням
     private fun initPlayer() {
         mPlayer = ExoPlayer.Builder(this)
             .setUseLazyPreparation(false)
             .setHandleAudioBecomingNoisy(true)
-            .setPauseAtEndOfMediaItems(false).build()
+            .setPauseAtEndOfMediaItems(false)
+            .build()
         mPlayer!!.addListener(playerListener)
     }
+
+    // Фабрика для обходу SSL
+    private fun createUnsafeHttpDataSourceFactory(): HttpDataSource.Factory {
+        val trustAllCerts = arrayOf(object : X509TrustManager {
+            override fun checkClientTrusted(chain: Array<out X509Certificate>?, authType: String?) {}
+            override fun checkServerTrusted(chain: Array<out X509Certificate>?, authType: String?) {}
+            override fun getAcceptedIssuers(): Array<X509Certificate> = emptyArray()
+        })
+
+        val sslContext = SSLContext.getInstance("SSL").apply {
+            init(null, trustAllCerts, java.security.SecureRandom())
+        }
+
+        val okHttpClient = OkHttpClient.Builder()
+            .sslSocketFactory(sslContext.socketFactory, trustAllCerts[0] as X509TrustManager)
+            .hostnameVerifier { _, _ -> true }
+            .build()
+
+        return OkHttpDataSource.Factory(okHttpClient)
+    }
+
+    // Стандартна фабрика
+    private fun createDefaultHttpDataSourceFactory(): HttpDataSource.Factory {
+        return DefaultHttpDataSource.Factory()
+    }
+
 
     override fun onDestroy() {
         mPlayer?.release()
@@ -248,9 +284,29 @@ class PlayerService() : Service(), Parcelable {
 
     fun setRadioWave(radioWave: RadioWave) {
         this.radioWave = radioWave
+        val url = radioWave.url
+        val dataSourceFactory = if (url == "https://giss.tv:666/xradio_channel.ogg") {
+            createUnsafeHttpDataSourceFactory() // Обхід SSL для проблемного URL
+        } else {
+            createDefaultHttpDataSourceFactory() // Стандартна поведінка для інших
+        }
+
+        val mediaItem = MediaItem.Builder()
+            .setUri(url)
+            .build()
+
+        // Використовуємо ProgressiveMediaSource для потокового аудіо
+        val mediaSourceFactory = ProgressiveMediaSource.Factory(dataSourceFactory)
+        val mediaSource = mediaSourceFactory.createMediaSource(mediaItem)
+
+        mPlayer?.apply {
+            setMediaSource(mediaSource)
+            prepare()
+        }
+
         val i = Intent(getString(R.string.intent_filter_notification))
         i.putExtra(getString(R.string.serializable_extra), radioWave)
-        LocalBroadcastManager.getInstance(applicationContext).sendBroadcast(i);
+        LocalBroadcastManager.getInstance(applicationContext).sendBroadcast(i)
     }
 
     fun getRadioWave(): RadioWave? {
