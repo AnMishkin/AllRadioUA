@@ -1,5 +1,7 @@
 package download.mishkindeveloper.AllRadioUA.ui.main
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import download.mishkindeveloper.AllRadioUA.data.entity.RadioWave
 import download.mishkindeveloper.AllRadioUA.data.entity.Track
 import download.mishkindeveloper.AllRadioUA.data.repository.RadioWaveRepository
@@ -12,6 +14,8 @@ class MainViewModel
     var trackRepository: TrackRepository
 ) : download.mishkindeveloper.AllRadioUA.base.BaseViewModel() {
 
+    private val radioWavesLiveData = MutableLiveData<List<RadioWave>>()
+    val radioWaves: LiveData<List<RadioWave>> = radioWavesLiveData
     fun insertRadioWave(radioWave: RadioWave) {
         radioWaveRepository.insertRadioWave(radioWave)
     }
@@ -35,6 +39,12 @@ class MainViewModel
     fun getAllRadioWaves(): List<RadioWave> {
         return radioWaveRepository.getAllRadioWave()
     }
+    fun getRadioWaves() {
+        radioWaveRepository.getRadioWavesFromDb {
+            radioWavesLiveData.setValue(it)
+        }
+    }
+
 
     fun getAllTracks(): List<Track> {
         return trackRepository.getAllTrack()

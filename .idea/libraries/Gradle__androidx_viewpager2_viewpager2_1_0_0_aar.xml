@@ -1,16 +1,16 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.viewpager2:viewpager2:1.0.0@aar" external-system-id="GRADLE">
     <ANNOTATIONS>
-      <root url="jar://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/transforms-3/38dc1d8148b7541ca0aa2a19eca0d9fe/transformed/jetified-viewpager2-1.0.0/annotations.zip!/" />
+      <root url="jar://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/transforms-3/df55a9700cd17645f2c14282d13844e2/transformed/jetified-viewpager2-1.0.0/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/transforms-3/38dc1d8148b7541ca0aa2a19eca0d9fe/transformed/jetified-viewpager2-1.0.0/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/transforms-3/38dc1d8148b7541ca0aa2a19eca0d9fe/transformed/jetified-viewpager2-1.0.0/AndroidManifest.xml" />
-      <root url="file://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/transforms-3/38dc1d8148b7541ca0aa2a19eca0d9fe/transformed/jetified-viewpager2-1.0.0/res" />
+      <root url="file://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/transforms-3/df55a9700cd17645f2c14282d13844e2/transformed/jetified-viewpager2-1.0.0/res" />
+      <root url="file://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/transforms-3/df55a9700cd17645f2c14282d13844e2/transformed/jetified-viewpager2-1.0.0/AndroidManifest.xml" />
+      <root url="jar://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/transforms-3/df55a9700cd17645f2c14282d13844e2/transformed/jetified-viewpager2-1.0.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/modules-2/files-2.1/androidx.viewpager2/viewpager2/1.0.0/3c3569044e6969f1ee5c3aa03b08e6717a2d782f/viewpager2-1.0.0-sources.jar!/" />
+      <root url="jar://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/modules-2/files-2.1/androidx.viewpager2/viewpager2/1.0.0/3c3569044e6969f1ee5c3aa03b08e6717a2d782f/viewpager2-1.0.0-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

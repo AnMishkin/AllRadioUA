@@ -1,11 +1,11 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.android.gms:play-services-ads-identifier:18.2.0@aar" external-system-id="GRADLE">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/transforms-3/0297dc7750e48250ecd588a7d9797f07/transformed/jetified-play-services-ads-identifier-18.2.0/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/transforms-3/0297dc7750e48250ecd588a7d9797f07/transformed/jetified-play-services-ads-identifier-18.2.0/AndroidManifest.xml" />
+      <root url="file://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/transforms-3/1c501ec95e901356b203007bca0ba577/transformed/jetified-play-services-ads-identifier-18.2.0/AndroidManifest.xml" />
+      <root url="jar://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/transforms-3/1c501ec95e901356b203007bca0ba577/transformed/jetified-play-services-ads-identifier-18.2.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/modules-2/files-2.1/com.google.android.gms/play-services-ads-identifier/18.2.0/40486b8656531ea8ded133a910ea1a20c99ba50e/play-services-ads-identifier-18.2.0-javadoc.jar!/" />
+      <root url="jar://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/modules-2/files-2.1/com.google.android.gms/play-services-ads-identifier/18.2.0/40486b8656531ea8ded133a910ea1a20c99ba50e/play-services-ads-identifier-18.2.0-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES />
   </library>

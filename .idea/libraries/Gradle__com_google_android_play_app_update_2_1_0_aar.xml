@@ -1,11 +1,11 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.android.play:app-update:2.1.0@aar" external-system-id="GRADLE">
     <ANNOTATIONS>
-      <root url="jar://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/transforms-3/f26daea78bf05cdf3e26943b4bc79641/transformed/jetified-app-update-2.1.0/annotations.zip!/" />
+      <root url="jar://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/transforms-3/9e9ad6fec5620a81bfd461076f80b65b/transformed/jetified-app-update-2.1.0/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/transforms-3/f26daea78bf05cdf3e26943b4bc79641/transformed/jetified-app-update-2.1.0/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/transforms-3/f26daea78bf05cdf3e26943b4bc79641/transformed/jetified-app-update-2.1.0/AndroidManifest.xml" />
+      <root url="file://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/transforms-3/9e9ad6fec5620a81bfd461076f80b65b/transformed/jetified-app-update-2.1.0/AndroidManifest.xml" />
+      <root url="jar://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/transforms-3/9e9ad6fec5620a81bfd461076f80b65b/transformed/jetified-app-update-2.1.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

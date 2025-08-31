@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.android.play:review-ktx:2.0.1@aar" external-system-id="GRADLE">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/transforms-3/d67159f9673ea12c0fab9d9696d0a8cd/transformed/jetified-review-ktx-2.0.1/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/transforms-3/d67159f9673ea12c0fab9d9696d0a8cd/transformed/jetified-review-ktx-2.0.1/AndroidManifest.xml" />
+      <root url="jar://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/transforms-3/636d4337308ee28650c57a1f098d061e/transformed/jetified-review-ktx-2.0.1/jars/classes.jar!/" />
+      <root url="file://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/transforms-3/636d4337308ee28650c57a1f098d061e/transformed/jetified-review-ktx-2.0.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.android.play:feature-delivery-ktx:2.1.0@aar" external-system-id="GRADLE">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/transforms-3/080c02bb63bfdb65d7932250fc1071d6/transformed/jetified-feature-delivery-ktx-2.1.0/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/transforms-3/080c02bb63bfdb65d7932250fc1071d6/transformed/jetified-feature-delivery-ktx-2.1.0/AndroidManifest.xml" />
+      <root url="file://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/transforms-3/c58a5bdb5ea0654683839bcd6d61ea5e/transformed/jetified-feature-delivery-ktx-2.1.0/AndroidManifest.xml" />
+      <root url="jar://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/transforms-3/c58a5bdb5ea0654683839bcd6d61ea5e/transformed/jetified-feature-delivery-ktx-2.1.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

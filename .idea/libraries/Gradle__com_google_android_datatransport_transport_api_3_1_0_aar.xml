@@ -1,12 +1,12 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.android.datatransport:transport-api:3.1.0@aar" external-system-id="GRADLE">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/transforms-3/21adbd2088277584556d4af5d992fa25/transformed/jetified-transport-api-3.1.0/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/transforms-3/21adbd2088277584556d4af5d992fa25/transformed/jetified-transport-api-3.1.0/AndroidManifest.xml" />
+      <root url="jar://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/transforms-3/f3c75630c2934982fa79ba3715fa0702/transformed/jetified-transport-api-3.1.0/jars/classes.jar!/" />
+      <root url="file://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/transforms-3/f3c75630c2934982fa79ba3715fa0702/transformed/jetified-transport-api-3.1.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/modules-2/files-2.1/com.google.android.datatransport/transport-api/3.1.0/23d05daf48623692291222722b18b39510f6a9c8/transport-api-3.1.0-sources.jar!/" />
+      <root url="jar://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/modules-2/files-2.1/com.google.android.datatransport/transport-api/3.1.0/23d05daf48623692291222722b18b39510f6a9c8/transport-api-3.1.0-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

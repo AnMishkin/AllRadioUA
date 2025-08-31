@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.android.play:app-update-ktx:2.1.0@aar" external-system-id="GRADLE">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/transforms-3/17ae38a393fe9c9e51a21caef12f0e4c/transformed/jetified-app-update-ktx-2.1.0/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/transforms-3/17ae38a393fe9c9e51a21caef12f0e4c/transformed/jetified-app-update-ktx-2.1.0/AndroidManifest.xml" />
+      <root url="jar://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/transforms-3/721a08c9988367133f3486751622e422/transformed/jetified-app-update-ktx-2.1.0/jars/classes.jar!/" />
+      <root url="file://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/transforms-3/721a08c9988367133f3486751622e422/transformed/jetified-app-update-ktx-2.1.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

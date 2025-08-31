@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.android.play:core-common:2.0.3@aar" external-system-id="GRADLE">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/transforms-3/1800c1d83c8424f310781135e07bc9b8/transformed/jetified-core-common-2.0.3/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/transforms-3/1800c1d83c8424f310781135e07bc9b8/transformed/jetified-core-common-2.0.3/res" />
-      <root url="file://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/transforms-3/1800c1d83c8424f310781135e07bc9b8/transformed/jetified-core-common-2.0.3/AndroidManifest.xml" />
+      <root url="file://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/transforms-3/90773524029b4e218a6968633e74bbc4/transformed/jetified-core-common-2.0.3/res" />
+      <root url="jar://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/transforms-3/90773524029b4e218a6968633e74bbc4/transformed/jetified-core-common-2.0.3/jars/classes.jar!/" />
+      <root url="file://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/transforms-3/90773524029b4e218a6968633e74bbc4/transformed/jetified-core-common-2.0.3/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

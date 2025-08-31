@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.core:core-ktx:1.13.1@aar" external-system-id="GRADLE">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/transforms-3/6d736fec9aa4dc3faadc9c28c185fc3d/transformed/jetified-core-ktx-1.13.1/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/transforms-3/6d736fec9aa4dc3faadc9c28c185fc3d/transformed/jetified-core-ktx-1.13.1/res" />
-      <root url="file://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/transforms-3/6d736fec9aa4dc3faadc9c28c185fc3d/transformed/jetified-core-ktx-1.13.1/AndroidManifest.xml" />
+      <root url="file://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/transforms-3/ecd7f163cb4c45173009db810c0b58ec/transformed/jetified-core-ktx-1.13.1/AndroidManifest.xml" />
+      <root url="jar://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/transforms-3/ecd7f163cb4c45173009db810c0b58ec/transformed/jetified-core-ktx-1.13.1/jars/classes.jar!/" />
+      <root url="file://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/transforms-3/ecd7f163cb4c45173009db810c0b58ec/transformed/jetified-core-ktx-1.13.1/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/modules-2/files-2.1/androidx.core/core-ktx/1.13.1/2ebeecb97d5b1557fc7b3e3758447b8176e322e8/core-ktx-1.13.1-sources.jar!/" />
+      <root url="jar://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/modules-2/files-2.1/androidx.core/core-ktx/1.13.1/2ebeecb97d5b1557fc7b3e3758447b8176e322e8/core-ktx-1.13.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

@@ -1,11 +1,11 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.android.play:asset-delivery:2.2.2@aar" external-system-id="GRADLE">
     <ANNOTATIONS>
-      <root url="jar://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/transforms-3/6031e61e42ff949e809542e31786c98d/transformed/jetified-asset-delivery-2.2.2/annotations.zip!/" />
+      <root url="jar://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/transforms-3/4af1f8db0e68f4bdc62382101f195856/transformed/jetified-asset-delivery-2.2.2/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/transforms-3/6031e61e42ff949e809542e31786c98d/transformed/jetified-asset-delivery-2.2.2/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/transforms-3/6031e61e42ff949e809542e31786c98d/transformed/jetified-asset-delivery-2.2.2/AndroidManifest.xml" />
+      <root url="file://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/transforms-3/4af1f8db0e68f4bdc62382101f195856/transformed/jetified-asset-delivery-2.2.2/AndroidManifest.xml" />
+      <root url="jar://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/transforms-3/4af1f8db0e68f4bdc62382101f195856/transformed/jetified-asset-delivery-2.2.2/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -1,16 +1,16 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.core:core:1.13.1@aar" external-system-id="GRADLE">
     <ANNOTATIONS>
-      <root url="jar://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/transforms-3/abe2883e7ba9745e165c273d77aca3c8/transformed/core-1.13.1/annotations.zip!/" />
+      <root url="jar://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/transforms-3/b234e5824520de1c33c74b8ffbea2390/transformed/core-1.13.1/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/transforms-3/abe2883e7ba9745e165c273d77aca3c8/transformed/core-1.13.1/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/transforms-3/abe2883e7ba9745e165c273d77aca3c8/transformed/core-1.13.1/res" />
-      <root url="file://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/transforms-3/abe2883e7ba9745e165c273d77aca3c8/transformed/core-1.13.1/AndroidManifest.xml" />
+      <root url="file://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/transforms-3/b234e5824520de1c33c74b8ffbea2390/transformed/core-1.13.1/AndroidManifest.xml" />
+      <root url="file://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/transforms-3/b234e5824520de1c33c74b8ffbea2390/transformed/core-1.13.1/res" />
+      <root url="jar://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/transforms-3/b234e5824520de1c33c74b8ffbea2390/transformed/core-1.13.1/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/../AnimalNewFromMyGit/.gradle/caches/modules-2/files-2.1/androidx.core/core/1.13.1/b0c9edc0bc9e5113630fbaca0967ef604097ba6f/core-1.13.1-sources.jar!/" />
+      <root url="jar://E:/razrabotka/AnimalNewFromMyGit/.gradle/caches/modules-2/files-2.1/androidx.core/core/1.13.1/b0c9edc0bc9e5113630fbaca0967ef604097ba6f/core-1.13.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
